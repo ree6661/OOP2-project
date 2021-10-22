@@ -17,7 +17,7 @@ CREATE DATABASE IF NOT EXISTS deliveryDB;
      
 	USE deliveryDB;
      CREATE TABLE IF NOT EXISTS office
-     (id_office int not null auto_increment,id_company int,id_city int,
+     (id_office int not null auto_increment,id_company int,id_city int,adress varchar(45),
      PRIMARY KEY (id_office),FOREIGN KEY (id_company) REFERENCES companies(id_company),
      FOREIGN KEY (id_city) REFERENCES cities(id_city));
      
@@ -40,7 +40,7 @@ CREATE DATABASE IF NOT EXISTS deliveryDB;
      
 	USE deliveryDB;
      CREATE TABLE IF NOT EXISTS admins
-     (id_admin int not null auto_increment,category varchar(45),phone char(12),
+     (id_admin int not null auto_increment,phone char(12),
      PRIMARY KEY (id_admin));
      
 	USE deliveryDB;
@@ -51,9 +51,9 @@ CREATE DATABASE IF NOT EXISTS deliveryDB;
     
     CREATE TABLE IF NOT EXISTS orders
 	(id_orders int not null auto_increment, id_category int,fragile boolean, id_office_sender int,id_office_recipient int,
-    delivery_to_address boolean,id_customer_recipient int,id_courier int,id_status int,
+    delivery_to_address boolean,id_customer_sender int,id_customer_recipient int,id_courier int,id_status int,
     cash_on_delivery double,paid boolean,acceptance_by_sender datetime,customer_delivery datetime,
     PRIMARY KEY (id_orders),FOREIGN KEY (id_category) REFERENCES categories(id_category),
     FOREIGN KEY (id_office_sender) REFERENCES office(id_office),FOREIGN KEY (id_office_recipient) REFERENCES office(id_office),
-    FOREIGN KEY (id_customer_recipient) REFERENCES customers(id_customer),FOREIGN KEY (id_courier) REFERENCES couriers(id_courier)
+   FOREIGN KEY (id_customer_sender) REFERENCES customers(id_customer), FOREIGN KEY (id_customer_recipient) REFERENCES customers(id_customer),FOREIGN KEY (id_courier) REFERENCES couriers(id_courier)
     ,FOREIGN KEY (id_status) REFERENCES statuses(id_status));
