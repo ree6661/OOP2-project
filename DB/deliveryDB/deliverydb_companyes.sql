@@ -16,26 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `categories`
+-- Table structure for table `companyes`
 --
 
-DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `companyes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `categories` (
-  `id_categori` int NOT NULL AUTO_INCREMENT,
-  `categori` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_categori`)
+CREATE TABLE `companyes` (
+  `id_company` int NOT NULL AUTO_INCREMENT,
+  `company` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_company`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `categories`
+-- Dumping data for table `companyes`
 --
 
-LOCK TABLES `categories` WRITE;
-/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+LOCK TABLES `companyes` WRITE;
+/*!40000 ALTER TABLE `companyes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `companyes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

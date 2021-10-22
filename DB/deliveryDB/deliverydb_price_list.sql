@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: deliverydb
 -- ------------------------------------------------------
--- Server version	8.0.27
+-- Server version	8.0.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,12 +24,12 @@ DROP TABLE IF EXISTS `price_list`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `price_list` (
   `id_company` int NOT NULL,
-  `id_category` int NOT NULL,
+  `id_categori` int NOT NULL,
   `price` double DEFAULT NULL,
-  PRIMARY KEY (`id_company`,`id_category`),
-  KEY `id_category` (`id_category`),
-  CONSTRAINT `price_list_ibfk_1` FOREIGN KEY (`id_company`) REFERENCES `companies` (`id_company`),
-  CONSTRAINT `price_list_ibfk_2` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`)
+  PRIMARY KEY (`id_company`,`id_categori`),
+  KEY `id_categori` (`id_categori`),
+  CONSTRAINT `price_list_ibfk_1` FOREIGN KEY (`id_company`) REFERENCES `companyes` (`id_company`),
+  CONSTRAINT `price_list_ibfk_2` FOREIGN KEY (`id_categori`) REFERENCES `categories` (`id_categori`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-22 12:23:27
+-- Dump completed on 2021-10-22 13:51:59
