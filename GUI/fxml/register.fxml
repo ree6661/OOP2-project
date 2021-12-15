@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="309.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <PasswordField id="pass2" layoutX="25.0" layoutY="432.0" prefHeight="38.0" prefWidth="243.0" promptText="потвърди паролата" />
+      <ImageView fitHeight="116.0" fitWidth="299.0" layoutX="15.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/GandHlogo.png" />
+         </image>
+      </ImageView>
+      <Label id="title" layoutX="92.0" layoutY="129.0" text="РЕГИСТРАЦИЯ" textFill="WHITE" />
+
+      <Button id="register" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="29.0" layoutY="479.0" mnemonicParsing="false" prefHeight="119.0" prefWidth="142.0" text="Регистрирай се" />
+      <TextField id="phone" layoutX="25.0" layoutY="244.0" prefHeight="38.0" prefWidth="243.0" promptText="телефон" />
+       <Button id="login" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="187.0" layoutY="481.0" mnemonicParsing="false" onAction="#loginFx" prefHeight="81.0" prefWidth="82.0" text="Влез" textOverrun="CENTER_ELLIPSIS" />
+      <Label id="errorMessage" layoutX="46.0" layoutY="155.0" prefHeight="38.0" prefWidth="222.0" textFill="RED">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField id="name" layoutX="25.0" layoutY="197.0" prefHeight="38.0" prefWidth="243.0" promptText=" име" />
+      <PasswordField id="pass" layoutX="23.0" layoutY="385.0" prefHeight="38.0" prefWidth="243.0" promptText="парола" />
+      <ComboBox id="cBox0" layoutX="25.0" layoutY="290.0" prefHeight="38.0" prefWidth="243.0" promptText="град" />
+      <TextField id="address" layoutX="23.0" layoutY="336.0" prefHeight="38.0" prefWidth="243.0" promptText="адрес" />
+   </children>
+</AnchorPane>
