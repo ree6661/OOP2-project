@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: deliverydb
+-- Host: localhost    Database: deliverydb
 -- ------------------------------------------------------
 -- Server version	8.0.27
 
@@ -29,6 +29,7 @@ CREATE TABLE `orders` (
   `id_office_sender` int DEFAULT NULL,
   `id_office_recipient` int DEFAULT NULL,
   `delivery_to_address` tinyint(1) DEFAULT NULL,
+  `id_customer_sender` int DEFAULT NULL,
   `id_customer_recipient` int DEFAULT NULL,
   `id_courier` int DEFAULT NULL,
   `id_status` int DEFAULT NULL,
@@ -40,15 +41,17 @@ CREATE TABLE `orders` (
   KEY `id_category` (`id_category`),
   KEY `id_office_sender` (`id_office_sender`),
   KEY `id_office_recipient` (`id_office_recipient`),
+  KEY `id_customer_sender` (`id_customer_sender`),
   KEY `id_customer_recipient` (`id_customer_recipient`),
   KEY `id_courier` (`id_courier`),
   KEY `id_status` (`id_status`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`),
   CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`id_office_sender`) REFERENCES `office` (`id_office`),
   CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`id_office_recipient`) REFERENCES `office` (`id_office`),
-  CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`id_customer_recipient`) REFERENCES `customers` (`id_customer`),
-  CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`id_courier`) REFERENCES `couriers` (`id_courier`),
-  CONSTRAINT `orders_ibfk_6` FOREIGN KEY (`id_status`) REFERENCES `statuses` (`id_status`)
+  CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`id_customer_sender`) REFERENCES `customers` (`id_customer`),
+  CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`id_customer_recipient`) REFERENCES `customers` (`id_customer`),
+  CONSTRAINT `orders_ibfk_6` FOREIGN KEY (`id_courier`) REFERENCES `couriers` (`id_courier`),
+  CONSTRAINT `orders_ibfk_7` FOREIGN KEY (`id_status`) REFERENCES `statuses` (`id_status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -70,4 +73,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-22 12:23:28
+-- Dump completed on 2021-12-17  0:01:54

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: deliverydb
+-- Host: localhost    Database: deliverydb
 -- ------------------------------------------------------
--- Server version	8.0.26
+-- Server version	8.0.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,7 +26,7 @@ CREATE TABLE `cities` (
   `id_city` int NOT NULL AUTO_INCREMENT,
   `city` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_city`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `cities` (
 
 LOCK TABLES `cities` WRITE;
 /*!40000 ALTER TABLE `cities` DISABLE KEYS */;
+INSERT INTO `cities` VALUES (1,'Varna'),(2,'Sofia');
 /*!40000 ALTER TABLE `cities` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -47,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-22 13:51:59
+-- Dump completed on 2021-12-17  0:01:55

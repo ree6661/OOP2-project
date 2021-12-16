@@ -29,7 +29,7 @@ CREATE DATABASE IF NOT EXISTS deliveryDB;
      
 	USE deliveryDB;
      CREATE TABLE IF NOT EXISTS customers
-     (id_customer int not null auto_increment,customer varchar(45),phone char(12),id_city int,address varchar(45),
+     (id_customer int not null auto_increment,customer varchar(45),phone char(12),id_city int,address varchar(45),password varchar(30),
      PRIMARY KEY (id_customer),FOREIGN KEY (id_city) REFERENCES cities(id_city));
      
      
