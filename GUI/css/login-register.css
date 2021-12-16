@@ -1,0 +1,32 @@
+*{
+	-fx-text-fill: white;
+	-fx-background-color: black;
+}
+TextField,PasswordField,ComboBox{
+	-fx-border-color: white;
+	-fx-border-radius: 3;
+}
+Button{
+	-fx-border-color: white;
+	-fx-border-radius: 3;
+}
+Hyperlink{
+	-fx-text-fill: #60cdf7;
+}
+#login{
+	-fx-graphic: url("../img/GandHlogin0.png");
+}
+#login:hover {
+
+	-fx-graphic: url("../img/GandHlogin1.png");
+}
+#register{
+	-fx-graphic: url("../img/register0.png");
+}
+#register:hover {
+
+	-fx-graphic: url("../img/register1.png");
+}
+#errorMessage{
+	-fx-text-fill: red;
+}
