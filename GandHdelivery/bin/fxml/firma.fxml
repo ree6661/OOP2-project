@@ -56,12 +56,12 @@
                </graphic></BottomNavigationButton>
          </children></Pane>
       <TextField layoutX="15.0" layoutY="125.0" prefHeight="26.0" prefWidth="200.0" text="име на фирма" />
-      <TextArea layoutX="15.0" layoutY="186.0" prefHeight="199.0" prefWidth="294.0" />
       <Label layoutX="14.0" layoutY="162.0" prefHeight="18.0" prefWidth="275.0" text="офиси[име на град_адрес]" />
-      <Button layoutX="582.0" layoutY="123.0" mnemonicParsing="false" text="създай/редактирай фирма" />
+      <TextArea layoutX="15.0" layoutY="186.0" prefHeight="199.0" prefWidth="294.0" />
       <Button layoutX="15.0" layoutY="395.0" mnemonicParsing="false" text="добави офисите" />
       <Label layoutX="323.0" layoutY="162.0" text="служители[име на служител_телефон_офис ID]" />
       <TextArea layoutX="323.0" layoutY="186.0" prefHeight="199.0" prefWidth="294.0" />
       <Button layoutX="323.0" layoutY="395.0" mnemonicParsing="false" text="добави служителите" />
+      <Button layoutX="582.0" layoutY="123.0" mnemonicParsing="false" text="създай/редактирай фирма" />
    </children>
 </Pane>

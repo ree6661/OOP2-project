@@ -59,13 +59,13 @@
          </children></Pane>
       <AnchorPane id="filterPane" layoutY="99.0" prefHeight="360.0" prefWidth="200.0">
          <children>
-            <Button id="vij" alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="286.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" textOverrun="CENTER_WORD_ELLIPSIS" />
+            <Label layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="60.0" text="функция " />
+            <ComboBox layoutX="14.0" layoutY="32.0" prefHeight="28.0" prefWidth="172.0" />
             <Label layoutX="7.0" layoutY="115.0" text="от" />
             <DatePicker layoutX="30.0" layoutY="111.0" prefHeight="26.0" prefWidth="159.0" />
             <Label layoutX="10.0" layoutY="151.0" text="до" />
             <DatePicker layoutX="33.0" layoutY="147.0" prefHeight="26.0" prefWidth="159.0" />
-            <Label layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="60.0" text="функция " />
-            <ComboBox layoutX="14.0" layoutY="32.0" prefHeight="28.0" prefWidth="172.0" />
+            <Button id="vij" alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="286.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" textOverrun="CENTER_WORD_ELLIPSIS" />
          </children>
       </AnchorPane>
       <TableView layoutX="200.0" layoutY="99.0" prefHeight="360.0" prefWidth="584.0">
