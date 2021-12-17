@@ -98,7 +98,7 @@ public class RegisterController implements Initializable {
     	
     	System.out.println("Successful register");
     	
-    	Add.customer(username, phoneNumber, cityMap.get(city), location);
+    	Add.customer(username, phoneNumber, cityMap.get(city), location, password);
     	
     	System.out.println("Added customer");
     }
