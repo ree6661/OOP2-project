@@ -2,6 +2,8 @@ Gabriel:
 todo:
 работещи полета, валидации, връзка с база данни от:
   login, home, firma, pratkaRegister
+  
+  добавяне на поле парола в admins, couriers
 
 completed:
 
