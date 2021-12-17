@@ -1,16 +1,19 @@
 Gabriel:
   todo:
     работещи полета, валидации, връзка с база данни от:
-    login, home, firma, pratkaRegister
+    home, firma, pratkaRegister
     
+    
+  completed:
+    register
+    login
     добавяне на поле парола в admins, couriers
 
-  completed:
 
 Hristomir:
   todo:
     добавяне на поле error в login
-    
+    полето user name да има място за 2 имена
     
   completed:
     
