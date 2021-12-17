@@ -38,4 +38,43 @@ public class TableQuery {
 			return false;
 		}
 	}
+	
+	public static String getRecordFromTables(
+			String recordToReturn, String valueColumnName, 
+			String value, String... tables) {
+		// select password from customer where phone = phoneNumber
+		try {
+			Connection DB = Create.getConnection();
+			PreparedStatement ps;
+			String sql = "";
+			ResultSet rs;
+			
+			
+			for(int i = 0; i < tables.length; ++i) {
+				sql = "select " + recordToReturn + " from " + tables[i] + 
+						" where " + valueColumnName + " = " + value;
+				 ps = DB.prepareStatement(sql);
+				 rs = ps.executeQuery();
+				 
+				 if(rs.next()) return rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return "";
+	}
+	
+	public static String searchInTables(String find, String columnName, String... toSearch) {
+		
+		TableQuery query;
+		for(int i = 0; i < toSearch.length; ++i) {
+			query = new TableQuery(toSearch[i]);
+			
+			if(query.contains(columnName, find)) 
+				return toSearch[i];
+		}
+		
+		return "";
+	}
 }

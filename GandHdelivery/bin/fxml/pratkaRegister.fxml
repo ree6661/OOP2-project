@@ -56,17 +56,17 @@
                   </AnchorPane>
                </graphic></BottomNavigationButton>
          </children></Pane>
-      <ComboBox layoutX="42.0" layoutY="197.0" prefHeight="28.0" prefWidth="173.0" promptText="фирма доставчик" />
-      <ComboBox layoutX="42.0" layoutY="235.0" prefHeight="28.0" prefWidth="173.0" promptText="офис на подаване" />
-      <TextField layoutX="43.0" layoutY="270.0" prefHeight="26.0" prefWidth="173.0" promptText="ID на Подател" />
-      <TextField layoutX="43.0" layoutY="303.0" prefHeight="26.0" prefWidth="173.0" promptText="ID на Получател" />
-      <DatePicker layoutX="43.0" layoutY="345.0" prefHeight="26.0" prefWidth="173.0" promptText="приемане от подател" />
       <ComboBox layoutX="316.0" layoutY="197.0" prefHeight="28.0" prefWidth="173.0" promptText="категория" />
       <CheckBox layoutX="316.0" layoutY="237.0" mnemonicParsing="false" text="чупливо" />
-      <CheckBox layoutX="316.0" layoutY="271.0" mnemonicParsing="false" text="доставка до  адрес" />
+      <ComboBox layoutX="42.0" layoutY="235.0" prefHeight="28.0" prefWidth="173.0" promptText="офис на подаване" />
       <ComboBox layoutX="316.0" layoutY="301.0" prefHeight="28.0" prefWidth="173.0" promptText="офис за получаване" />
-      <DatePicker layoutX="579.0" layoutY="198.0" promptText="доставка на клиент" />
+      <CheckBox layoutX="316.0" layoutY="271.0" mnemonicParsing="false" text="доставка до  адрес" />
+      <ComboBox layoutX="42.0" layoutY="197.0" prefHeight="28.0" prefWidth="173.0" promptText="фирма доставчик" />
+      <TextField layoutX="43.0" layoutY="270.0" prefHeight="26.0" prefWidth="173.0" promptText="ID на Подател" />
+      <TextField layoutX="43.0" layoutY="303.0" prefHeight="26.0" prefWidth="173.0" promptText="ID на Получател" />
       <CheckBox layoutX="579.0" layoutY="237.0" mnemonicParsing="false" text="предплатена доставха" />
+      <DatePicker layoutX="43.0" layoutY="345.0" prefHeight="26.0" prefWidth="173.0" promptText="приемане от подател" />
+      <DatePicker layoutX="579.0" layoutY="198.0" promptText="доставка на клиент" />
       <Button layoutX="603.0" layoutY="424.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="173.0" text="регистрирай пратката" />
    </children>
 </Pane>

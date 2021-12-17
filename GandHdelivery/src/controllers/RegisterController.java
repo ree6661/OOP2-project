@@ -22,7 +22,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import validation.Valid;
 
-public class RegisterController implements Initializable { 
+public final class RegisterController implements Initializable { 
 	
 	@FXML
 	private TextField name, phone, address;
@@ -45,10 +45,9 @@ public class RegisterController implements Initializable {
 			
 			cityMap = new HashMap<String, Integer>();
 			
-			LinkedList<String> ls = new LinkedList<>();
 			while(rs.next()) 
-//				ls.add(rs.getString(1));
-			cityMap.put(rs.getString(2), Integer.parseInt(rs.getString(1)));
+				cityMap.put(rs.getString(2),
+							Integer.parseInt(rs.getString(1)));
 			
 			cBox0.getItems().addAll(cityMap.keySet());
 			

@@ -12,7 +12,7 @@ public class Launch extends Application {
 		try {
 			
 		
-			Parent root = FXMLLoader.load(getClass().getResource("../fxml/register.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("../fxml/login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("../css/login-register.css").toExternalForm());
 			primaryStage.setScene(scene);
