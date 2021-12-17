@@ -1,14 +1,17 @@
 Gabriel:
-todo:
-работещи полета, валидации, връзка с база данни от:
-  login, home, firma, pratkaRegister
-  
-  добавяне на поле парола в admins, couriers
+  todo:
+    работещи полета, валидации, връзка с база данни от:
+    login, home, firma, pratkaRegister
+    
+    добавяне на поле парола в admins, couriers
 
-completed:
+  completed:
 
 Hristomir:
-todo:
-добавяне на поле error в login
-
-completed:
+  todo:
+    добавяне на поле error в login
+    
+    
+  completed:
+    
+    
