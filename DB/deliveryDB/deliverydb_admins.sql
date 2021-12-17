@@ -24,9 +24,12 @@ DROP TABLE IF EXISTS `admins`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admins` (
   `id_admin` int NOT NULL AUTO_INCREMENT,
-  `phone` char(12) DEFAULT NULL,
-  PRIMARY KEY (`id_admin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `admin` varchar(45) NOT NULL,
+  `phone` char(12) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_admin`),
+  UNIQUE KEY `phone_UNIQUE` (`phone`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +38,7 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
+INSERT INTO `admins` VALUES (1,'','987897654123','admin1'),(2,'','876789086513','admin2');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -47,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-17  0:01:55
+-- Dump completed on 2021-12-18  0:11:51

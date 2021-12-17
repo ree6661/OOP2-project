@@ -24,15 +24,16 @@ DROP TABLE IF EXISTS `customers`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customers` (
   `id_customer` int NOT NULL AUTO_INCREMENT,
-  `customer` varchar(45) DEFAULT NULL,
-  `phone` char(12) DEFAULT NULL,
+  `customer` varchar(45) NOT NULL,
+  `phone` char(12) NOT NULL,
   `id_city` int DEFAULT NULL,
   `address` varchar(45) DEFAULT NULL,
   `password` varchar(30) NOT NULL,
   PRIMARY KEY (`id_customer`),
+  UNIQUE KEY `phone_UNIQUE` (`phone`),
   KEY `id_city` (`id_city`),
   CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`id_city`) REFERENCES `cities` (`id_city`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +42,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Иван','359876783412',2,'Иван Рилски 5','12345');
+INSERT INTO `customers` VALUES (1,'Иван','359876783412',2,'Иван Рилски 5','12345'),(2,'Ivan','123456789121',2,'aaa aa 2','12345'),(3,'Ivan','123456789012',2,'as asd 12','12345');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-17  0:01:55
+-- Dump completed on 2021-12-18  0:11:50

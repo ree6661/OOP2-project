@@ -29,18 +29,18 @@ CREATE DATABASE IF NOT EXISTS deliveryDB;
      
 	USE deliveryDB;
      CREATE TABLE IF NOT EXISTS customers
-     (id_customer int not null auto_increment,customer varchar(45),phone char(12),id_city int,address varchar(45),password varchar(30),
+     (id_customer int not null auto_increment,customer varchar(45),phone char(12),id_city int,address varchar(45),password varchar(30) not null,
      PRIMARY KEY (id_customer),FOREIGN KEY (id_city) REFERENCES cities(id_city));
      
      
 	USE deliveryDB;
      CREATE TABLE IF NOT EXISTS couriers
-     (id_courier int not null auto_increment,id_office int,courier varchar(45),phone char(12),
+     (id_courier int not null auto_increment,id_office int,courier varchar(45),phone char(12),password varchar(30) not null,
      PRIMARY KEY (id_courier),FOREIGN KEY (id_office) REFERENCES office(id_office));
      
 	USE deliveryDB;
      CREATE TABLE IF NOT EXISTS admins
-     (id_admin int not null auto_increment,phone char(12),
+     (id_admin int not null auto_increment,phone char(12),password varchar(30) not null,
      PRIMARY KEY (id_admin));
      
 	USE deliveryDB;
