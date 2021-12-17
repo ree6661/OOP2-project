@@ -1,14 +1,15 @@
 Gabriel:
   todo:
+    начин да избера правилната форма след login(може би с връщане/подаване на клас Consumer)
     работещи полета, валидации, връзка с база данни от:
-    home, firma, pratkaRegister
+      home, firma, pratkaRegister
     
     
   completed:
     register
     login
     добавяне на поле парола в admins, couriers
-
+    
 
 Hristomir:
   todo:
