@@ -1,8 +1,15 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import application.Launch;
+import database.Admin;
+import database.Courier;
+import database.Customer;
 import database.TableQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +37,12 @@ public final class LoginController {
 	}
 	
 	@FXML
-    void loginFx(ActionEvent event) {
+    void registerFx(ActionEvent event) {
+		
+	}
+	
+	@FXML
+    void loginFx(ActionEvent event) throws SQLException, IOException {
     	String phoneNumber = this.phone.getText(),
     			password = this.pass.getText();
     	
@@ -40,18 +52,43 @@ public final class LoginController {
     		return;
     	}
     		//this.error.setText("Вече съществува такъв телефон в базата данни");
+    	ResultSet record = null;
+    	String recordTable = null;
+    	for(int i = 0; i < users.length; ++i) {
+    		record = TableQuery.getRecordFromTable(
+    					"phone", phoneNumber, users[i]); 
+    		
+    		if(record != null) {
+    			recordTable = users[i];
+    			break;
+    		}
+    	}
     	
-    	final String userPassword = 
-    			TableQuery.getRecordFromTables(
-    					"password", "phone", phoneNumber, users); 
-    	
-    	if(!password.equals(userPassword)) {
+    	if(recordTable == null) {
     		System.out.println(err);
     		return;
     	}
     	
-    	System.out.println("password: " + userPassword);
+    	System.out.println(recordTable);
     	
+		switch(recordTable) {
+		case "customers":
+			HomeController.customer = Customer.create(record);
+			Launch.launch.homeForm();
+			break;
+		case "couriers":
+			PratkaRegisterController.courier = Courier.create(record);
+			Launch.launch.pratkaForm();
+			break;
+		case "admins":
+			FirmaController.admin = Admin.create(record);
+			Launch.launch.firmaForm();
+			break;
+		default:
+			System.out.println("error: unknown table: " + recordTable);
+			return;
+		}
+		
     	System.out.println("Successful login");
     }
 }

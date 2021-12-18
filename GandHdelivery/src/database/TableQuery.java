@@ -39,6 +39,28 @@ public class TableQuery {
 		}
 	}
 	
+	public static ResultSet getRecordFromTable(
+			String valueColumnName, String value, String table) {
+		
+		ResultSet rs = null;
+		
+		try {
+			Connection DB = Create.getConnection();
+			PreparedStatement ps;
+			String sql = "";
+			
+			sql = "select * from " + table + 
+					" where " + valueColumnName + " = " + value;
+			ps = DB.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(!rs.next()) return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rs;
+	}
+	
 	public static String getRecordFromTables(
 			String recordToReturn, String valueColumnName, 
 			String value, String... tables) {
@@ -51,12 +73,14 @@ public class TableQuery {
 			
 			
 			for(int i = 0; i < tables.length; ++i) {
-				sql = "select " + recordToReturn + " from " + tables[i] + 
+				sql = "select *" /*+ recordToReturn */+ " from " + tables[i] + 
 						" where " + valueColumnName + " = " + value;
 				 ps = DB.prepareStatement(sql);
 				 rs = ps.executeQuery();
 				 
-				 if(rs.next()) return rs.getString(1);
+				 if(rs.next()) return rs.getString(recordToReturn);
+					 //return rs.getString(1);
+				 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
