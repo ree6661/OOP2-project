@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `customers`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customers` (
   `id_customer` int NOT NULL AUTO_INCREMENT,
-  `customer` varchar(45) NOT NULL,
+  `name` varchar(45) NOT NULL,
   `phone` char(12) NOT NULL,
   `id_city` int DEFAULT NULL,
   `address` varchar(45) DEFAULT NULL,
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-18  0:11:50
+-- Dump completed on 2021-12-18 16:45:25

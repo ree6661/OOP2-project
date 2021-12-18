@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `couriers`;
 CREATE TABLE `couriers` (
   `id_courier` int NOT NULL AUTO_INCREMENT,
   `id_office` int NOT NULL,
-  `courier` varchar(45) NOT NULL,
+  `name` varchar(45) NOT NULL,
   `phone` char(12) NOT NULL,
   `password` varchar(30) NOT NULL,
   PRIMARY KEY (`id_courier`),
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-18  0:11:50
+-- Dump completed on 2021-12-18 16:45:25
