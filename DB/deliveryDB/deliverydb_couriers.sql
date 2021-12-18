@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `couriers`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `couriers` (
   `id_courier` int NOT NULL AUTO_INCREMENT,
-  `id_office` int NOT NULL,
   `name` varchar(45) NOT NULL,
   `phone` char(12) NOT NULL,
   `password` varchar(30) NOT NULL,
+  `id_office` int NOT NULL,
   PRIMARY KEY (`id_courier`),
   UNIQUE KEY `phone_UNIQUE` (`phone`),
   KEY `couriers_ibfk_1` (`id_office`),
@@ -41,7 +41,7 @@ CREATE TABLE `couriers` (
 
 LOCK TABLES `couriers` WRITE;
 /*!40000 ALTER TABLE `couriers` DISABLE KEYS */;
-INSERT INTO `couriers` VALUES (1,1,'Stefan Hristov','987898917212','stefan'),(2,2,'Dimityr Vasilev','816789876312','mitio');
+INSERT INTO `couriers` VALUES (1,'Stefan Hristov','987898917212','stefan',1),(2,'Dimityr Vasilev','816789876312','mitio',2);
 /*!40000 ALTER TABLE `couriers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-18 16:45:25
+-- Dump completed on 2021-12-18 17:35:19
