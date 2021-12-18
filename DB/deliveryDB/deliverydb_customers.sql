@@ -28,7 +28,7 @@ CREATE TABLE `customers` (
   `phone` char(12) NOT NULL,
   `password` varchar(30) NOT NULL,
   `id_city` int DEFAULT NULL,
-  `address` varchar(45) DEFAULT NULL,
+  `address` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id_customer`),
   UNIQUE KEY `phone_UNIQUE` (`phone`),
   KEY `id_city` (`id_city`),
@@ -42,7 +42,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Иван','359876783412','12345',2,'Иван Рилски 5'),(2,'Ivan','123456789121','12345',2,'aaa aa 2'),(3,'Ivan','123456789012','12345',2,'as asd 12');
+INSERT INTO `customers` VALUES (1,'Иван','359876783412','12345',2,'Иван Рилски 5'),(2,'Ivan','123456789121','12345',2,'D'),(3,'Ivan','123456789012','12345',2,'as asd 12');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-18 17:35:18
+-- Dump completed on 2021-12-18 20:25:46
