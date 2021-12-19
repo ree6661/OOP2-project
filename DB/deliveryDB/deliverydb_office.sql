@@ -26,7 +26,7 @@ CREATE TABLE `office` (
   `id_office` int NOT NULL AUTO_INCREMENT,
   `id_company` int DEFAULT NULL,
   `id_city` int DEFAULT NULL,
-  `adress` varchar(45) DEFAULT NULL,
+  `address` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_office`),
   KEY `id_company` (`id_company`),
   KEY `id_city` (`id_city`),
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-18 20:25:45
+-- Dump completed on 2021-12-19 16:47:11
