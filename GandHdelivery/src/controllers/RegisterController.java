@@ -7,9 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+import application.Launch;
+import application.Property;
 import database.Add;
 import database.Create;
 import database.TableQuery;
@@ -34,26 +35,9 @@ public final class RegisterController implements Initializable {
 	@FXML
 	private Label error;
 	
-	HashMap<String, Integer> cityMap;
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
-			Connection con = Create.getConnection();
-			Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = stmt.executeQuery("select * from cities");
-			
-			cityMap = new HashMap<String, Integer>();
-			
-			while(rs.next()) 
-				cityMap.put(rs.getString(2),
-							Integer.parseInt(rs.getString(1)));
-			
-			cBox0.getItems().addAll(cityMap.keySet());
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
+		cBox0.getItems().addAll(Property.citiesMap.keySet());
 	}
 	
     @FXML
@@ -97,14 +81,15 @@ public final class RegisterController implements Initializable {
     	
     	System.out.println("Successful register");
     	
-    	Add.customer(username, phoneNumber, cityMap.get(city), location, password);
+    	Add.customer(username, phoneNumber, Property.citiesMap.get(city), location, password);
     	
     	System.out.println("Added customer");
     }
     
     @FXML
-    public void login(ActionEvent e) {
+    public void login(ActionEvent e) throws SQLException, IOException {
     	System.out.println("login");
+    	Launch.launch.loginForm();
     }
     
     @FXML

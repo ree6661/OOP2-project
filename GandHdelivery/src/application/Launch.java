@@ -11,16 +11,20 @@ import javafx.stage.Stage;
 
 public class Launch extends Application {
 	
-	public static Parent login, register, home, pratka, firma;
 	private Scene loginScene, registerScene, homeScene, pratkaScene, firmaScene;
-	public static Stage stage;
+	private Stage stage;
+	private Parent login, register, home, pratka, firma;
+	
 	public static Launch launch;
+	
 	@Override
 	public void start(Stage stage) {
 		this.stage = stage;
 		Launch.launch = this;
 		try {
-			loginForm();
+			Property.initAll();
+			firmaForm();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -53,6 +57,7 @@ public class Launch extends Application {
 		
 		this.home = FXMLLoader.load(getClass().getResource("../fxml/home.fxml"));
 		this.home.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
+//		this.home.getStylesheets().add(getClass().getResource("../css/firma.css").toExternalForm());
 		this.homeScene = new Scene(this.home);
 		
 		this.stage.setScene(this.homeScene);
@@ -75,18 +80,12 @@ public class Launch extends Application {
 		
 		this.firma = FXMLLoader.load(getClass().getResource("../fxml/firma.fxml"));
 		this.firmaScene = new Scene(this.firma);
-		this.firma.getStylesheets().add(getClass().getResource("../css/firma.css").toExternalForm());
+		this.firma.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
+//		this.firma.getStylesheets().add(getClass().getResource("../css/firma.css").toExternalForm());
+//		this.firma.getStylesheets().add(getClass().getResource("../css/pratkaRegister.css").toExternalForm());
 		
 		this.stage.setScene(this.firmaScene);
 		this.stage.show();
-	}
-
-	public Stage getStage() {
-		return stage;
-	}
-
-	public void setStage(Stage stage) {
-		this.stage = stage;
 	}
 	
 	public static void main(String[] args) {

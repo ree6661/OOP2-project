@@ -25,6 +25,18 @@ public class TableQuery {
 		}
 	}
 	
+	public static ResultSet execute(String sql) throws SQLException {
+		Connection DB = Create.getConnection();
+		PreparedStatement ps = DB.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();;
+		
+		
+		if(!rs.next()) return null;
+		
+		return ps.executeQuery();
+	}
+	
 	public boolean contains(String column, String contains) {
 		try {
 			String sql = "select " + column + " from " + table + 
@@ -39,26 +51,23 @@ public class TableQuery {
 		}
 	}
 	
-	public static ResultSet getRecordFromTable(
-			String valueColumnName, String value, String table) {
+	public static <T> ResultSet getRecordFromTable(
+			String valueColumnName, T value, String table) throws SQLException {
 		
+		
+		Connection DB = Create.getConnection();
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		try {
-			Connection DB = Create.getConnection();
-			PreparedStatement ps;
-			String sql = "";
-			
-			sql = "select * from " + table + 
-					" where " + valueColumnName + " = " + value;
-			ps = DB.prepareStatement(sql);
-			rs = ps.executeQuery();
-			if(!rs.next()) return null;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		String sql = "";
 		
-		return rs;
+		sql = "select * from " + table + 
+				" where " + valueColumnName + " = " + value;
+		ps = DB.prepareStatement(sql);
+		rs = ps.executeQuery();
+		if(!rs.next()) return null;
+		
+		return ps.executeQuery();
 	}
 	
 	public static String getRecordFromTables(
@@ -78,7 +87,7 @@ public class TableQuery {
 				 ps = DB.prepareStatement(sql);
 				 rs = ps.executeQuery();
 				 
-				 if(rs.next()) return rs.getString(recordToReturn);
+				 if(rs.next()) return ps.executeQuery().getString(recordToReturn);
 					 //return rs.getString(1);
 				 
 			}

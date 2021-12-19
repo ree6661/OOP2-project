@@ -65,13 +65,13 @@
             <Label layoutX="10.0" layoutY="151.0" text="до" />
             <DatePicker layoutX="33.0" layoutY="147.0" prefHeight="26.0" prefWidth="159.0" />
             <Label layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="60.0" text="функция " />
-            <ComboBox layoutX="14.0" layoutY="32.0" prefHeight="28.0" prefWidth="172.0" />
+            <ComboBox fx:id="functions" layoutX="14.0" layoutY="32.0" prefHeight="28.0" prefWidth="172.0" />
          </children>
       </AnchorPane>
       <TableView layoutX="200.0" layoutY="99.0" prefHeight="360.0" prefWidth="584.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C2" />
           <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
    </children>

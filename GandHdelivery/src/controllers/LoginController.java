@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Launch;
-import database.Admin;
-import database.Courier;
-import database.Customer;
 import database.TableQuery;
+import database.users.Admin;
+import database.users.Courier;
+import database.users.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -37,13 +37,15 @@ public final class LoginController {
 	}
 	
 	@FXML
-    void registerFx(ActionEvent event) {
-		
+    void registerFx(ActionEvent event) throws SQLException, IOException {
+		System.out.println("Register");
+		Launch.launch.registerForm();
 	}
 	
 	@FXML
     void loginFx(ActionEvent event) throws SQLException, IOException {
-    	String phoneNumber = this.phone.getText(),
+    	System.out.println("Login");
+		String phoneNumber = this.phone.getText(),
     			password = this.pass.getText();
     	
     	if(!Valid.phoneNumber(phoneNumber) || !Valid.password(password)) {

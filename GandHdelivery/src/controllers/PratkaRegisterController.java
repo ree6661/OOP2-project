@@ -3,7 +3,7 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import database.Courier;
+import database.users.Courier;
 import javafx.fxml.FXML;
 
 public class PratkaRegisterController {
