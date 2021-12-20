@@ -29,12 +29,12 @@ public class TableQuery {
 		Connection DB = Create.getConnection();
 		PreparedStatement ps = DB.prepareStatement(sql);
 		
-		ResultSet rs = ps.executeQuery();;
+		ResultSet rs = ps.executeQuery();
 		
 		
 		if(!rs.next()) return null;
 		
-		return ps.executeQuery();
+		return rs;
 	}
 	
 	public boolean contains(String column, String contains) {
@@ -62,12 +62,12 @@ public class TableQuery {
 		String sql = "";
 		
 		sql = "select * from " + table + 
-				" where " + valueColumnName + " = " + value;
+				" where " + valueColumnName + " = '" + value + "'";
 		ps = DB.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if(!rs.next()) return null;
 		
-		return ps.executeQuery();
+		return rs;
 	}
 	
 	public static String getRecordFromTables(
@@ -83,11 +83,11 @@ public class TableQuery {
 			
 			for(int i = 0; i < tables.length; ++i) {
 				sql = "select *" /*+ recordToReturn */+ " from " + tables[i] + 
-						" where " + valueColumnName + " = " + value;
+						" where " + valueColumnName + " = '" + value + "'";
 				 ps = DB.prepareStatement(sql);
 				 rs = ps.executeQuery();
 				 
-				 if(rs.next()) return ps.executeQuery().getString(recordToReturn);
+				 if(rs.next()) return rs.getString(recordToReturn);
 					 //return rs.getString(1);
 				 
 			}
@@ -110,4 +110,12 @@ public class TableQuery {
 		
 		return "";
 	}
+	
+	public static String cityIdToName(int id) throws SQLException {
+		final String sql = "select city from cities where id_city='" + id + "'";
+		ResultSet officeCity = TableQuery.execute(sql);
+		
+		return officeCity.getString(1);
+	}
+	
 }

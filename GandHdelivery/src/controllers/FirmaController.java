@@ -4,13 +4,12 @@ package controllers;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import application.Property;
 import database.Company;
+import database.Office;
 import database.TableQuery;
 import database.users.Admin;
 import javafx.beans.value.ChangeListener;
@@ -22,7 +21,7 @@ import javafx.scene.control.TextField;
 public class FirmaController {
 	
 	public Company company;
-	
+	public Office office;
 	public static Admin admin;
 	
 	@FXML
@@ -40,7 +39,7 @@ public class FirmaController {
     void initialize() {
     	companies.getItems().addAll(Property.companiesMap.keySet());
 		companies.valueProperty().addListener(firmaListener());
-		
+		offices.valueProperty().addListener(OfficeListener());
 		city.getItems().addAll(Property.citiesMap.keySet());
     }
     
@@ -50,44 +49,66 @@ public class FirmaController {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				offices.getItems().clear();
+				company = new Company();
 				
-				final int company_id = Property.companiesMap.get(newValue);
+				company.setId(Property.companiesMap.get(newValue));
 				
-				String sql = "select * from office where id_company=" + company_id;
+				String sql = "select * from office where id_company='" + company.getId() + "'";
 				try {
 					ResultSet rs = TableQuery.execute(sql);
+					
 					if(rs == null) {
+						offices.setPromptText("Няма офис");
 						System.out.println("no office in company");
 						return;
 					}
+					company.setOffices(rs);
 					
-					sql = "select * from office where id_company=" + company_id;
-					ResultSet officeResult = TableQuery.execute(sql);
-					if(officeResult == null) {
-						System.out.println("no office in resultset");
-						return;
+					for(int i = 0; i < company.offices.size(); ++i) {
+						Office office = company.offices.get(i);
+						
+						offices.getItems().add(
+								TableQuery.cityIdToName(office.getId_city()) + 
+								" " + office.getAddress());
 					}
-					/*
-					sql = "select city from cities where id_city=" + 
-							officeResult.getString("id_city");
-					ResultSet officeCity = TableQuery.execute(sql);
-					if(officeCity == null) {
-						System.out.println("err: office no city");
-						return;
+					Office prompt = company.offices.get(0);
+					
+					offices.setPromptText(prompt.getFullAddress());
+					city.setPromptText(prompt.getCity());
+					address.setText(prompt.getAddress());
+					
+				} catch(SQLException e) {
+					e.printStackTrace();
+					System.out.println(e + "\nerror: can't load company office");
+				}
+			}
+		};
+		return listener;
+    }
+    
+    private ChangeListener<String> OfficeListener() {
+    	ChangeListener<String> listener = new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				//city.getItems().clear();
+				office = new Office();
+				
+				try {
+					for(int i = 0; i < company.offices.size(); ++i) {
+						String officeName = 
+								TableQuery.cityIdToName(company.offices.get(i).getId_city()) + 
+								" " + company.offices.get(i).getAddress();
+						if(officeName.equals(newValue)) {
+							office = company.offices.get(i);
+							break;
+						}
 					}
-					*/
-					LinkedList<String> officeList = new LinkedList<>();
+					if(office.getId_office() == 0) return;
 					
-					while(officeResult.next()) {
-						officeList.add(
-								Property.citiesMap.get(officeResult.getString("id_city")) + 
-								" " + officeResult.getString("address"));
-					}
-					offices.getItems().addAll(officeList);
+					city.setPromptText(TableQuery.cityIdToName(office.getId_city()));
 					
-					
-					
-					//address.setText(officeResult.getString("address"));
+					address.setText(office.getAddress());
 					
 				} catch(SQLException e) {
 					e.printStackTrace();
