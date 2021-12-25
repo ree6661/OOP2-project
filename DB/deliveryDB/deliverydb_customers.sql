@@ -30,7 +30,6 @@ CREATE TABLE `customers` (
   `id_city` int DEFAULT NULL,
   `address` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id_customer`),
-  UNIQUE KEY `phone_UNIQUE` (`phone`),
   KEY `id_city` (`id_city`),
   CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`id_city`) REFERENCES `cities` (`id_city`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-20 23:46:08
+-- Dump completed on 2021-12-26  0:12:53
