@@ -1,16 +1,22 @@
 package database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+
+import database.users.Courier;
 
 public class Office {
 	private int id_office, id_company, id_city;
 	private String address;
+	public LinkedList<Courier> couriers;
 	
 	public Office() {
 		this.id_office = 0;
 		this.id_company = 0;
 		this.id_city = 0;
 		this.address = "";
+		this.couriers = new LinkedList<Courier>();
 	}
 	
 	public Office(int id_office, int id_company, int id_city, String address) {
@@ -18,6 +24,7 @@ public class Office {
 		this.id_company = id_company;
 		this.id_city = id_city;
 		this.address = address;
+		this.couriers = new LinkedList<Courier>();
 	}
 	
 	public int getId_office() {
@@ -58,5 +65,15 @@ public class Office {
 	
 	public String getFullAddress() throws SQLException {
 		return this.getCity() + " " + this.address;
+	}
+	
+	public void setCouriers(ResultSet rs) throws SQLException {
+		this.couriers.clear();
+		Courier courier;
+		do {
+			courier = new Courier(rs.getInt("id_courier"), rs.getString("name"), rs.getString("phone"), rs.getString("password"), this.id_office);
+			//if(office.getId_office() == 0) return;
+			couriers.add(courier);
+		}while(rs.next());
 	}
 }

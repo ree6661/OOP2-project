@@ -5,6 +5,10 @@ import java.sql.SQLException;
 
 public class Admin extends Consumer {
 	
+	public Admin() {
+		super();
+	}
+	
 	public Admin(int id, String name, String phone, String password) {
 		super(id, name, phone, password);
 	}

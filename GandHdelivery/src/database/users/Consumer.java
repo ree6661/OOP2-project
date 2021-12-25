@@ -10,6 +10,13 @@ public class Consumer {
 	protected String phone;
 	protected String password;
 	
+	public Consumer() {
+		this.id = 0;
+		this.name = "";
+		this.phone = "";
+		this.password = "";
+	}
+	
 	public Consumer(int id, String name, String phone, String password) {
 		this.id = id;
 		this.name = name;

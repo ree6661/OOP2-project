@@ -1,11 +1,14 @@
 package validation;
 
+import java.sql.SQLException;
 import java.util.regex.Pattern;
+
+import database.TableQuery;
 
 public final class Valid {
 	
 	public static boolean username(String username) {
-		if(username == null) return false;
+		if(username == null || username.equals("")) return false;
 		
 		final String regex = "1234567890!@№%€§*()-–=+`~_#^&[]{};:\'\"$\\/,<.>|?";
         for(char ch : regex.toCharArray()) 
@@ -26,5 +29,25 @@ public final class Valid {
 	
 	public static boolean password(String password) {
 		return password.length() > 4 && password.length() < 31;
+	}
+	
+	public static String user(String name, String phone, String password, String repeatPassword) throws SQLException {
+		
+		if(!Valid.username(name)) 
+    		return "Името не трябва да съдържа символи и да е твърде кратко";
+    	
+    	if(!Valid.phoneNumber(phone)) 
+    		return "Телефона трябва да съдържа 12 цифри";
+    		
+    	if(!Valid.password(password)) 
+    		return "Паролата трябва да е между 5 и 30 символа";
+    		
+    	if(!repeatPassword.equals(password)) 
+    		return "Паролите не съвпадат";
+    	
+    	if(TableQuery.phoneExists(phone)) 
+    		return "Вече съществува такъв телефон в базата данни";
+    	
+		return "";
 	}
 }

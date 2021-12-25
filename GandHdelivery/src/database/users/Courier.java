@@ -7,6 +7,11 @@ public class Courier extends Consumer {
 	
 	private int id_office;
 	
+	public Courier() {
+		super();
+		this.id_office = 0;
+	}
+	
 	public Courier(int id, String name, String phone, String password, int id_office) {
 		super(id, name, phone, password);
 		this.setId_office(id_office);

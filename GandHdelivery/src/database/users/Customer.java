@@ -8,6 +8,12 @@ public class Customer extends Consumer {
 	private int id_city;
 	private String address;
 	
+	public Customer() {
+		super();
+		this.id_city = 0;
+		this.address = "";
+	}
+	
 	public Customer(int id, String name, String phone, String password, int id_city, String address) {
 		super(id, name, phone, password);
 		this.id_city = id_city;

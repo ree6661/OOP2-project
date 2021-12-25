@@ -10,6 +10,8 @@ public class TableQuery {
 	
 	private Connection DB;
 	private String table;
+	public static final String[] users = 
+		{"customers", "couriers", "admins"};
 	
 	public TableQuery(String tableName) {
 		try {
@@ -118,4 +120,14 @@ public class TableQuery {
 		return officeCity.getString(1);
 	}
 	
+	public static boolean phoneExists(String phone) throws SQLException {
+		
+		ResultSet record = null;
+		for(int i = 0; i < TableQuery.users.length; ++i) {
+    		record = TableQuery.getRecordFromTable(
+    					"phone", phone, users[i]); 
+    		if(record != null) return true;
+		}
+		return false;
+	}
 }

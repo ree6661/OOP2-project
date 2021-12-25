@@ -35,6 +35,7 @@ public class Company {
 	}
 	
 	public void setOffices(ResultSet rs) throws SQLException {
+		this.offices.clear();
 		Office office;
 		do {
 			office = new Office(rs.getInt("id_office"), this.id, rs.getInt("id_city"), rs.getString("address"));

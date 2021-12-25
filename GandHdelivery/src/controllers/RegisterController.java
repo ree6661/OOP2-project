@@ -41,7 +41,7 @@ public final class RegisterController implements Initializable {
 	}
 	
     @FXML
-    public void register(ActionEvent e) throws IOException {
+    public void register(ActionEvent e) throws IOException, SQLException {
     	System.out.println("Register");
     	this.error.setText("");
     	
@@ -52,31 +52,11 @@ public final class RegisterController implements Initializable {
     			password = this.password.getText(),
     	    	repeatPassword = this.repeatPassword.getText();
     	
-    	TableQuery customerQuery = new TableQuery("customers");
+    	this.error.setText(Valid.user(username, phoneNumber, password, repeatPassword));
+    	if(!this.error.getText().equals("")) return;
     	
-    	if(!Valid.username(username)) {
-    		this.error.setText("Името не трябва да съдържа символи и да е твърде кратко");
-    		return;
-    	}
-    	if(!Valid.phoneNumber(phoneNumber)) {
-    		this.error.setText("Телефона трябва да съдържа 12 цифри");
-    		return;
-    	} else if(customerQuery.contains("phone", phoneNumber)) {
-    		this.error.setText("Вече съществува такъв телефон в базата данни");
-    		return;
-    	}
     	if(city.equals("град")) {
     		city = "";
-    	}
-    	//poleto address ne e zadylzitelno
-    	
-    	if(!Valid.password(password)) {
-    		this.error.setText("Паролата трябва да е между 5 и 30 символа");
-    		return;
-    	}
-    	if(!repeatPassword.equals(password)) {
-    		this.error.setText("Паролите не съвпадат");
-    		return;
     	}
     	
     	System.out.println("Successful register");
