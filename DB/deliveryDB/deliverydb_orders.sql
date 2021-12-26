@@ -23,21 +23,22 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
-  `id_orders` int NOT NULL AUTO_INCREMENT,
+  `id_order` int NOT NULL AUTO_INCREMENT,
   `id_category` int DEFAULT NULL,
-  `fragile` tinyint(1) DEFAULT NULL,
   `id_office_sender` int DEFAULT NULL,
   `id_office_recipient` int DEFAULT NULL,
-  `delivery_to_address` tinyint(1) DEFAULT NULL,
   `id_customer_sender` int DEFAULT NULL,
   `id_customer_recipient` int DEFAULT NULL,
   `id_courier` int DEFAULT NULL,
   `id_status` int DEFAULT NULL,
-  `cash_on_delivery` double DEFAULT NULL,
+  `fragile` tinyint(1) DEFAULT NULL,
   `paid` tinyint(1) DEFAULT NULL,
+  `cash_on_delivery` double DEFAULT NULL,
+  `delivery_to_address` tinyint(1) DEFAULT NULL,
+  `address` varchar(45) DEFAULT NULL,
   `acceptance_by_sender` datetime DEFAULT NULL,
   `customer_delivery` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_orders`),
+  PRIMARY KEY (`id_order`),
   KEY `id_category` (`id_category`),
   KEY `id_office_sender` (`id_office_sender`),
   KEY `id_office_recipient` (`id_office_recipient`),
@@ -52,7 +53,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`id_customer_recipient`) REFERENCES `customers` (`id_customer`),
   CONSTRAINT `orders_ibfk_6` FOREIGN KEY (`id_courier`) REFERENCES `couriers` (`id_courier`),
   CONSTRAINT `orders_ibfk_7` FOREIGN KEY (`id_status`) REFERENCES `statuses` (`id_status`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,6 +62,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,1,1,4,1,2,1,1,1,0,25,NULL,NULL,'2021-12-27 00:00:00','2021-12-30 00:00:00'),(2,1,1,4,1,2,1,1,1,1,25,NULL,NULL,'2021-12-27 00:00:00','2021-12-30 00:00:00'),(3,1,1,4,1,2,1,1,1,1,49.99,1,'Ivan rilski 23','2021-12-27 00:00:00','2021-12-30 00:00:00');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -73,4 +75,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-26  0:12:53
+-- Dump completed on 2021-12-26 22:44:44
