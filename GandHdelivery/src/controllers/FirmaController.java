@@ -1,11 +1,13 @@
 package controllers;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import application.Launch;
 import application.Property;
 import database.Add;
 import database.Company;
@@ -59,16 +61,23 @@ public class FirmaController {
 		offices.valueProperty().addListener(officesListener());		
 		couriers.valueProperty().addListener(couriersListener());
     }
-    
+    @FXML
+    void queries() {
+    	
+    }/*
+    @FXML
+    void registerOrder() throws SQLException, IOException {
+    	PratkaRegisterController.admin = admin;
+    	PratkaRegisterController.userCourier = false;
+    	Launch.launch.pratkaForm();
+    }
+    */
     @FXML
     private void addFirma() throws SQLException {
     	String name = firmaName.getText();
     	if(name.equals("")) return;
     	
-    	String sql = "select company from companies where company='" + name + "'";
-    	ResultSet rs = TableQuery.execute(sql);
-    	
-    	if(rs != null) {
+    	if(TableQuery.getCompanyId(name) > 0) {
     		System.out.println("Can't add company: already exists");
     		return;
     	}
@@ -80,8 +89,16 @@ public class FirmaController {
     	companies.getItems().addAll(Property.companiesMap.keySet());
     }
     @FXML
-    private void changeFirma() {
-    	
+    private void changeFirma() throws SQLException {
+    	String name = companies.getSelectionModel().getSelectedItem();
+    	if(name.equals("") || name.length() < 3) return;
+    	int id_company = TableQuery.getCompanyId(name);
+    	if(id_company < 1){
+    		System.out.println("Can't change company: not exists");
+    		return;
+    	}
+    	Update.company(id_company, name);
+    	System.out.println("Successfully updated company");
     }
     @FXML
     private void deleteFirma() throws SQLException {

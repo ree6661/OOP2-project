@@ -50,4 +50,17 @@ public final class Valid {
     	
 		return "";
 	}
+	
+	public static boolean order(String phoneSender, String phoneReceiver, String date1, String date2) {
+		
+		if(phoneSender.equals("") || phoneReceiver.equals("") || date1.equals("") || date2.equals("")) {
+			System.out.println("Can't add order: empty field error");
+			return false;
+		}
+		if(phoneSender.equals(phoneReceiver)) {
+			System.out.println("Phones can't be the same");
+			return false;
+		}
+		return true;
+	}
 }

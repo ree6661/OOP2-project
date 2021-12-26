@@ -76,6 +76,7 @@ public final class LoginController {
 		switch(recordTable) {
 		case "customers":
 			HomeController.customer = Customer.create(record);
+			HomeController.user = 3;
 			Launch.launch.homeForm();
 			break;
 		case "couriers":

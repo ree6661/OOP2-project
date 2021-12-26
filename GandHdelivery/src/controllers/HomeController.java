@@ -1,22 +1,20 @@
 package controllers;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import database.Create;
+import database.users.Admin;
+import database.users.Courier;
 import database.users.Customer;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 
 public final class HomeController {
 	
+	public static Admin admin;
+	public static Courier courier;
 	public static Customer customer;
-	
+	public static int user = 0;//1 admin 2 courier 3 customer
 	@FXML
 	private ComboBox<String> functions;
 	

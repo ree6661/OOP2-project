@@ -5,6 +5,9 @@ import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+
+import com.mysql.cj.xdevapi.Table;
 
 public class TableQuery {
 	
@@ -129,5 +132,72 @@ public class TableQuery {
     		if(record != null) return true;
 		}
 		return false;
+	}
+	public static int getCompanyId(String companyName) throws SQLException {
+		String sql = "select * from companies where company='" + companyName + "'";
+		ResultSet rs = TableQuery.execute(sql);
+		
+		if(rs == null) return 0;
+		return rs.getInt("id_company");
+	}
+	
+	public static LinkedList<Company> allCompanies() throws SQLException {
+		LinkedList<Company> companies = new LinkedList<>();
+		
+		String sql = "select * from companies";
+		
+		ResultSet rs = TableQuery.execute(sql);
+
+		do companies.add(new Company(rs.getInt("id_company"), rs.getString("company")));
+		while(rs.next());
+		
+		for(int i = 0; i < companies.size(); ++i) {
+		
+			sql = "select * from office where id_company='" + companies.get(i).getId() + "'";
+			rs = TableQuery.execute(sql);
+			if(rs == null) continue;
+			do companies.get(i).offices.add(
+					new Office(rs.getInt("id_office"), rs.getInt("id_company"),
+							rs.getInt("id_city"), rs.getString("address")));
+			while(rs.next());
+		}
+		
+		return companies;
+	}
+	
+	public static int getCategoryId(String category) throws SQLException {
+		String sql = "select id_category from categories where category='" + category + "'";
+		
+		ResultSet rs = TableQuery.execute(sql);
+		
+		if(rs == null) return 0;
+		
+		return rs.getInt("id_category");
+	}
+	
+	public static int getOfficeId(String fullAddress) throws SQLException {
+		String sql = "select * from office";
+		
+		ResultSet rs = TableQuery.execute(sql);
+		
+		if(rs == null) return 0;
+		Company c = new Company();
+		c.setOffices(rs);
+		for(int i = 0; i < c.offices.size(); ++i) {
+			Office o = c.offices.get(i);
+			if(o.getFullAddress().equals(fullAddress))
+				return o.getId_office();
+		}
+		return 0;
+	}
+	
+	public static int getCustomerId(String phone) throws SQLException {
+		String sql = "select id_customer from customers where phone='" + phone + "'";
+		
+		ResultSet rs = TableQuery.execute(sql);
+		
+		if(rs == null) return 0;
+		
+		return rs.getInt("id_customer");
 	}
 }

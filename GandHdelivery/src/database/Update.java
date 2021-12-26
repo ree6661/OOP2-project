@@ -34,4 +34,17 @@ public class Update {
 		st.executeUpdate();
 		st.close();
 	}
+	
+	public static void company(int id_company, String company) throws SQLException {
+		Connection conn = Create.getConnection();
+		
+		final String sql = "update companies set company=? where id_company=?";
+		
+		PreparedStatement st = conn.prepareStatement(sql);
+		st.setString(1, company);
+		st.setInt(2, id_company);
+		
+		st.executeUpdate();
+		st.close();
+	}
 }

@@ -56,17 +56,19 @@
                   </AnchorPane>
                </graphic></BottomNavigationButton>
          </children></Pane>
-      <ComboBox layoutX="316.0" layoutY="197.0" prefHeight="28.0" prefWidth="173.0" promptText="категория" />
-      <CheckBox layoutX="316.0" layoutY="237.0" mnemonicParsing="false" text="чупливо" />
-      <ComboBox layoutX="42.0" layoutY="235.0" prefHeight="28.0" prefWidth="173.0" promptText="офис на подаване" />
-      <ComboBox layoutX="316.0" layoutY="301.0" prefHeight="28.0" prefWidth="173.0" promptText="офис за получаване" />
-      <CheckBox layoutX="316.0" layoutY="271.0" mnemonicParsing="false" text="доставка до  адрес" />
-      <ComboBox layoutX="42.0" layoutY="197.0" prefHeight="28.0" prefWidth="173.0" promptText="фирма доставчик" />
-      <TextField layoutX="43.0" layoutY="270.0" prefHeight="26.0" prefWidth="173.0" promptText="ID на Подател" />
-      <TextField layoutX="43.0" layoutY="303.0" prefHeight="26.0" prefWidth="173.0" promptText="ID на Получател" />
-      <CheckBox layoutX="579.0" layoutY="237.0" mnemonicParsing="false" text="предплатена доставха" />
-      <DatePicker layoutX="43.0" layoutY="345.0" prefHeight="26.0" prefWidth="173.0" promptText="приемане от подател" />
-      <DatePicker layoutX="579.0" layoutY="198.0" promptText="доставка на клиент" />
-      <Button layoutX="603.0" layoutY="424.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="173.0" text="регистрирай пратката" />
+      <ComboBox fx:id="category" layoutX="316.0" layoutY="197.0" prefHeight="28.0" prefWidth="173.0" promptText="категория" />
+      <CheckBox fx:id="fragile" layoutX="316.0" layoutY="237.0" mnemonicParsing="false" text="чупливо" />
+      <ComboBox fx:id="officeSender" layoutX="42.0" layoutY="235.0" prefHeight="28.0" prefWidth="173.0" promptText="офис на подаване" />
+      <ComboBox fx:id="officeReceiver" layoutX="316.0" layoutY="301.0" prefHeight="28.0" prefWidth="173.0" promptText="офис за получаване" />
+      <CheckBox fx:id="sendToAddress" layoutX="316.0" layoutY="271.0" mnemonicParsing="false" text="доставка до  адрес" />
+      <ComboBox fx:id="companySender" layoutX="42.0" layoutY="197.0" prefHeight="28.0" prefWidth="173.0" promptText="фирма доставчик" />
+      <TextField fx:id="phoneSender" layoutX="43.0" layoutY="270.0" prefHeight="26.0" prefWidth="173.0" promptText="Телефон на Подател" />
+      <TextField fx:id="phoneReceiver" layoutX="43.0" layoutY="303.0" prefHeight="26.0" prefWidth="173.0" promptText="Телефон на Получател" />
+      <CheckBox fx:id="isPaid" layoutX="579.0" layoutY="237.0" mnemonicParsing="false" text="предплатена доставка" />
+      <DatePicker fx:id="receiveDate" layoutX="43.0" layoutY="345.0" prefHeight="26.0" prefWidth="173.0" promptText="приемане от подател" />
+      <DatePicker fx:id="clientReceiveDate" layoutX="579.0" layoutY="198.0" promptText="доставка на клиент" />
+      <Button layoutX="603.0" layoutY="424.0" mnemonicParsing="false" onAction="#registerOrder" prefHeight="30.0" prefWidth="173.0" text="регистрирай пратката" />
+      <TextField fx:id="address" layoutX="316.0" layoutY="359.0" prefHeight="25.0" prefWidth="173.0" promptText="адрес на доставка" />
+      <TextField fx:id="sendPrice" layoutX="579.0" layoutY="276.0" prefHeight="25.0" prefWidth="174.0" promptText="сума на доставка" />
    </children>
 </Pane>

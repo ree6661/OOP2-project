@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import controllers.PratkaRegisterController;
+import database.users.Courier;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,7 +25,10 @@ public class Launch extends Application {
 		Launch.launch = this;
 		try {
 			Property.initAll();
-			firmaForm();
+			PratkaRegisterController.courier = new Courier();
+			PratkaRegisterController.courier.setId(1);
+			pratkaForm();
+			//firmaForm();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -69,6 +74,7 @@ public class Launch extends Application {
 		
 		this.pratka = FXMLLoader.load(getClass().getResource("../fxml/pratkaRegister.fxml"));
 		this.pratkaScene = new Scene(this.pratka);
+		this.pratka.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
 		this.pratka.getStylesheets().add(getClass().getResource("../css/pratkaRegister.css").toExternalForm());
 		
 		this.stage.setScene(this.pratkaScene);
