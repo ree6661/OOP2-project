@@ -200,4 +200,49 @@ public class TableQuery {
 		
 		return rs.getInt("id_customer");
 	}
+	
+	public static String categoryIdToString(int id_category) throws SQLException {
+		String sql = "select category from categories where id_category='"+id_category + "'";
+		
+		ResultSet rs = TableQuery.execute(sql);
+		
+		if(rs == null) return null;
+		
+		return rs.getString("category");
+	}
+	
+	public static String getOffice(int id_office) throws SQLException {
+		String sql = "select * from office where id_office='" + id_office + "'";
+		ResultSet rs = TableQuery.execute(sql);
+		
+		if(rs == null) return null;
+		
+		return TableQuery.cityIdToName(rs.getInt("id_city")) + " " + rs.getString("address");
+	}
+	
+	public static String getCustomer(int id_customer) throws SQLException {
+		String sql = "select name from customers where id_customer='" + id_customer + "'";
+		ResultSet rs = TableQuery.execute(sql);
+		
+		if(rs == null) return null;
+		
+		return rs.getString("name");
+	}
+	
+	public static String getCourier(int id_courier) throws SQLException {
+		String sql = "select name from couriers where id_courier='" + id_courier + "'";
+		ResultSet rs = TableQuery.execute(sql);
+		
+		if(rs == null) return null;
+		
+		return rs.getString("name");
+	}
+	
+	public static String getStatus(int id_status) throws SQLException {
+		String sql = "select status_name from statuses where id_status='" + id_status +"'";
+		ResultSet rs = TableQuery.execute(sql);
+		
+		if(rs == null) return null;
+		return rs.getString("status_name");
+	}
 }

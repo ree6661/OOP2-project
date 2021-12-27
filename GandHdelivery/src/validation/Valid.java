@@ -61,6 +61,11 @@ public final class Valid {
 			System.out.println("Phones can't be the same");
 			return false;
 		}
+		
+		if(!Valid.phoneNumber(phoneSender) || ! Valid.phoneNumber(phoneReceiver)) {
+			System.out.println("invalid phone number");
+			return false;
+		}
 		return true;
 	}
 }

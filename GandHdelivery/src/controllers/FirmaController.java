@@ -64,14 +64,13 @@ public class FirmaController {
     @FXML
     void queries() {
     	
-    }/*
+    }
     @FXML
     void registerOrder() throws SQLException, IOException {
-    	PratkaRegisterController.admin = admin;
-    	PratkaRegisterController.userCourier = false;
+    	
     	Launch.launch.pratkaForm();
     }
-    */
+    
     @FXML
     private void addFirma() throws SQLException {
     	String name = firmaName.getText();

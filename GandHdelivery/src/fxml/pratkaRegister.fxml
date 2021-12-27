@@ -41,7 +41,7 @@
                   </MenuButton>
                </children>
             </Pane>
-            <BottomNavigationButton id="spravki" layoutX="200.0" prefHeight="98.0" prefWidth="159.0" text="справки" />
+            <BottomNavigationButton id="spravki" layoutX="200.0" onAction="#queries" prefHeight="98.0" prefWidth="159.0" text="справки" />
             <BottomNavigationButton id="pratka" layoutX="359.0" prefHeight="98.0" prefWidth="159.0" text="регистрирай пратка" />
             <BottomNavigationButton id="firma" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" prefHeight="98.0" prefWidth="137.0" text="фирма" textOverrun="CLIP">
                <font>

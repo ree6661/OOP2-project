@@ -9,7 +9,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -59,20 +58,15 @@
          </children></Pane>
       <AnchorPane id="filterPane" layoutY="99.0" prefHeight="360.0" prefWidth="200.0">
          <children>
-            <Button id="vij" alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="286.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" textOverrun="CENTER_WORD_ELLIPSIS" />
+            <Button id="vij" alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="286.0" mnemonicParsing="false" onAction="#filter" prefHeight="60.0" prefWidth="60.0" textOverrun="CENTER_WORD_ELLIPSIS" />
             <Label layoutX="7.0" layoutY="115.0" text="от" />
-            <DatePicker layoutX="30.0" layoutY="111.0" prefHeight="26.0" prefWidth="159.0" />
-            <Label layoutX="10.0" layoutY="151.0" text="до" />
-            <DatePicker layoutX="33.0" layoutY="147.0" prefHeight="26.0" prefWidth="159.0" />
+            <DatePicker fx:id="dateFrom" layoutX="30.0" layoutY="111.0" prefHeight="26.0" prefWidth="159.0" />
+            <Label layoutX="7.0" layoutY="152.0" text="до" />
+            <DatePicker fx:id="dateTo" layoutX="30.0" layoutY="147.0" prefHeight="26.0" prefWidth="159.0" />
             <Label layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="60.0" text="функция " />
             <ComboBox fx:id="functions" layoutX="14.0" layoutY="32.0" prefHeight="28.0" prefWidth="172.0" />
          </children>
       </AnchorPane>
-      <TableView layoutX="200.0" layoutY="99.0" prefHeight="360.0" prefWidth="584.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <TableView fx:id="table" layoutX="200.0" layoutY="99.0" prefHeight="360.0" prefWidth="584.0" />
    </children>
 </Pane>

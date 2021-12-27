@@ -9,6 +9,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 public class Launch extends Application {
@@ -25,9 +28,10 @@ public class Launch extends Application {
 		Launch.launch = this;
 		try {
 			Property.initAll();
-			PratkaRegisterController.courier = new Courier();
-			PratkaRegisterController.courier.setId(1);
-			pratkaForm();
+			Launch.launch.homeForm();
+//			PratkaRegisterController.courier = new Courier();
+//			PratkaRegisterController.courier.setId(1);
+//			pratkaForm();
 			//firmaForm();
 			
 		}catch(Exception e) {
@@ -92,6 +96,21 @@ public class Launch extends Application {
 		
 		this.stage.setScene(this.firmaScene);
 		this.stage.show();
+	}
+	
+	public static void alert(String error, String content) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Error");
+		alert.setHeaderText(error);
+		alert.setContentText(content);
+		alert.showAndWait();
+	}
+	
+	public static void alert(String error) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Error");
+		alert.setHeaderText(error);
+		alert.showAndWait();
 	}
 	
 	public static void main(String[] args) {

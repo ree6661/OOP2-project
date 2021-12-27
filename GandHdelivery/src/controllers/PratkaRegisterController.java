@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+import application.Launch;
 import application.Property;
 import database.Add;
 import database.Company;
@@ -47,6 +49,11 @@ public class PratkaRegisterController {
     
     @FXML
     private URL location;
+    
+    @FXML
+    private void queries() throws SQLException, IOException {
+    	Launch.launch.homeForm();
+    }
 
     @FXML
     void initialize() throws SQLException {
@@ -76,6 +83,12 @@ public class PratkaRegisterController {
     	LocalDate receiveDate = this.receiveDate.getValue(),
     			clientLocalDate = this.clientReceiveDate.getValue();
     	
+    	if(receiveDate == null || clientLocalDate == null) {
+    		Launch.alert("Dates can't be empty", "");
+    		//System.out.println("dates can't be empty");
+    		return;
+    	}
+    	
     	boolean fragile = this.fragile.isSelected(),
     			sendToAddress = this.sendToAddress.isSelected(),
     			isPaid = this.isPaid.isSelected();
@@ -89,7 +102,8 @@ public class PratkaRegisterController {
     		return;
     	
     	if(!sendToAddress && officeSender.getSelectionModel().getSelectedItem().equals(officeReceiver.getSelectionModel().getSelectedItem())) {
-    		System.out.println("Can't deliver to the same office");
+    		Launch.alert("Can't deliver", "");
+    		//System.out.println("Can't deliver to the same office");
     		return;
     	}
     	if(sendToAddress && address.equals("")) {
