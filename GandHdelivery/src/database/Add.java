@@ -3,6 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public final class Add {
@@ -17,6 +18,40 @@ public final class Add {
 		
 		st.execute();
 		st.close();
+	}
+	
+	public static void companyPrice(String name, double plik, double kolet, double paket, double tovar) throws SQLException {
+		Connection conn = Create.getConnection();
+		
+		String sql = "insert into companies(company) values(?)";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, name);
+		
+		ps.execute();
+		
+		sql = "SELECT id_company FROM companies ORDER BY id_company DESC LIMIT 1";
+		ResultSet rs = TableQuery.execute(sql);
+		if(rs == null) {
+			System.out.println("Can't find company");
+			ps.close();
+			return;
+		}
+		double[] categories = {plik, kolet, paket, tovar};
+		int id_company = rs.getInt("id_company");
+		sql = "insert into price_list(id_company, id_category, price) values(?, ?, ?)";
+		
+		for(int i = 1; i < 5; ++i) {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, id_company);
+			ps.setInt(2, i);
+			ps.setDouble(3, categories[i-1]);
+			
+			ps.execute();
+		}
+		
+		ps.close();
 	}
 	
 	public static void customer(String name, String phone, int city, String address, String password) throws SQLException {

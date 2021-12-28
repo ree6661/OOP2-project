@@ -7,7 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-import com.mysql.cj.xdevapi.Table;
+import database.property.Company;
+import database.property.Office;
 
 public class TableQuery {
 	
@@ -73,34 +74,6 @@ public class TableQuery {
 		if(!rs.next()) return null;
 		
 		return rs;
-	}
-	
-	public static String getRecordFromTables(
-			String recordToReturn, String valueColumnName, 
-			String value, String... tables) {
-		// select password from customer where phone = phoneNumber
-		try {
-			Connection DB = Create.getConnection();
-			PreparedStatement ps;
-			String sql = "";
-			ResultSet rs;
-			
-			
-			for(int i = 0; i < tables.length; ++i) {
-				sql = "select *" /*+ recordToReturn */+ " from " + tables[i] + 
-						" where " + valueColumnName + " = '" + value + "'";
-				 ps = DB.prepareStatement(sql);
-				 rs = ps.executeQuery();
-				 
-				 if(rs.next()) return rs.getString(recordToReturn);
-					 //return rs.getString(1);
-				 
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return "";
 	}
 	
 	public static String searchInTables(String find, String columnName, String... toSearch) {

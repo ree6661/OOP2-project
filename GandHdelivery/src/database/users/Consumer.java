@@ -3,7 +3,9 @@ package database.users;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Consumer {
+import database.queries.Query;
+
+public class Consumer implements Query {
 	
 	protected int id;
 	protected String name;

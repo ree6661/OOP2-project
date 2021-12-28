@@ -12,7 +12,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="309.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
-      <PasswordField fx:id="pass" layoutX="29.0" layoutY="229.0" prefHeight="38.0" prefWidth="235.0" promptText="парола" />
       <ImageView fitHeight="116.0" fitWidth="299.0" layoutX="15.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/GandHlogo.png" />
@@ -23,6 +22,7 @@
       <Button id="register" alignment="CENTER_RIGHT" contentDisplay="BOTTOM" layoutX="127.0" layoutY="278.0" mnemonicParsing="false" onAction="#registerFx" prefHeight="119.0" prefWidth="139.0" text="Регистрирай се" />
       <Hyperlink id="forgot" layoutX="61.0" layoutY="405.0" text="забравих си паролата" />
       <TextField fx:id="phone" layoutX="29.0" layoutY="182.0" prefHeight="38.0" prefWidth="235.0" promptText="телефон" />
+      <PasswordField fx:id="pass" layoutX="29.0" layoutY="229.0" prefHeight="38.0" prefWidth="235.0" promptText="парола" />
        <Button id="login" alignment="CENTER_RIGHT" contentDisplay="BOTTOM" layoutX="29.0" layoutY="279.0" mnemonicParsing="false" onAction="#loginFx" prefHeight="81.0" prefWidth="82.0" text="Влез" textOverrun="CENTER_ELLIPSIS" />
       <Label id="errorMessage" layoutX="126.0" layoutY="159.0" textFill="RED">
          <font>

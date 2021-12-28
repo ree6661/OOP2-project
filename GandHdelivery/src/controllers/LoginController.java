@@ -18,7 +18,7 @@ import validation.Valid;
 
 public final class LoginController {
 	
-	private final String err = "Invalid phone number or password";
+	private final String err = "Невалидни телефон и/или парола";
 	private final String[] users = 
 			{"customers", "couriers", "admins"};
 	
@@ -38,22 +38,19 @@ public final class LoginController {
 	
 	@FXML
     void registerFx(ActionEvent event) throws SQLException, IOException {
-		System.out.println("Register");
 		Launch.launch.registerForm();
 	}
 	
 	@FXML
     void loginFx(ActionEvent event) throws SQLException, IOException {
-    	System.out.println("Login");
 		String phoneNumber = this.phone.getText(),
     			password = this.pass.getText();
     	
     	if(!Valid.phoneNumber(phoneNumber) || !Valid.password(password)) {
-    		//this.error.setText("Името не трябва да съдържа символи и да е твърде кратко");
-    		System.out.println(err);
+    		Launch.alert(err);
     		return;
     	}
-    		//this.error.setText("Вече съществува такъв телефон в базата данни");
+    	
     	ResultSet record = null;
     	String recordTable = null;
     	for(int i = 0; i < users.length; ++i) {
@@ -67,7 +64,7 @@ public final class LoginController {
     	}
     	
     	if(recordTable == null) {
-    		System.out.println(err);
+    		Launch.alert(err);
     		return;
     	}
     	
@@ -76,7 +73,7 @@ public final class LoginController {
 		switch(recordTable) {
 		case "customers":
 			HomeController.customer = Customer.create(record);
-			HomeController.user = 3;
+			HomeController.user = true;
 			Launch.launch.homeForm();
 			break;
 		case "couriers":
@@ -91,7 +88,5 @@ public final class LoginController {
 			System.out.println("error: unknown table: " + recordTable);
 			return;
 		}
-		
-    	System.out.println("Successful login");
     }
 }

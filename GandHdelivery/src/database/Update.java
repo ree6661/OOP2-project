@@ -40,11 +40,35 @@ public class Update {
 		
 		final String sql = "update companies set company=? where id_company=?";
 		
-		PreparedStatement st = conn.prepareStatement(sql);
-		st.setString(1, company);
-		st.setInt(2, id_company);
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, company);
+		ps.setInt(2, id_company);
 		
-		st.executeUpdate();
-		st.close();
+		ps.executeUpdate();
+		ps.close();
+	}
+	
+	public static void companyCategory(int id_company, String company, double plik, double kolet, double paket, double tovar) throws SQLException {
+		Connection conn = Create.getConnection();
+		
+		String sql = "update companies set company=? where id_company=?";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, company);
+		ps.setInt(2, id_company);
+		
+		ps.executeUpdate();
+		
+		sql = "update price_list set price=? where id_company=? and id_category=?";
+		double[] categories = {plik, kolet, paket, tovar};
+		for(int i = 1; i < 5; ++i) {			
+			ps = conn.prepareStatement(sql);
+			ps.setDouble(1, categories[i-1]);
+			ps.setInt(2, id_company);
+			ps.setInt(3, i);
+			ps.executeUpdate();
+		}
+		
+		ps.close();
 	}
 }

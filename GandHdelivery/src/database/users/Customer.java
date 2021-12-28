@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class Customer extends Consumer {
 	
 	private int id_city;
-	private String address;
+	private String address, city_name = "";
 	
 	public Customer() {
 		super();
@@ -49,6 +49,14 @@ public class Customer extends Consumer {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getCity_name() {
+		return city_name;
+	}
+
+	public void setCity_name(String city_name) {
+		this.city_name = city_name;
 	}
 
 }

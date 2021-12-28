@@ -2,23 +2,16 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import application.Launch;
 import application.Property;
 import database.Add;
-import database.Create;
-import database.TableQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import validation.Valid;
@@ -32,9 +25,6 @@ public final class RegisterController implements Initializable {
 	@FXML
 	private PasswordField password, repeatPassword;
 	
-	@FXML
-	private Label error;
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cBox0.getItems().addAll(Property.citiesMap.keySet());
@@ -42,8 +32,6 @@ public final class RegisterController implements Initializable {
 	
     @FXML
     public void register(ActionEvent e) throws IOException, SQLException {
-    	System.out.println("Register");
-    	this.error.setText("");
     	
     	String username = this.name.getText(), 
     			phoneNumber = this.phone.getText(),
@@ -51,24 +39,24 @@ public final class RegisterController implements Initializable {
     			location = this.address.getText(),
     			password = this.password.getText(),
     	    	repeatPassword = this.repeatPassword.getText();
-    	
-    	this.error.setText(Valid.user(username, phoneNumber, password, repeatPassword));
-    	if(!this.error.getText().equals("")) return;
+    	String err = "";
+    	err = Valid.user(username, phoneNumber, password, repeatPassword);
+    	if(!err.equals("")) {
+    		Launch.alert(err);
+    		return;
+    	}
     	
     	if(city.equals("град")) {
     		city = "";
     	}
     	
-    	System.out.println("Successful register");
-    	
     	Add.customer(username, phoneNumber, Property.citiesMap.get(city), location, password);
     	
-    	System.out.println("Added customer");
+    	Launch.alert("Успешна регистрация.");
     }
     
     @FXML
     public void login(ActionEvent e) throws SQLException, IOException {
-    	System.out.println("login");
     	Launch.launch.loginForm();
     }
     

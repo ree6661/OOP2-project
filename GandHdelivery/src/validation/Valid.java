@@ -3,6 +3,7 @@ package validation;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
+import application.Launch;
 import database.TableQuery;
 
 public final class Valid {
@@ -54,18 +55,24 @@ public final class Valid {
 	public static boolean order(String phoneSender, String phoneReceiver, String date1, String date2) {
 		
 		if(phoneSender.equals("") || phoneReceiver.equals("") || date1.equals("") || date2.equals("")) {
-			System.out.println("Can't add order: empty field error");
+			Launch.alert("Всички полета трябва да са попълнени");
 			return false;
 		}
 		if(phoneSender.equals(phoneReceiver)) {
-			System.out.println("Phones can't be the same");
+			Launch.alert("Телефоните не може да са еднакви");
 			return false;
 		}
 		
 		if(!Valid.phoneNumber(phoneSender) || ! Valid.phoneNumber(phoneReceiver)) {
-			System.out.println("invalid phone number");
+			Launch.alert("Невалиден телефонен номер");
 			return false;
 		}
+		return true;
+	}
+	
+	public static boolean price(double price) {
+		if(price < 0) return false;
+		
 		return true;
 	}
 }

@@ -12,8 +12,8 @@ import java.util.ResourceBundle;
 import application.Launch;
 import application.Property;
 import database.Add;
-import database.Company;
 import database.TableQuery;
+import database.property.Company;
 import database.users.Courier;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -68,10 +68,11 @@ public class PratkaRegisterController {
     	String sql = "select category from categories";
     	ResultSet rs = TableQuery.execute(sql);
     	if(rs == null) {
-    		System.out.println("categories empty");
+    		Launch.alert("Не е избрана категория");
     		return;
     	}
-    	do category.getItems().add(rs.getString("category"));
+    	this.category.valueProperty().addListener(categoryListener());
+    	do this.category.getItems().add(rs.getString("category"));
     	while(rs.next());
     	
     }
@@ -84,8 +85,7 @@ public class PratkaRegisterController {
     			clientLocalDate = this.clientReceiveDate.getValue();
     	
     	if(receiveDate == null || clientLocalDate == null) {
-    		Launch.alert("Dates can't be empty", "");
-    		//System.out.println("dates can't be empty");
+    		Launch.alert("Полетата за дати не може да са празни");
     		return;
     	}
     	
@@ -102,17 +102,16 @@ public class PratkaRegisterController {
     		return;
     	
     	if(!sendToAddress && officeSender.getSelectionModel().getSelectedItem().equals(officeReceiver.getSelectionModel().getSelectedItem())) {
-    		Launch.alert("Can't deliver", "");
-    		//System.out.println("Can't deliver to the same office");
+    		Launch.alert("Не може да се достави до същия офис");
     		return;
     	}
     	if(sendToAddress && address.equals("")) {
-    		System.out.println("address can't be empty");
+    		Launch.alert("Полето адрес не може да е празно");
     		return;
     	}
     	
     	if(Date.valueOf(receiveDate).after(Date.valueOf(clientLocalDate))) {
-    		System.out.println("Can't send date be before receive date");
+    		Launch.alert("Не може да се изпрати, преди дата на получаване");
     		return;
     	}
     	
@@ -134,7 +133,7 @@ public class PratkaRegisterController {
     			id_customer_recipient, id_courier, id_status,
     			fragile, isPaid, price, sendToAddress, address,
     			Date.valueOf(receiveDate), Date.valueOf(clientLocalDate));
-    	System.out.println("Successfully added order");
+    	Launch.alert("Успешно добавена поръчка");
     }
     
     private ChangeListener<String> firmaListener() {
@@ -161,8 +160,31 @@ public class PratkaRegisterController {
 					e.printStackTrace();
 				}
     			officeReceiver.getItems().addAll(officeSender.getItems());
-    			
     		}
     	};
+    }
+    
+    private ChangeListener<String> categoryListener() {
+    	return new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				int id_category = category.getSelectionModel().getSelectedIndex()+1;
+				
+				try {
+					String sql = "select price from price_list where id_company='" + company.getId() + "' and id_category='" + id_category + "'";
+					ResultSet rs = TableQuery.execute(sql);
+					if(rs == null) {
+						Launch.alert("Фирмата няма цени");
+						return;
+					}
+					
+					sendPrice.setText(Double.toString(rs.getDouble("price")));
+					
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		};
     }
 }

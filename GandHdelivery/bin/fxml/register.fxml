@@ -23,11 +23,6 @@
       <Button id="register" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="29.0" layoutY="479.0" mnemonicParsing="false" onAction="#register" prefHeight="119.0" prefWidth="142.0" text="Регистрирай се" />
       <TextField fx:id="phone" layoutX="25.0" layoutY="244.0" prefHeight="38.0" prefWidth="243.0" promptText="телефон" />
        <Button id="login" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="187.0" layoutY="481.0" mnemonicParsing="false" onAction="#login" prefHeight="81.0" prefWidth="82.0" text="Влез" textOverrun="CENTER_ELLIPSIS" />
-      <Label fx:id="error" layoutX="46.0" layoutY="155.0" prefHeight="38.0" prefWidth="222.0" textAlignment="CENTER" textFill="RED">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
       <TextField fx:id="name" layoutX="25.0" layoutY="197.0" prefHeight="38.0" prefWidth="243.0" promptText=" име" />
       <PasswordField fx:id="password" layoutX="23.0" layoutY="385.0" prefHeight="38.0" prefWidth="243.0" promptText="парола" />
       <ComboBox fx:id="cBox0" layoutX="25.0" layoutY="290.0" prefHeight="38.0" prefWidth="243.0" promptText="град" />

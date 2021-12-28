@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 public class Launch extends Application {
@@ -28,7 +27,9 @@ public class Launch extends Application {
 		Launch.launch = this;
 		try {
 			Property.initAll();
-			Launch.launch.homeForm();
+			registerForm();
+//			loginForm();
+			//Launch.launch.homeForm();
 //			PratkaRegisterController.courier = new Courier();
 //			PratkaRegisterController.courier.setId(1);
 //			pratkaForm();
