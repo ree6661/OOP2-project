@@ -5,15 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public final class Create { //maybe make all private?
-	static final String database = "deliverydb";
-	static final String url = "jdbc:mysql://localhost/" + database + "?useUnicode=true&characterEncoding=UTF-8";
-	static final String admin = "root";
-	static final String adminPass = "Mysql@localhost:3306";
+public final class Create {
+	private static final String database = "deliverydb";
+	private static final String url = "jdbc:mysql://localhost/" + database + "?useUnicode=true&characterEncoding=UTF-8";
+	private static final String admin = "root";
+	private static final String adminPass = "Mysql@localhost:3306";
 	
-	static Connection conn;
-	static PreparedStatement create;
-	static String sql;
+	private static Connection conn;
+	private static PreparedStatement create;
+	private static String sql;
 	
    public static void main(String[] args) {
 	   try {
@@ -22,7 +22,6 @@ public final class Create { //maybe make all private?
 	   } catch(Exception e) {
 		   e.printStackTrace();
 	   }
-	   
    }
    
    public static void DB() throws SQLException {

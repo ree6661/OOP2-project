@@ -17,6 +17,10 @@ public class Courier extends Consumer {
 		this.setId_office(id_office);
 	}
 	
+	public String toString() {
+		return "id: " + id + " name: " + name + " phone: " + phone;
+	}
+	
 	public static Courier create(ResultSet rs) throws SQLException {
 		Consumer c = Consumer.create(rs);
 		
@@ -39,5 +43,4 @@ public class Courier extends Consumer {
 	public void setId_office(int id_office) {
 		this.id_office = id_office;
 	}
-
 }

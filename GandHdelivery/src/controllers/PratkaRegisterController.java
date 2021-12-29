@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 import application.Launch;
+import application.Logger;
 import application.Property;
 import database.Add;
 import database.TableQuery;
@@ -31,6 +32,7 @@ public class PratkaRegisterController {
 
 	public static Courier courier;
     
+	private final Logger logger = new Logger(PratkaRegisterController.class.getName());
 	@FXML
 	private ComboBox<String> category, officeSender,
 						officeReceiver, companySender;
@@ -57,6 +59,9 @@ public class PratkaRegisterController {
 
     @FXML
     void initialize() throws SQLException {
+    	logger.info("In pratka register form");
+    	logger.info("Logged courier: " + courier);
+    	
     	companies = TableQuery.allCompanies();
     	if(companySender.getItems().size() == 0) {
     		for(Company c : companies) 
@@ -78,6 +83,8 @@ public class PratkaRegisterController {
     }
     @FXML
     void registerOrder() throws SQLException {
+    	logger.info("Clicked register order");
+    	
     	String phoneSender = this.phoneSender.getText(),
     			phoneReceiver = this.phoneReceiver.getText(),
     			address = this.address.getText();
@@ -134,12 +141,15 @@ public class PratkaRegisterController {
     			fragile, isPaid, price, sendToAddress, address,
     			Date.valueOf(receiveDate), Date.valueOf(clientLocalDate));
     	Launch.alert("Успешно добавена поръчка");
+    	logger.info("Successful added order");
     }
     
     private ChangeListener<String> firmaListener() {
     	return new ChangeListener<String>() {
     		@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+    			logger.info("Changed firma combobox");
+    			
     			officeSender.getItems().clear();
     			officeReceiver.getItems().clear();
     			
@@ -169,6 +179,8 @@ public class PratkaRegisterController {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				logger.info("Changed category combobox");
+				
 				int id_category = category.getSelectionModel().getSelectedIndex()+1;
 				
 				try {

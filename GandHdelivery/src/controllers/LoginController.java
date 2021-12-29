@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Launch;
+import application.Logger;
 import database.TableQuery;
 import database.users.Admin;
 import database.users.Courier;
@@ -22,6 +23,7 @@ public final class LoginController {
 	private final String[] users = 
 			{"customers", "couriers", "admins"};
 	
+	private final Logger logger = new Logger(LoginController.class.getName());
 	@FXML
 	private TextField phone, pass;
 
@@ -33,7 +35,7 @@ public final class LoginController {
 	
 	@FXML
 	void initialize() {
-
+		logger.info("In login form");
 	}
 	
 	@FXML
@@ -43,6 +45,7 @@ public final class LoginController {
 	
 	@FXML
     void loginFx(ActionEvent event) throws SQLException, IOException {
+		logger.info("Clicked login");
 		String phoneNumber = this.phone.getText(),
     			password = this.pass.getText();
     	

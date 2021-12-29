@@ -26,6 +26,10 @@ public class Consumer implements Query {
 		this.password = password;
 	}
 	
+	public String toString() {
+		return "id: " + id + " name: " + name + " phone: " + phone;
+	}
+	
 	public static Consumer create(ResultSet rs) throws SQLException {
 		int id = 0;
 		String name = null, phone = null, password = null;

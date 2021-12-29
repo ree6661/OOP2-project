@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Launch;
+import application.Logger;
 import application.Property;
 import database.Add;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ import validation.Valid;
 
 public final class RegisterController implements Initializable { 
 	
+	private final Logger logger = new Logger(RegisterController.class.getName());
 	@FXML
 	private TextField name, phone, address;
 	@FXML
@@ -27,12 +29,13 @@ public final class RegisterController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		logger.info("In register form");
 		cBox0.getItems().addAll(Property.citiesMap.keySet());
 	}
 	
     @FXML
     public void register(ActionEvent e) throws IOException, SQLException {
-    	
+    	logger.info("Clicked register");
     	String username = this.name.getText(), 
     			phoneNumber = this.phone.getText(),
     			city = this.cBox0.getValue(),
@@ -53,6 +56,7 @@ public final class RegisterController implements Initializable {
     	Add.customer(username, phoneNumber, Property.citiesMap.get(city), location, password);
     	
     	Launch.alert("Успешна регистрация.");
+    	logger.info("Successful register");
     }
     
     @FXML
@@ -65,11 +69,4 @@ public final class RegisterController implements Initializable {
     
     @FXML
     private URL location;
-    
-    @FXML
-    void initialize() {
-    	
-    }
-
-	
 }

@@ -3,8 +3,9 @@ package application;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import controllers.PratkaRegisterController;
-import database.users.Courier;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,15 +21,18 @@ public class Launch extends Application {
 	private Parent login, register, home, pratka, firma;
 	
 	public static Launch launch;
-	
+	static final Logger logger = Logger.getLogger(Launch.class.getName());
 	@Override
 	public void start(Stage stage) {
+		PropertyConfigurator.configure(getClass().getResource("log4j.properties.txt"));
+		logger.info("Starting application");
+		
 		this.stage = stage;
 		Launch.launch = this;
 		try {
 			Property.initAll();
-			registerForm();
-//			loginForm();
+			//registerForm();
+			loginForm();
 			//Launch.launch.homeForm();
 //			PratkaRegisterController.courier = new Courier();
 //			PratkaRegisterController.courier.setId(1);

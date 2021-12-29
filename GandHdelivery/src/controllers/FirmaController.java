@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Launch;
+import application.Logger;
 import application.Property;
 import database.Add;
 import database.TableQuery;
@@ -32,6 +33,7 @@ public class FirmaController {
 	
 	public static Admin admin;
 	
+	private final Logger logger = new Logger(FirmaController.class.getName());
 	@FXML
 	private ComboBox<String> companies, offices, city, couriers;
 	@FXML
@@ -46,6 +48,9 @@ public class FirmaController {
     
     @FXML
     void initialize() throws SQLException {
+    	logger.info("In firma form");
+    	logger.info("Logged admin: " + admin);
+    	
     	Property.initAll();
     	
     	if(companies.getItems().size() == 0) {
@@ -70,6 +75,8 @@ public class FirmaController {
     
     @FXML
     private void addFirma() throws SQLException {
+    	logger.info("Clicked add firma");
+    	
     	String name = firmaName.getText();
     	if(name.equals("")) {
     		Launch.alert("Полето име на фирма е празно");
@@ -97,12 +104,15 @@ public class FirmaController {
     	
     	Add.companyPrice(name, plik, kolet, paket, tovar);
     	Launch.alert("Успешно добавена фирма");
+    	logger.info("Successful added company");
     	companies.getItems().clear();
     	Property.initCompaniesMap();
     	companies.getItems().addAll(Property.companiesMap.keySet());
     }
     @FXML
     private void changeFirma() throws SQLException {
+    	logger.info("Clicked change firma");
+    	
     	String name = firmaName.getText();//companies.getSelectionModel().getSelectedItem();
     	if(name.equals("") || name.length() < 3) {
     		Launch.alert("Невалидно име на фирма");
@@ -130,6 +140,7 @@ public class FirmaController {
     	
     	Update.companyCategory(id_company, name, plik, kolet, paket, tovar);
     	Launch.alert("Фирмата е успешно редактирана");
+    	logger.info("Successful changed company");
     	companies.getItems().clear();
     	Property.initCompaniesMap();
     	companies.getItems().addAll(Property.companiesMap.keySet());
@@ -137,10 +148,13 @@ public class FirmaController {
     }
     @FXML
     private void deleteFirma() throws SQLException {
+    	logger.info("Clicked delete firma");
+    	
     	if(this.company == null) return;
     	Delete.companyCategory(this.company);
     	this.company = null;
     	Launch.alert("Фирмата е успешно изтрита");
+    	logger.info("Successful deleted company");
     	if(couriers.getItems() == null) return;
     	couriers.getItems().clear();
     	if(offices.getItems() == null) return;
@@ -152,6 +166,8 @@ public class FirmaController {
     }
     @FXML
     private void addOffice() throws SQLException {
+    	logger.info("Clicked add office");
+    	
     	if(company == null) return;
     	String cityName = this.city.getPromptText(),
     			address = this.address.getText();
@@ -169,10 +185,13 @@ public class FirmaController {
     	}
 		Add.office(this.company.getId(), cityIndex, address);
 		Launch.alert("Успешно добавен офис");
+		logger.info("Successful added office");
 		initialize();
     }
     @FXML
     private void changeOffice() throws SQLException {
+    	logger.info("Clicked change office");
+    	
     	if(company == null) return;
     	String cityName = this.city.getSelectionModel().getSelectedItem();
     	
@@ -193,13 +212,17 @@ public class FirmaController {
     	System.out.println(this.office.getId_office()+ address + "c " + cityIndex);
     	Update.office(this.office.getId_office(), cityIndex, address);
     	Launch.alert("Успешно редактиран офис");
+    	logger.info("Successful changef office");
     	initialize();
     }
     @FXML
     private void deleteOffice() throws SQLException {
+    	logger.info("Clicked delete office");
+    	
     	Delete.office(this.office);
     	this.office = null;
     	Launch.alert("Успешно изтрит офис");
+    	logger.info("Successful deleted office");
     	if(couriers.getItems() == null) return;
     	couriers.getItems().clear();
     	if(offices.getItems() == null) return;
@@ -208,6 +231,8 @@ public class FirmaController {
     }
     @FXML
     private void addCourier() throws SQLException {
+    	logger.info("Clicked add courier");
+    	
     	if(this.company == null || this.office == null) return;
     	String name = this.courierTextField.getText(),
     			phone = this.phone.getText(),
@@ -233,10 +258,13 @@ public class FirmaController {
     	}
 		Add.courier(name, phone, password, this.office.getId_office());
 		Launch.alert("Успешно добавен куриер");
+		logger.info("Successful added courier");
 		initialize();
     }
     @FXML
     private void changeCourier() throws SQLException {
+    	logger.info("Clicked change courier");
+    	
     	if(this.company == null || this.office == null || 
     						this.courier == null) {
     		System.out.println("null");
@@ -261,13 +289,17 @@ public class FirmaController {
     	
     	Update.courier(this.courier.getId(), name, phone, password);
     	Launch.alert("Успешно редактиран куриер");
+    	logger.info("Successful changed courier");
     	initialize();
     }
     @FXML
     private void deleteCourier() throws SQLException {
+    	logger.info("Clicked delete courier");
+    	
     	Delete.courier(this.courier);
     	this.courier = null;
     	Launch.alert("Успешно изтрит куриер");
+    	logger.info("Successful deleted courier");
     	if(couriers.getItems() == null) return;
     	couriers.getItems().clear();
     	initialize();
@@ -278,6 +310,8 @@ public class FirmaController {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				logger.info("Changed firma combobox");
+				
 				offices.getItems().clear();
 				city.setPromptText("");
 				address.setText("");
@@ -357,6 +391,8 @@ public class FirmaController {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				
+				logger.info("Changed office combobox");
+				
 				couriers.getItems().clear();
 				courierTextField.setText("");
 				phone.setText("");
@@ -417,6 +453,7 @@ public class FirmaController {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				logger.info("Changed courier combobox");
 				
 				courierTextField.setText("");
 				phone.setText("");

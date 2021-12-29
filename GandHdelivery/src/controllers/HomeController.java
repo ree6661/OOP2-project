@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Launch;
+import application.Logger;
 import application.Property;
 import database.TableQuery;
 import database.property.Order;
@@ -39,6 +40,8 @@ public final class HomeController {
 	
 	public static Customer customer;
 	public static boolean user = false;
+	
+	private final Logger logger = new Logger(HomeController.class.getName());
 	@FXML
 	private ComboBox<String> functions;
 	
@@ -57,22 +60,13 @@ public final class HomeController {
     @FXML
     private URL location;
     
-    @FXML
-    private void filter() throws SQLException {
-    	
-    	int queryIndex = functions.getSelectionModel().getSelectedIndex();
-    	
-    	switch(queryIndex) {
-    	case 0: query1(); break;
-    	case 1: query2(); break;
-    	case 2: query3(); break;
-    	case 3: query4(); break;
-    	case 4: query5(); break;
-    	}
-    }
-    
 	@FXML
     void initialize() throws SQLException {
+		logger.info("In home form");
+		if(HomeController.user) {
+			logger.info("Logged customer: " + customer);
+		}
+		
 		if(HomeController.user) {
 			this.phone.setText(HomeController.customer.getPhone());
 			this.phone.setDisable(true);
@@ -87,12 +81,24 @@ public final class HomeController {
     	
 		this.table.setEditable(true);
 		this.table.setPlaceholder(new Label("Няма данни"));
-		
-		
+    }
+	
+	@FXML
+    private void filter() throws SQLException {
+    	logger.info("Clicked filter");
+    	int queryIndex = functions.getSelectionModel().getSelectedIndex();
+    	logger.info("Query index: " + queryIndex);
+    	switch(queryIndex) {
+    	case 0: query1(); break;
+    	case 1: query2(); break;
+    	case 2: query3(); break;
+    	case 3: query4(); break;
+    	case 4: query5(); break;
+    	}
     }
 	
 	private void query1() throws SQLException {
-		
+		logger.info("In query1");
 		LocalDate from = this.dateFrom.getValue(),
     			to = this.dateTo.getValue();
     	if(from == null || to == null) {
@@ -178,6 +184,8 @@ public final class HomeController {
 	}
 	
 	private void query2() throws SQLException {
+		logger.info("In query2");
+		
 		String phone = this.phone.getText();
 		if(!Valid.phoneNumber(phone)) {
 			Launch.alert("Въведете правилен телефонен номер на клиент", "Телефона трябва да съдържа 12 цифри");
@@ -237,6 +245,7 @@ public final class HomeController {
 	}
 	
 	private void query3() throws SQLException {
+		logger.info("In query3");
 		
 		TableColumn<Query, String> 
 				companiesC = new TableColumn<>("Брой фирми"),
@@ -277,6 +286,7 @@ public final class HomeController {
 	}
 	
 	private void query4() throws SQLException {
+		logger.info("In query4");
 		
 		TableColumn<Query, String> 
 			idC = new TableColumn<>("ID куриер"),
@@ -313,7 +323,8 @@ public final class HomeController {
 	}
 	
 	private void query5() throws SQLException {
-		//
+		logger.info("In query5");
+		
 		TableColumn<Query, String> 
 			idC = new TableColumn<>("ID на клиент"),
 			nameC = new TableColumn<>("Име"),

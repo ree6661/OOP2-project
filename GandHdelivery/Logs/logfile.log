@@ -1,0 +1,51 @@
+2021-12-29 11:27:40 DEBUG Launch:28 - Hello Debug
+2021-12-29 11:30:58 DEBUG Launch:28 - Hello Debug
+2021-12-29 11:41:35 DEBUG Launch:28 - Hello Debug
+2021-12-29 11:41:38 INFO  LoginController:19 - In login form
+2021-12-29 12:03:18 DEBUG Launch:28 - Hello Debug
+2021-12-29 12:03:19 INFO  RegisterController:19 - In register form
+2021-12-29 12:03:21 INFO  LoginController:19 - In login form
+2021-12-29 12:06:05 DEBUG Launch:28 - Hello Debug
+2021-12-29 12:06:05 INFO  RegisterController:19 - In register form
+2021-12-29 12:06:07 INFO  LoginController:19 - In login form
+2021-12-29 12:06:12 INFO  LoginController:19 - Clicked login
+2021-12-29 12:06:12 INFO  FirmaController:19 - In firma form
+2021-12-29 12:06:20 INFO  FirmaController:19 - Changed firma combobox
+2021-12-29 12:06:20 INFO  FirmaController:19 - Changed office combobox
+2021-12-29 12:06:20 INFO  FirmaController:19 - Changed courier combobox
+2021-12-29 12:06:24 INFO  FirmaController:19 - Changed office combobox
+2021-12-29 12:06:24 INFO  FirmaController:19 - Changed courier combobox
+2021-12-29 12:06:24 INFO  FirmaController:19 - Changed courier combobox
+2021-12-29 12:06:29 INFO  FirmaController:19 - Changed office combobox
+2021-12-29 12:06:29 INFO  FirmaController:19 - Changed courier combobox
+2021-12-29 12:06:33 INFO  FirmaController:19 - Clicked delete courier
+2021-12-29 12:06:34 INFO  FirmaController:19 - Successful deleted courier
+2021-12-29 12:06:34 INFO  FirmaController:19 - In firma form
+2021-12-29 12:06:36 INFO  FirmaController:19 - Clicked change courier
+2021-12-29 12:06:43 INFO  FirmaController:19 - Clicked change courier
+2021-12-29 12:10:18 INFO  Launch:28 - Starting application
+2021-12-29 12:10:19 INFO  LoginController:19 - In login form
+2021-12-29 12:11:35 INFO  Launch:28 - Starting application
+2021-12-29 12:11:36 INFO  LoginController:19 - In login form
+2021-12-29 12:11:37 INFO  LoginController:19 - Clicked login
+2021-12-29 12:11:44 INFO  RegisterController:19 - In register form
+2021-12-29 12:11:45 INFO  RegisterController:19 - Clicked register
+2021-12-29 12:11:46 INFO  LoginController:19 - In login form
+2021-12-29 12:12:03 INFO  Launch:28 - Starting application
+2021-12-29 12:12:04 INFO  LoginController:19 - In login form
+2021-12-29 12:12:47 INFO  Launch:28 - Starting application
+2021-12-29 12:12:48 INFO  LoginController:19 - In login form
+2021-12-29 12:12:51 INFO  Launch:28 - Starting application
+2021-12-29 12:12:52 INFO  LoginController:19 - In login form
+2021-12-29 12:12:55 INFO  Launch:28 - Starting application
+2021-12-29 12:12:56 INFO  LoginController:19 - In login form
+2021-12-29 12:12:58 INFO  Launch:28 - Starting application
+2021-12-29 12:12:59 INFO  LoginController:19 - In login form
+2021-12-29 12:13:32 INFO  Launch:28 - Starting application
+2021-12-29 12:13:33 INFO  LoginController:19 - In login form
+2021-12-29 12:14:04 INFO  Launch:28 - Starting application
+2021-12-29 12:14:05 INFO  LoginController:19 - In login form
+2021-12-29 12:14:06 INFO  RegisterController:19 - In register form
+2021-12-29 12:14:45 INFO  Launch:28 - Starting application
+2021-12-29 12:14:45 INFO  LoginController:19 - In login form
+2021-12-29 12:14:47 INFO  RegisterController:19 - In register form
