@@ -38,15 +38,3 @@
 	-fx-background-color: red;
 	-fx-graphic: url("../img/filter.png");
 }
-#firmaPopPane{	
-	visibility: hidden;
-	-fx-background-color: blue;
-}
-#firma:pressed #firmaPopPane , #firmaPopPane:hover{
-	-fx-content-display:	graphic-only;
-	visibility: visible;
-}
-#firma:focused{
-	-fx-content-display:	graphic-only;
-
-}

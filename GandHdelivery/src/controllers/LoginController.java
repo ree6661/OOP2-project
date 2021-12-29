@@ -71,13 +71,11 @@ public final class LoginController {
     		return;
     	}
     	
-    	System.out.println(recordTable);
-    	
 		switch(recordTable) {
 		case "customers":
 			HomeController.customer = Customer.create(record);
 			HomeController.user = true;
-			Launch.launch.homeForm();
+			Launch.launch.homeFormCustomer();
 			break;
 		case "couriers":
 			PratkaRegisterController.courier = Courier.create(record);
@@ -87,9 +85,6 @@ public final class LoginController {
 			FirmaController.admin = Admin.create(record);
 			Launch.launch.firmaForm();
 			break;
-		default:
-			System.out.println("error: unknown table: " + recordTable);
-			return;
 		}
     }
 }

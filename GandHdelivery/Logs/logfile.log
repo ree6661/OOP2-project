@@ -49,3 +49,454 @@
 2021-12-29 12:14:45 INFO  Launch:28 - Starting application
 2021-12-29 12:14:45 INFO  LoginController:19 - In login form
 2021-12-29 12:14:47 INFO  RegisterController:19 - In register form
+2021-12-29 13:10:32 INFO  Launch:28 - Starting application
+2021-12-29 13:10:33 INFO  LoginController:19 - In login form
+2021-12-29 13:10:42 INFO  LoginController:19 - Clicked login
+2021-12-29 13:10:42 INFO  FirmaController:19 - In firma form
+2021-12-29 13:10:42 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:12:04 INFO  HomeController:19 - In home form
+2021-12-29 13:16:21 INFO  Launch:28 - Starting application
+2021-12-29 13:16:22 INFO  LoginController:19 - In login form
+2021-12-29 13:16:30 INFO  LoginController:19 - Clicked login
+2021-12-29 13:16:30 INFO  FirmaController:19 - In firma form
+2021-12-29 13:16:30 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:16:32 INFO  HomeController:19 - In home form
+2021-12-29 13:16:34 INFO  FirmaController:19 - In firma form
+2021-12-29 13:16:34 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:16:35 INFO  HomeController:19 - In home form
+2021-12-29 13:16:36 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:16:36 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:16:37 INFO  HomeController:19 - In home form
+2021-12-29 13:16:38 INFO  FirmaController:19 - In firma form
+2021-12-29 13:16:38 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:16:39 INFO  HomeController:19 - In home form
+2021-12-29 13:16:40 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:16:40 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:16:43 INFO  HomeController:19 - In home form
+2021-12-29 13:16:45 INFO  FirmaController:19 - In firma form
+2021-12-29 13:16:45 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:16:48 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:16:48 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:16:49 INFO  HomeController:19 - In home form
+2021-12-29 13:16:50 INFO  FirmaController:19 - In firma form
+2021-12-29 13:16:50 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:18:27 INFO  Launch:28 - Starting application
+2021-12-29 13:18:27 INFO  LoginController:19 - In login form
+2021-12-29 13:18:33 INFO  LoginController:19 - Clicked login
+2021-12-29 13:18:33 INFO  FirmaController:19 - In firma form
+2021-12-29 13:18:33 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:18:51 INFO  Launch:28 - Starting application
+2021-12-29 13:18:51 INFO  LoginController:19 - In login form
+2021-12-29 13:18:56 INFO  LoginController:19 - Clicked login
+2021-12-29 13:18:56 INFO  FirmaController:19 - In firma form
+2021-12-29 13:18:56 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:19:00 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:19:00 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:19:04 INFO  HomeController:19 - In home form
+2021-12-29 13:19:05 INFO  FirmaController:19 - In firma form
+2021-12-29 13:19:05 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:19:06 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:19:06 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:19:07 INFO  HomeController:19 - In home form
+2021-12-29 13:19:08 INFO  FirmaController:19 - In firma form
+2021-12-29 13:19:08 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:19:09 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:19:09 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:20:02 INFO  HomeController:19 - In home form
+2021-12-29 13:20:03 INFO  FirmaController:19 - In firma form
+2021-12-29 13:20:03 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:20:45 INFO  Launch:28 - Starting application
+2021-12-29 13:20:46 INFO  LoginController:19 - In login form
+2021-12-29 13:20:51 INFO  Launch:28 - Starting application
+2021-12-29 13:20:52 INFO  LoginController:19 - In login form
+2021-12-29 13:20:56 INFO  LoginController:19 - Clicked login
+2021-12-29 13:20:56 INFO  FirmaController:19 - In firma form
+2021-12-29 13:20:56 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:21:01 INFO  HomeController:19 - In home form
+2021-12-29 13:21:02 INFO  FirmaController:19 - In firma form
+2021-12-29 13:21:02 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:21:19 INFO  HomeController:19 - In home form
+2021-12-29 13:21:19 INFO  FirmaController:19 - In firma form
+2021-12-29 13:21:19 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:21:35 INFO  HomeController:19 - In home form
+2021-12-29 13:22:42 INFO  FirmaController:19 - In firma form
+2021-12-29 13:22:42 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:22:43 INFO  HomeController:19 - In home form
+2021-12-29 13:23:02 INFO  FirmaController:19 - In firma form
+2021-12-29 13:23:02 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:23:02 INFO  HomeController:19 - In home form
+2021-12-29 13:29:49 INFO  FirmaController:19 - In firma form
+2021-12-29 13:29:49 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:29:50 INFO  HomeController:19 - In home form
+2021-12-29 13:29:53 INFO  FirmaController:19 - In firma form
+2021-12-29 13:29:53 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:29:53 INFO  HomeController:19 - In home form
+2021-12-29 13:29:57 INFO  FirmaController:19 - In firma form
+2021-12-29 13:29:57 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:30:00 INFO  HomeController:19 - In home form
+2021-12-29 13:30:39 INFO  FirmaController:19 - In firma form
+2021-12-29 13:30:39 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:30:40 INFO  HomeController:19 - In home form
+2021-12-29 13:30:42 INFO  FirmaController:19 - In firma form
+2021-12-29 13:30:42 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:30:42 INFO  HomeController:19 - In home form
+2021-12-29 13:30:43 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:30:43 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:30:44 INFO  HomeController:19 - In home form
+2021-12-29 13:30:45 INFO  FirmaController:19 - In firma form
+2021-12-29 13:30:45 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:30:46 INFO  HomeController:19 - In home form
+2021-12-29 13:31:41 INFO  FirmaController:19 - In firma form
+2021-12-29 13:31:41 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:31:41 INFO  HomeController:19 - In home form
+2021-12-29 13:31:46 INFO  Launch:28 - Starting application
+2021-12-29 13:31:47 INFO  LoginController:19 - In login form
+2021-12-29 13:32:01 INFO  LoginController:19 - Clicked login
+2021-12-29 13:32:01 INFO  FirmaController:19 - In firma form
+2021-12-29 13:32:01 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:32:02 INFO  HomeController:19 - In home form
+2021-12-29 13:32:03 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:32:03 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:32:04 INFO  HomeController:19 - In home form
+2021-12-29 13:32:42 INFO  FirmaController:19 - In firma form
+2021-12-29 13:32:42 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:32:42 INFO  HomeController:19 - In home form
+2021-12-29 13:32:43 INFO  FirmaController:19 - In firma form
+2021-12-29 13:32:43 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:32:44 INFO  HomeController:19 - In home form
+2021-12-29 13:32:56 INFO  Launch:28 - Starting application
+2021-12-29 13:32:57 INFO  LoginController:19 - In login form
+2021-12-29 13:33:03 INFO  LoginController:19 - Clicked login
+2021-12-29 13:33:03 INFO  FirmaController:19 - In firma form
+2021-12-29 13:33:03 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:33:04 INFO  HomeController:19 - In home form
+2021-12-29 13:33:12 INFO  FirmaController:19 - In firma form
+2021-12-29 13:33:12 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:33:13 INFO  HomeController:19 - In home form
+2021-12-29 13:33:14 INFO  FirmaController:19 - In firma form
+2021-12-29 13:33:14 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:33:15 INFO  HomeController:19 - In home form
+2021-12-29 13:33:21 INFO  FirmaController:19 - In firma form
+2021-12-29 13:33:21 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:33:21 INFO  HomeController:19 - In home form
+2021-12-29 13:33:47 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:33:47 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:36:40 INFO  HomeController:19 - In home form
+2021-12-29 13:36:41 INFO  FirmaController:19 - In firma form
+2021-12-29 13:36:41 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:36:41 INFO  HomeController:19 - In home form
+2021-12-29 13:36:51 INFO  FirmaController:19 - In firma form
+2021-12-29 13:36:51 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:36:52 INFO  HomeController:19 - In home form
+2021-12-29 13:36:53 INFO  FirmaController:19 - In firma form
+2021-12-29 13:36:53 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:36:56 INFO  HomeController:19 - In home form
+2021-12-29 13:37:00 INFO  FirmaController:19 - In firma form
+2021-12-29 13:37:00 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:37:01 INFO  HomeController:19 - In home form
+2021-12-29 13:37:02 INFO  FirmaController:19 - In firma form
+2021-12-29 13:37:02 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:37:03 INFO  HomeController:19 - In home form
+2021-12-29 13:37:07 INFO  FirmaController:19 - In firma form
+2021-12-29 13:37:07 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:37:08 INFO  HomeController:19 - In home form
+2021-12-29 13:38:11 INFO  FirmaController:19 - In firma form
+2021-12-29 13:38:11 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:38:12 INFO  HomeController:19 - In home form
+2021-12-29 13:38:14 INFO  FirmaController:19 - In firma form
+2021-12-29 13:38:14 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:38:17 INFO  HomeController:19 - In home form
+2021-12-29 13:38:28 INFO  FirmaController:19 - In firma form
+2021-12-29 13:38:28 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:38:48 INFO  HomeController:19 - In home form
+2021-12-29 13:38:49 INFO  FirmaController:19 - In firma form
+2021-12-29 13:38:49 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:38:52 INFO  HomeController:19 - In home form
+2021-12-29 13:39:09 INFO  FirmaController:19 - In firma form
+2021-12-29 13:39:09 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:39:11 INFO  HomeController:19 - In home form
+2021-12-29 13:40:30 INFO  FirmaController:19 - In firma form
+2021-12-29 13:40:30 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:40:30 INFO  HomeController:19 - In home form
+2021-12-29 13:40:33 INFO  FirmaController:19 - In firma form
+2021-12-29 13:40:33 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:40:33 INFO  HomeController:19 - In home form
+2021-12-29 13:40:34 INFO  FirmaController:19 - In firma form
+2021-12-29 13:40:34 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:40:36 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:40:36 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:40:37 INFO  HomeController:19 - In home form
+2021-12-29 13:40:39 INFO  FirmaController:19 - In firma form
+2021-12-29 13:40:39 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:41:04 INFO  HomeController:19 - In home form
+2021-12-29 13:41:05 INFO  FirmaController:19 - In firma form
+2021-12-29 13:41:05 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:41:06 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:41:06 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:41:07 INFO  HomeController:19 - In home form
+2021-12-29 13:41:07 INFO  FirmaController:19 - In firma form
+2021-12-29 13:41:07 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:41:08 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:41:08 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:41:29 INFO  HomeController:19 - In home form
+2021-12-29 13:41:30 INFO  FirmaController:19 - In firma form
+2021-12-29 13:41:30 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:41:30 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:41:30 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:41:57 INFO  HomeController:19 - In home form
+2021-12-29 13:41:58 INFO  FirmaController:19 - In firma form
+2021-12-29 13:41:58 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:41:58 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:41:58 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:42:07 INFO  HomeController:19 - In home form
+2021-12-29 13:42:08 INFO  FirmaController:19 - In firma form
+2021-12-29 13:42:08 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:42:09 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:42:09 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:42:11 INFO  HomeController:19 - In home form
+2021-12-29 13:42:11 INFO  FirmaController:19 - In firma form
+2021-12-29 13:42:11 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:42:38 INFO  HomeController:19 - In home form
+2021-12-29 13:42:39 INFO  FirmaController:19 - In firma form
+2021-12-29 13:42:39 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:43:28 INFO  HomeController:19 - In home form
+2021-12-29 13:43:29 INFO  FirmaController:19 - In firma form
+2021-12-29 13:43:29 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:43:30 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:43:30 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:43:32 INFO  HomeController:19 - In home form
+2021-12-29 13:43:33 INFO  FirmaController:19 - In firma form
+2021-12-29 13:43:33 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:43:35 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:43:35 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:43:41 INFO  HomeController:19 - In home form
+2021-12-29 13:43:43 INFO  FirmaController:19 - In firma form
+2021-12-29 13:43:43 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:43:57 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:43:57 INFO  PratkaRegisterController:19 - Logged courier: null
+2021-12-29 13:43:58 INFO  HomeController:19 - In home form
+2021-12-29 13:43:58 INFO  FirmaController:19 - In firma form
+2021-12-29 13:43:58 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:43:59 INFO  HomeController:19 - In home form
+2021-12-29 13:44:00 INFO  FirmaController:19 - In firma form
+2021-12-29 13:44:00 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:44:01 INFO  HomeController:19 - In home form
+2021-12-29 13:44:01 INFO  FirmaController:19 - In firma form
+2021-12-29 13:44:01 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:44:01 INFO  HomeController:19 - In home form
+2021-12-29 13:44:02 INFO  FirmaController:19 - In firma form
+2021-12-29 13:44:02 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:44:03 INFO  HomeController:19 - In home form
+2021-12-29 13:44:03 INFO  FirmaController:19 - In firma form
+2021-12-29 13:44:03 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:44:42 INFO  Launch:28 - Starting application
+2021-12-29 13:44:43 INFO  LoginController:19 - In login form
+2021-12-29 13:44:59 INFO  LoginController:19 - Clicked login
+2021-12-29 13:44:59 INFO  HomeController:19 - In home form
+2021-12-29 13:44:59 INFO  HomeController:19 - Logged customer: id: 1 name: Иван phone: 359876783412
+2021-12-29 13:45:48 INFO  Launch:28 - Starting application
+2021-12-29 13:45:48 INFO  LoginController:19 - In login form
+2021-12-29 13:45:58 INFO  LoginController:19 - Clicked login
+2021-12-29 13:45:58 INFO  HomeController:19 - In home form
+2021-12-29 13:45:58 INFO  HomeController:19 - Logged customer: id: 1 name: Иван phone: 359876783412
+2021-12-29 13:47:28 INFO  Launch:28 - Starting application
+2021-12-29 13:47:28 INFO  LoginController:19 - In login form
+2021-12-29 13:47:46 INFO  LoginController:19 - Clicked login
+2021-12-29 13:47:46 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:47:46 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:48:14 INFO  Launch:28 - Starting application
+2021-12-29 13:48:14 INFO  LoginController:19 - In login form
+2021-12-29 13:48:19 INFO  LoginController:19 - Clicked login
+2021-12-29 13:48:19 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:48:19 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:48:21 INFO  HomeController:19 - In home form
+2021-12-29 13:48:22 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:48:22 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:48:23 INFO  HomeController:19 - In home form
+2021-12-29 13:48:25 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:48:25 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:48:26 INFO  HomeController:19 - In home form
+2021-12-29 13:48:27 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:48:27 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:48:42 INFO  Launch:28 - Starting application
+2021-12-29 13:48:43 INFO  LoginController:19 - In login form
+2021-12-29 13:48:47 INFO  LoginController:19 - Clicked login
+2021-12-29 13:48:47 INFO  FirmaController:19 - In firma form
+2021-12-29 13:48:47 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:49:06 INFO  Launch:28 - Starting application
+2021-12-29 13:49:07 INFO  LoginController:19 - In login form
+2021-12-29 13:49:13 INFO  LoginController:19 - Clicked login
+2021-12-29 13:49:13 INFO  FirmaController:19 - In firma form
+2021-12-29 13:49:13 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:49:16 INFO  HomeController:19 - In home form
+2021-12-29 13:49:17 INFO  FirmaController:19 - In firma form
+2021-12-29 13:49:17 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:49:18 INFO  HomeController:19 - In home form
+2021-12-29 13:49:19 INFO  FirmaController:19 - In firma form
+2021-12-29 13:49:19 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:49:20 INFO  HomeController:19 - In home form
+2021-12-29 13:49:20 INFO  FirmaController:19 - In firma form
+2021-12-29 13:49:20 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:49:42 INFO  Launch:28 - Starting application
+2021-12-29 13:49:43 INFO  LoginController:19 - In login form
+2021-12-29 13:49:48 INFO  LoginController:19 - Clicked login
+2021-12-29 13:49:48 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:49:48 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:49:50 INFO  HomeController:19 - In home form
+2021-12-29 13:49:51 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:49:51 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:49:52 INFO  HomeController:19 - In home form
+2021-12-29 13:49:52 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:49:52 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:49:55 INFO  Launch:28 - Starting application
+2021-12-29 13:49:56 INFO  LoginController:19 - In login form
+2021-12-29 13:50:00 INFO  LoginController:19 - Clicked login
+2021-12-29 13:50:00 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:50:00 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:50:10 INFO  HomeController:19 - In home form
+2021-12-29 13:50:13 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:50:13 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:50:16 INFO  HomeController:19 - In home form
+2021-12-29 13:50:20 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:50:20 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:51:41 INFO  Launch:28 - Starting application
+2021-12-29 13:51:42 INFO  LoginController:19 - In login form
+2021-12-29 13:51:48 INFO  LoginController:19 - Clicked login
+2021-12-29 13:51:48 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:51:48 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:51:51 INFO  HomeController:19 - In home form
+2021-12-29 13:51:53 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:51:53 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:51:54 INFO  HomeController:19 - In home form
+2021-12-29 13:51:55 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:51:55 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:51:56 INFO  HomeController:19 - In home form
+2021-12-29 13:52:00 INFO  Launch:28 - Starting application
+2021-12-29 13:52:00 INFO  LoginController:19 - In login form
+2021-12-29 13:52:12 INFO  LoginController:19 - Clicked login
+2021-12-29 13:52:12 INFO  FirmaController:19 - In firma form
+2021-12-29 13:52:12 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:52:15 INFO  HomeController:19 - In home form
+2021-12-29 13:52:16 INFO  FirmaController:19 - In firma form
+2021-12-29 13:52:16 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:52:17 INFO  HomeController:19 - In home form
+2021-12-29 13:52:18 INFO  FirmaController:19 - In firma form
+2021-12-29 13:52:18 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:56:50 INFO  Launch:28 - Starting application
+2021-12-29 13:56:50 INFO  LoginController:19 - In login form
+2021-12-29 13:56:56 INFO  LoginController:19 - Clicked login
+2021-12-29 13:56:56 INFO  FirmaController:19 - In firma form
+2021-12-29 13:56:56 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:57:00 INFO  HomeController:19 - In home form
+2021-12-29 13:57:00 INFO  FirmaController:19 - In firma form
+2021-12-29 13:57:00 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:57:01 INFO  HomeController:19 - In home form
+2021-12-29 13:57:02 INFO  FirmaController:19 - In firma form
+2021-12-29 13:57:02 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:57:03 INFO  HomeController:19 - In home form
+2021-12-29 13:57:04 INFO  FirmaController:19 - In firma form
+2021-12-29 13:57:04 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:57:42 INFO  Launch:28 - Starting application
+2021-12-29 13:57:43 INFO  LoginController:19 - In login form
+2021-12-29 13:57:46 INFO  LoginController:19 - Clicked login
+2021-12-29 13:57:46 INFO  FirmaController:19 - In firma form
+2021-12-29 13:57:46 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:57:48 INFO  HomeController:19 - In home form
+2021-12-29 13:57:50 INFO  FirmaController:19 - In firma form
+2021-12-29 13:57:50 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 13:57:53 INFO  Launch:28 - Starting application
+2021-12-29 13:57:54 INFO  LoginController:19 - In login form
+2021-12-29 13:58:04 INFO  LoginController:19 - Clicked login
+2021-12-29 13:58:04 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:58:04 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:58:08 INFO  HomeController:19 - In home form
+2021-12-29 13:58:09 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 13:58:09 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 13:58:10 INFO  HomeController:19 - In home form
+2021-12-29 13:58:13 INFO  Launch:28 - Starting application
+2021-12-29 13:58:14 INFO  LoginController:19 - In login form
+2021-12-29 13:58:23 INFO  LoginController:19 - Clicked login
+2021-12-29 13:58:23 INFO  HomeController:19 - In home form
+2021-12-29 13:58:23 INFO  HomeController:19 - Logged customer: id: 1 name: Иван phone: 359876783412
+2021-12-29 14:07:16 INFO  Launch:28 - Starting application
+2021-12-29 14:07:16 INFO  LoginController:19 - In login form
+2021-12-29 14:07:44 INFO  RegisterController:19 - In register form
+2021-12-29 14:07:53 INFO  RegisterController:19 - Clicked register
+2021-12-29 14:08:09 INFO  LoginController:19 - In login form
+2021-12-29 14:08:10 INFO  LoginController:19 - Clicked login
+2021-12-29 14:08:16 INFO  LoginController:19 - Clicked login
+2021-12-29 14:09:03 INFO  LoginController:19 - Clicked login
+2021-12-29 14:09:03 INFO  FirmaController:19 - In firma form
+2021-12-29 14:09:03 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 14:10:03 INFO  HomeController:19 - In home form
+2021-12-29 14:10:13 INFO  HomeController:19 - Clicked filter
+2021-12-29 14:10:13 INFO  HomeController:19 - Query index: 1
+2021-12-29 14:10:13 INFO  HomeController:19 - In query2
+2021-12-29 14:10:16 INFO  HomeController:19 - Clicked filter
+2021-12-29 14:10:16 INFO  HomeController:19 - Query index: 0
+2021-12-29 14:10:16 INFO  HomeController:19 - In query1
+2021-12-29 14:10:27 INFO  FirmaController:19 - In firma form
+2021-12-29 14:10:27 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 14:10:31 INFO  HomeController:19 - In home form
+2021-12-29 14:10:52 INFO  Launch:28 - Starting application
+2021-12-29 14:10:53 INFO  LoginController:19 - In login form
+2021-12-29 14:11:32 INFO  LoginController:19 - Clicked login
+2021-12-29 14:11:32 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 14:11:32 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 14:13:03 INFO  Launch:28 - Starting application
+2021-12-29 14:13:04 INFO  LoginController:19 - In login form
+2021-12-29 14:13:08 INFO  LoginController:19 - Clicked login
+2021-12-29 14:13:08 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 14:13:08 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 14:13:10 INFO  HomeController:19 - In home form
+2021-12-29 14:13:33 INFO  Launch:28 - Starting application
+2021-12-29 14:13:34 INFO  LoginController:19 - In login form
+2021-12-29 14:13:47 INFO  LoginController:19 - Clicked login
+2021-12-29 14:13:47 INFO  HomeController:19 - In home form
+2021-12-29 14:13:47 INFO  HomeController:19 - Logged customer: id: 1 name: Иван phone: 359876783412
+2021-12-29 14:15:34 INFO  HomeController:19 - Clicked filter
+2021-12-29 14:15:34 INFO  HomeController:19 - Query index: 0
+2021-12-29 14:15:34 INFO  HomeController:19 - In query1
+2021-12-29 14:31:28 INFO  HomeController:19 - Clicked filter
+2021-12-29 14:31:28 INFO  HomeController:19 - Query index: 0
+2021-12-29 14:31:28 INFO  HomeController:19 - In query1
+2021-12-29 14:31:30 INFO  HomeController:19 - Clicked filter
+2021-12-29 14:31:30 INFO  HomeController:19 - Query index: 0
+2021-12-29 14:31:30 INFO  HomeController:19 - In query1
+2021-12-29 14:39:37 INFO  Launch:28 - Starting application
+2021-12-29 14:39:37 INFO  LoginController:19 - In login form
+2021-12-29 14:39:55 INFO  RegisterController:19 - In register form
+2021-12-29 14:41:01 INFO  Launch:28 - Starting application
+2021-12-29 14:41:02 INFO  LoginController:19 - In login form
+2021-12-29 14:41:48 INFO  Launch:28 - Starting application
+2021-12-29 14:41:48 INFO  LoginController:19 - In login form
+2021-12-29 14:42:51 INFO  Launch:29 - Starting application
+2021-12-29 14:42:52 INFO  LoginController:19 - In login form
+2021-12-29 14:43:07 INFO  Launch:29 - Starting application
+2021-12-29 14:43:08 INFO  RegisterController:19 - In register form
+2021-12-29 14:43:25 INFO  Launch:29 - Starting application
+2021-12-29 14:43:27 INFO  FirmaController:19 - In firma form
+2021-12-29 14:43:27 INFO  FirmaController:19 - Logged admin: null
+2021-12-29 14:43:40 INFO  Launch:29 - Starting application
+2021-12-29 14:43:40 INFO  LoginController:19 - In login form
+2021-12-29 14:44:03 INFO  LoginController:19 - Clicked login
+2021-12-29 14:44:11 INFO  LoginController:19 - Clicked login
+2021-12-29 14:44:11 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 14:44:11 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229
+2021-12-29 14:44:27 INFO  Launch:29 - Starting application
+2021-12-29 14:44:27 INFO  LoginController:19 - In login form
+2021-12-29 14:50:50 INFO  Launch:29 - Starting application
+2021-12-29 14:50:51 INFO  LoginController:19 - In login form
+2021-12-29 14:51:05 INFO  LoginController:19 - Clicked login
+2021-12-29 14:51:06 INFO  FirmaController:19 - In firma form
+2021-12-29 14:51:06 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 14:51:33 INFO  Launch:29 - Starting application
+2021-12-29 14:51:34 INFO  LoginController:19 - In login form
+2021-12-29 14:51:41 INFO  LoginController:19 - Clicked login
+2021-12-29 14:51:41 INFO  FirmaController:19 - In firma form
+2021-12-29 14:51:41 INFO  FirmaController:19 - Logged admin: id: 1 name: admin1 phone: 987897654123
+2021-12-29 14:52:31 INFO  Launch:29 - Starting application
+2021-12-29 14:52:31 INFO  LoginController:19 - In login form
+2021-12-29 14:52:42 INFO  LoginController:19 - Clicked login
+2021-12-29 14:52:43 INFO  PratkaRegisterController:19 - In pratka register form
+2021-12-29 14:52:43 INFO  PratkaRegisterController:19 - Logged courier: id: 1 name: Dimitar Stefanov phone: 987898917229

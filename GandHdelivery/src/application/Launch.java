@@ -24,6 +24,7 @@ public class Launch extends Application {
 	static final Logger logger = Logger.getLogger(Launch.class.getName());
 	@Override
 	public void start(Stage stage) {
+		stage.setResizable(false);
 		PropertyConfigurator.configure(getClass().getResource("log4j.properties.txt"));
 		logger.info("Starting application");
 		
@@ -66,12 +67,36 @@ public class Launch extends Application {
 		this.stage.show();
 	}
 	
-	public void homeForm() throws SQLException, IOException {
+	public void homeFormAdmin() throws SQLException, IOException {
 		this.stage.hide();
 		
 		this.home = FXMLLoader.load(getClass().getResource("../fxml/home.fxml"));
 		this.home.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
-//		this.home.getStylesheets().add(getClass().getResource("../css/firma.css").toExternalForm());
+		this.home.getStylesheets().add(getClass().getResource("../css/hide-pratka.css").toExternalForm());
+//		this.home.getStylesheets().add(getClass().getResource("../css/hide-spravki.css").toExternalForm());
+		this.homeScene = new Scene(this.home);
+		
+		this.stage.setScene(this.homeScene);
+		this.stage.show();
+	}
+	public void homeFormCourier() throws SQLException, IOException {
+		this.stage.hide();
+		
+		this.home = FXMLLoader.load(getClass().getResource("../fxml/home.fxml"));
+		this.home.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
+		this.home.getStylesheets().add(getClass().getResource("../css/hide-firma.css").toExternalForm());
+		this.homeScene = new Scene(this.home);
+		
+		this.stage.setScene(this.homeScene);
+		this.stage.show();
+	}
+	public void homeFormCustomer() throws SQLException, IOException {
+		this.stage.hide();
+		
+		this.home = FXMLLoader.load(getClass().getResource("../fxml/home.fxml"));
+		this.home.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
+		this.home.getStylesheets().add(getClass().getResource("../css/hide-pratka.css").toExternalForm());
+		this.home.getStylesheets().add(getClass().getResource("../css/hide-firma.css").toExternalForm());
 		this.homeScene = new Scene(this.home);
 		
 		this.stage.setScene(this.homeScene);
@@ -96,8 +121,7 @@ public class Launch extends Application {
 		this.firma = FXMLLoader.load(getClass().getResource("../fxml/firma.fxml"));
 		this.firmaScene = new Scene(this.firma);
 		this.firma.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
-//		this.firma.getStylesheets().add(getClass().getResource("../css/firma.css").toExternalForm());
-//		this.firma.getStylesheets().add(getClass().getResource("../css/pratkaRegister.css").toExternalForm());
+		this.firma.getStylesheets().add(getClass().getResource("../css/hide-pratka.css").toExternalForm());
 		
 		this.stage.setScene(this.firmaScene);
 		this.stage.show();

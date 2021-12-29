@@ -5,12 +5,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -18,15 +16,7 @@
    <children>
       <Pane id="navPane" prefHeight="99.0" prefWidth="780.0">
          <children>
-            <Button id="izvestia" layoutX="696.0" layoutY="14.0" minHeight="10.0" minWidth="53.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="70.0">
-               <contextMenu>
-                  <ContextMenu>
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                    </items>
-                  </ContextMenu>
-               </contextMenu>
-            </Button>
+            <Button id="izvestia" layoutX="696.0" layoutY="14.0" minHeight="10.0" minWidth="53.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="70.0" />
             <Pane id="acPane" prefHeight="99.0" prefWidth="200.0">
                <children>
                   <Avatar layoutX="7.0" layoutY="19.0" radius="30.0" />
@@ -46,15 +36,7 @@
             <BottomNavigationButton id="firma" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" prefHeight="98.0" prefWidth="137.0" text="фирма" textOverrun="CLIP">
                <font>
                   <Font />
-               </font>
-               <graphic>
-                  <AnchorPane id="firmaPopPane" prefHeight="98.0" prefWidth="130.0">
-                     <children>
-                        <BottomNavigationButton prefHeight="46.0" prefWidth="138.0" text="създай" />
-                        <BottomNavigationButton layoutY="52.0" prefHeight="46.0" prefWidth="138.0" text="редактирай" />
-                     </children>
-                  </AnchorPane>
-               </graphic></BottomNavigationButton>
+               </font></BottomNavigationButton>
          </children></Pane>
       <ComboBox fx:id="category" layoutX="316.0" layoutY="197.0" prefHeight="28.0" prefWidth="173.0" promptText="категория" />
       <CheckBox fx:id="fragile" layoutX="316.0" layoutY="237.0" mnemonicParsing="false" text="чупливо" />

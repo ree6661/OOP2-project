@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -82,6 +83,16 @@ public final class HomeController {
 		this.table.setEditable(true);
 		this.table.setPlaceholder(new Label("Няма данни"));
     }
+	
+	@FXML
+	private void registerPratka() throws SQLException, IOException {
+		Launch.launch.pratkaForm();
+	}
+	
+	@FXML
+	private void firma() throws SQLException, IOException {
+		Launch.launch.firmaForm();
+	}
 	
 	@FXML
     private void filter() throws SQLException {

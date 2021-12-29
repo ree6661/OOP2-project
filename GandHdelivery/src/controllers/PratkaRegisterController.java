@@ -54,7 +54,7 @@ public class PratkaRegisterController {
     
     @FXML
     private void queries() throws SQLException, IOException {
-    	Launch.launch.homeForm();
+    	Launch.launch.homeFormCourier();
     }
 
     @FXML

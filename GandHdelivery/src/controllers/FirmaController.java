@@ -66,7 +66,7 @@ public class FirmaController {
     }
     @FXML
     void queries() throws SQLException, IOException {
-    	Launch.launch.homeForm();
+    	Launch.launch.homeFormAdmin();
     }
     @FXML
     void registerOrder() throws SQLException, IOException {
