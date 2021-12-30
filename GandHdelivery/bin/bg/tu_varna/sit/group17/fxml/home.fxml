@@ -53,7 +53,7 @@
             </Pane>
             <Button id="spravki" disable="true" layoutX="206.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0" text="справки" />
             <Button id="pratka" layoutX="359.0" mnemonicParsing="false" onAction="#registerPratka" prefHeight="110.0" prefWidth="159.0" text="+пратка" />
-            <Button id="izvestia" layoutX="696.0" layoutY="14.0" minHeight="10.0" minWidth="53.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="70.0" />
+            <Button id="izvestia" fx:id="notificationBell" layoutX="696.0" layoutY="14.0" minHeight="10.0" minWidth="53.0" mnemonicParsing="false" onAction="#notificationBellClick" prefHeight="71.0" prefWidth="70.0" />
             <Button id="firma" layoutX="518.0" mnemonicParsing="false" onAction="#firma" prefHeight="110.0" prefWidth="159.0" text="фирма" />
          </children>
       </Pane>
