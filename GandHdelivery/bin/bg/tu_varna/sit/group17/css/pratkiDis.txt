@@ -1,4 +1,0 @@
-#firma{
--fx-border-width: 0 5 0 0;}
-#spravki{
--fx-border-width: 0 0 0 5;}
