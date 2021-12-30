@@ -40,7 +40,7 @@ CREATE TABLE `couriers` (
 
 LOCK TABLES `couriers` WRITE;
 /*!40000 ALTER TABLE `couriers` DISABLE KEYS */;
-INSERT INTO `couriers` VALUES (1,'Dimitar Stefanov','987898917229','stefan',1),(7,'Ivan Dimitrov','987678765132','ivanmitiov',4);
+INSERT INTO `couriers` VALUES (1,'Dimitar Stefanov','987898917229','stefan',1);
 /*!40000 ALTER TABLE `couriers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-28 22:57:37
+-- Dump completed on 2021-12-31  0:05:57
