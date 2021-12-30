@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.ToggleButtonGroup?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.group17.controllers.FirmaController">
+   <children>
+      <ComboBox fx:id="companies" layoutX="13.0" layoutY="115.0" prefHeight="36.0" prefWidth="218.0" promptText="Име на фирма" />
+      <ComboBox fx:id="offices" layoutX="282.0" layoutY="115.0" prefHeight="38.0" prefWidth="218.0" promptText="Град и адрес на офис" />
+      <ComboBox fx:id="city" layoutX="282.0" layoutY="151.0" prefHeight="41.0" prefWidth="218.0" promptText="Град" />
+      <TextField fx:id="address" layoutX="282.0" layoutY="192.0" prefHeight="39.0" prefWidth="218.0" promptText="Адрес" />
+      <TextField fx:id="courierTextField" layoutX="551.0" layoutY="151.0" prefHeight="38.0" prefWidth="218.0" promptText="Име на куриер" />
+      <TextField fx:id="phone" layoutX="551.0" layoutY="187.0" prefHeight="38.0" prefWidth="218.0" promptText="Телефон" />
+      <Button layoutX="14.0" layoutY="354.0" mnemonicParsing="false" onAction="#addFirma" prefHeight="39.0" prefWidth="92.0" text="+фирма" />
+      <Button layoutX="283.0" layoutY="355.0" mnemonicParsing="false" onAction="#addOffice" prefHeight="39.0" prefWidth="92.0" text="+офис" />
+      <Button layoutX="551.0" layoutY="355.0" mnemonicParsing="false" onAction="#addCourier" prefHeight="39.0" prefWidth="108.0" text="+служител" />
+      <PasswordField fx:id="password" layoutX="550.0" layoutY="224.0" prefHeight="39.0" prefWidth="218.0" promptText="парола" />
+      <ComboBox fx:id="couriers" layoutX="550.0" layoutY="115.0" prefHeight="38.0" prefWidth="218.0" promptText="Име на куриер" />
+      <Button layoutX="282.0" layoutY="403.0" mnemonicParsing="false" onAction="#changeOffice" prefHeight="39.0" prefWidth="218.0" text="редактирай офис" />
+      <Button layoutX="551.0" layoutY="403.0" mnemonicParsing="false" onAction="#changeCourier" prefHeight="36.0" prefWidth="218.0" text="редактирай служител" />
+      <TextField fx:id="firmaName" layoutX="14.0" layoutY="151.0" prefHeight="26.0" prefWidth="218.0" promptText="Име на фирма" />
+      <Button layoutX="13.0" layoutY="408.0" mnemonicParsing="false" onAction="#changeFirma" prefHeight="39.0" prefWidth="218.0" text="редактирай фирма" />
+      <Button layoutX="140.0" layoutY="354.0" mnemonicParsing="false" onAction="#deleteFirma" prefHeight="39.0" prefWidth="92.0" text="- фирма" />
+      <Button layoutX="408.0" layoutY="354.0" mnemonicParsing="false" onAction="#deleteOffice" prefHeight="39.0" prefWidth="92.0" text="-офис" />
+      <Button layoutX="674.0" layoutY="354.0" mnemonicParsing="false" onAction="#deleteCourier" prefHeight="39.0" prefWidth="92.0" text="-куриер" />
+      <TextField fx:id="plik" layoutX="14.0" layoutY="187.0" prefHeight="27.0" prefWidth="218.0" promptText="Цена за плик" />
+      <TextField fx:id="kolet" layoutX="14.0" layoutY="224.0" prefHeight="23.0" prefWidth="218.0" promptText="Цена за колет" />
+      <TextField fx:id="paket" layoutX="14.0" layoutY="261.0" prefHeight="23.0" prefWidth="218.0" promptText="Цена за голям пакет" />
+      <TextField fx:id="tovar" layoutX="14.0" layoutY="297.0" prefHeight="36.0" prefWidth="218.0" promptText="Цена за товар" />
+      <ToggleButtonGroup selectionType="SINGLE" />
+      <Pane id="navPane" prefHeight="110.0" prefWidth="780.0">
+         <children>
+            <Pane id="acPane" prefHeight="99.0" prefWidth="200.0">
+               <children>
+                  <MenuButton id="userName" alignment="TOP_LEFT" layoutX="1.0" layoutY="65.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="199.0" text="user name" textFill="#333333">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="смени аватара" />
+                        <MenuItem mnemonicParsing="false" text="излез" />
+                     </items>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </MenuButton>
+                  <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/defalut%20avatar.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button id="spravki" layoutX="206.0" mnemonicParsing="false" onAction="#queries" prefHeight="110.0" prefWidth="159.0" text="справки" />
+            <Button id="pratka" layoutX="359.0" mnemonicParsing="false" onAction="#registerOrder" prefHeight="110.0" prefWidth="159.0" text="+пратка" />
+            <Button id="izvestia" layoutX="696.0" layoutY="14.0" minHeight="10.0" minWidth="53.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="70.0" />
+            <Button id="firma" disable="true" layoutX="518.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0" text="фирма" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
