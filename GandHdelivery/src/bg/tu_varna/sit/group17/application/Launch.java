@@ -73,7 +73,6 @@ public class Launch extends Application {
 		this.home = FXMLLoader.load(getClass().getResource("../fxml/home.fxml"));
 		this.home.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
 		this.home.getStylesheets().add(getClass().getResource("../css/hide-pratka.css").toExternalForm());
-//		this.home.getStylesheets().add(getClass().getResource("../css/hide-spravki.css").toExternalForm());
 		this.homeScene = new Scene(this.home);
 		
 		this.stage.setScene(this.homeScene);
@@ -121,8 +120,6 @@ public class Launch extends Application {
 		this.firma = FXMLLoader.load(getClass().getResource("../fxml/firma.fxml"));
 		this.firmaScene = new Scene(this.firma);
 		this.firma.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
-		//this.firma.getStylesheets().add(getClass().getResource("../css/spravkiOnHover.css").toExternalForm());
-		
 		this.firma.getStylesheets().add(getClass().getResource("../css/hide-pratka.css").toExternalForm());
 		
 		this.stage.setScene(this.firmaScene);

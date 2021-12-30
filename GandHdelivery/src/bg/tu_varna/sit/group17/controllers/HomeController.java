@@ -50,6 +50,23 @@ public final class HomeController {
 	
 	private LinkedList<Query2> orders = new LinkedList<>();
 	
+	private boolean delivered = false;
+	
+	private final String izv = "-fx-background-color: black;"
+			+ "-fx-background-image: url("+getClass().getResource("../img/izv.png").toExternalForm()+");"
+			+ "	-fx-background-position:  center, center;"
+			+ "	-fx-background-repeat: no-repeat;"
+			+ "	-fx-background-size: 70% 90%;"
+			+ "	-fx-border-radius: 50;";
+	private final String izv2 = "-fx-background-color: black;"
+			+ "-fx-background-image: url("+getClass().getResource("../img/izv2.png").toExternalForm()+");"
+			+ "	-fx-background-position:  center, center;"
+			+ "	-fx-background-repeat: no-repeat;"
+			+ "	-fx-background-size: 70% 90%;"
+			+ "	-fx-border-radius: 50;";
+	
+	private LinkedList<String> office_recipient_name;
+	
 	@FXML
 	private ComboBox<String> functions;
 	
@@ -63,7 +80,7 @@ public final class HomeController {
 	private TableView<Query> table;
 	
 	@FXML
-	private Button cancel;
+	private Button cancel, notificationBell;
 	
     @FXML
     private ResourceBundle resources;
@@ -71,11 +88,53 @@ public final class HomeController {
     @FXML
     private URL location;
     
+    @FXML
+    private void notificationBellClick() {
+    	if(this.delivered) {
+    		
+    		this.notificationBell.setStyle(this.izv);
+    		this.delivered = false;
+    		String offices = "";
+    		for(String s : office_recipient_name) offices += s + " ";
+    		
+    		Launch.alert("Имате пратка в офис " + offices);
+    		return;
+    	}
+    	Launch.alert("Нямате известия");
+    }
+    
+    private void notificationCheck() throws SQLException {
+    	String sql = "select id_office_recipient from orders where id_customer_recipient='" + HomeController.customer.getId() + "' and id_status='" + Property.statusesId[2] + "'";
+    	ResultSet rs = TableQuery.execute(sql);
+    	
+    	if(rs == null) return;
+    	this.delivered = true;
+    	
+    	do this.office_recipient_name.add(TableQuery.getOffice(rs.getInt("id_office_recipient")));
+    	while(rs.next());
+    	this.notificationBell.setGraphic(null);
+    	
+    	notification();
+    }
+    
+    private void notification() {
+    	
+    	this.notificationBell.setStyle(izv2);
+    }
+    
+    @SuppressWarnings("unused")
+	private void noNotification() {
+    	
+    	this.notificationBell.setStyle(izv);
+    }
+    
 	@FXML
     void initialize() throws SQLException {
 		logger.info("In home form");
+		this.office_recipient_name = new LinkedList<>();
 		if(HomeController.user) {
 			logger.info("Logged customer: " + customer);
+			notificationCheck();
 		}
 		
 		if(HomeController.user) {
@@ -128,18 +187,19 @@ public final class HomeController {
 			Launch.alert("Невалидно ID");
 			return;
 		}
-		String sql = "select id_status from orders where id_order='" + id_order + "'";
+		String sql = "select id_status from orders where id_order='" + id_order + "' and id_customer_recipient='" + customer.getId() + "'";
 		ResultSet rs = TableQuery.execute(sql);
 		
 		if(rs == null) {
 			Launch.alert("Невалидно ID");
 			return;
 		}
-		if(rs.getInt("id_status") == Property.statusesId[1]) {
+		int id_status = rs.getInt("id_status");
+		if(id_status == Property.statusesId[1]) {
 			Launch.alert("Пратката вече е отказана");
 			return;
 		}
-		if(rs.getInt("id_status") == Property.statusesId[2]) {
+		if(id_status == Property.statusesId[2]) {
 			Launch.alert("Пратката не може да бъде отказана, вече е получена");
 			return;
 		}

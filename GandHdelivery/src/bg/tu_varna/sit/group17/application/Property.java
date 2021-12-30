@@ -11,8 +11,8 @@ import bg.tu_varna.sit.group17.database.Create;
 public final class Property {
 	public static HashMap<String, Integer> citiesMap;
 	public static HashMap<String, Integer> companiesMap;
-	public static int[] statusesId = {1, 2, 3};
-	//1 неполучен 2 отказана 3 получена
+	public static int[] statusesId = {1, 2, 3, 4};
+	//1 неполучен 2 отказана 3 получена 4 взета
 	public static void initAll() throws SQLException {
 		initCityMap();
 		initCompaniesMap();
