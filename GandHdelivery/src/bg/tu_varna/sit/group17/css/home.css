@@ -1,0 +1,107 @@
+Button{
+	-fx-text-fill: #B0B079;
+	-fx-background-color: black;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+}
+Button:hover{
+	-fx-border-color: #B0B079;
+}
+#acPane{
+	-fx-text-fill: white;
+	-fx-background-color: black;
+	-fx-effect: null;
+	-fx-border-radius: 0;
+	-fx-border-width: 0 1 0 0; 
+	-fx-border-color: transparent black transparent transparent;
+}
+#spravki,#pratka,#firma
+{
+	-fx-text-fill: white;
+	-fx-background-color: black;
+	-fx-effect: null;
+	-fx-font-size: 24px;
+	-fx-font-style: Italic;
+	 
+	-fx-border-color: white;
+	-fx-border-width: 0 5 0 5; 
+	-fx-border-color: transparent white transparent white;
+}
+#spravki:hover,#pratka:hover,#firma:hover{
+	-fx-text-fill: #B0B079;
+	-fx-border-color: transparent #B0B079 transparent #B0B079;
+}
+#navPane{
+	-fx-background-color: black;
+}
+#mainPane{
+	-fx-text-fill: black;
+	-fx-background-color: white;
+}
+#filterPane {
+	-fx-background-color: black;
+	-fx-text-fill: #B0B079;
+	-fx-border-width: 0 5 0 0; 
+	-fx-border-color: transparent white transparent transparent;
+
+}
+#filterPane>*{
+	-fx-text-fill: #B0B079;
+	-fx-background-color: black;
+}
+#userName, #userName .context-menu{
+	-fx-border: none;
+	-fx-text-fill: white;
+	-fx-background-color: black;
+}
+#userName .label{-fx-text-fill: white;}
+
+.menu-item:focused {
+     -fx-background-color: #B0B079;                       
+}
+#izvestia{
+	-fx-background-color: black;
+	-fx-background-image: url("../img/izv.png");
+	-fx-background-position:  center, center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 70% 90%;
+	-fx-border-radius: 50;
+}
+#vij{
+	-fx-background-color: black;
+	-fx-graphic: url("../img/filter.png");
+}
+#vij:hover{
+	-fx-graphic: url("../img/filter1.png");
+}
+.button,.textField,.comboBox
+{
+	-fx-spacing: 100;
+}
+
+
+#spravki:disabled,#pratka:disabled,#firma:disabled{
+	
+	-fx-opacity: 0.96;
+	-fx-text-fill: black;
+	-fx-background-color: white;
+	-fx-effect: null;
+}
+TextField,PasswordField,ComboBox,.date-picker{
+	-fx-prompt-text-fill: #B0B079;
+	-fx-border-width: 2;
+	-fx-border-color: #B0B079;
+	-fx-border-radius: 0;
+}
+.date-picker >*{
+	-fx-prompt-text-fill: #B0B079;
+}
+.check-box{
+	-fx-prompt-text-fill: #B0B079;
+	-fx-focus-color: white;
+}
+ComboBox  .cell{-fx-text-fill: #B0B079;}
+
+.check-box:selected .mark {
+	-fx-background-color: #B0B079;
+}
