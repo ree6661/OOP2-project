@@ -31,7 +31,7 @@ CREATE TABLE `couriers` (
   PRIMARY KEY (`id_courier`),
   KEY `couriers_ibfk_1` (`id_office`),
   CONSTRAINT `couriers_ibfk_1` FOREIGN KEY (`id_office`) REFERENCES `office` (`id_office`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `couriers` (
 
 LOCK TABLES `couriers` WRITE;
 /*!40000 ALTER TABLE `couriers` DISABLE KEYS */;
-INSERT INTO `couriers` VALUES (1,'Dimitar Stefanov','987898917229','stefan',1);
+INSERT INTO `couriers` VALUES (1,'Димитър Стефанов','359898917229','stefan',1),(18,'Радослав Общински','359789876189','radkapiratka',1),(19,'Светльо Свирчев','359878917214','svetlak2000',1),(20,'Кирил Иванов','398781923412','12345',15);
 /*!40000 ALTER TABLE `couriers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-31  0:05:57
+-- Dump completed on 2021-12-31 21:54:45

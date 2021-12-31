@@ -32,7 +32,7 @@ CREATE TABLE `office` (
   KEY `id_city` (`id_city`),
   CONSTRAINT `office_ibfk_1` FOREIGN KEY (`id_company`) REFERENCES `companies` (`id_company`),
   CONSTRAINT `office_ibfk_2` FOREIGN KEY (`id_city`) REFERENCES `cities` (`id_city`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `office` (
 
 LOCK TABLES `office` WRITE;
 /*!40000 ALTER TABLE `office` DISABLE KEYS */;
-INSERT INTO `office` VALUES (1,1,1,'Tsar Asen 90'),(4,1,3,'Ivan Rilski 9'),(5,1,2,'Ivan Aleksandyr 5'),(6,1,1,'Tsar Asen 6');
+INSERT INTO `office` VALUES (1,1,1,'Цар Асен 90'),(4,1,3,'Иван Рилски 51'),(5,1,2,'Иван Александър 69'),(6,1,1,'Цар Асен 91'),(9,1,1,'Цар Освободител 96'),(15,2,4,'Иван Александър');
 /*!40000 ALTER TABLE `office` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-31  0:05:58
+-- Dump completed on 2021-12-31 21:54:45

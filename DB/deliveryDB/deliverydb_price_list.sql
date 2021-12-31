@@ -39,7 +39,7 @@ CREATE TABLE `price_list` (
 
 LOCK TABLES `price_list` WRITE;
 /*!40000 ALTER TABLE `price_list` DISABLE KEYS */;
-INSERT INTO `price_list` VALUES (1,1,5.5),(1,2,10),(1,3,15),(1,4,20),(2,1,8),(2,2,15),(2,3,24),(2,4,36),(19,1,8),(19,2,15),(19,3,24),(19,4,36);
+INSERT INTO `price_list` VALUES (1,1,5.5),(1,2,10),(1,3,15),(1,4,20),(2,1,8),(2,2,15),(2,3,24),(2,4,36),(3,1,2),(3,2,0.5),(3,3,6),(3,4,50);
 /*!40000 ALTER TABLE `price_list` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-31  0:05:58
+-- Dump completed on 2021-12-31 21:54:45

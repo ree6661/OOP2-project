@@ -35,7 +35,7 @@ CREATE TABLE `statuses` (
 
 LOCK TABLES `statuses` WRITE;
 /*!40000 ALTER TABLE `statuses` DISABLE KEYS */;
-INSERT INTO `statuses` VALUES (1,'Неполучена'),(2,'Отказана'),(3,'Получена'),(4,'Взета');
+INSERT INTO `statuses` VALUES (1,'Неполучена'),(2,'Отказана'),(3,'Очакваща приемане от клиент'),(4,'Приета от клиент'),(5,'Прекратена пратка');
 /*!40000 ALTER TABLE `statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-31  0:05:57
+-- Dump completed on 2021-12-31 21:54:46
