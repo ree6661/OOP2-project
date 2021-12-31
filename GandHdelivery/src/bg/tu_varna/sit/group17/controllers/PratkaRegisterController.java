@@ -14,16 +14,20 @@ import bg.tu_varna.sit.group17.application.Logger;
 import bg.tu_varna.sit.group17.application.Property;
 import bg.tu_varna.sit.group17.database.Add;
 import bg.tu_varna.sit.group17.database.TableQuery;
+import bg.tu_varna.sit.group17.database.Update;
 import bg.tu_varna.sit.group17.database.property.Company;
 import bg.tu_varna.sit.group17.database.users.Courier;
 import bg.tu_varna.sit.group17.validation.Valid;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
 public class PratkaRegisterController {
 	
@@ -41,10 +45,16 @@ public class PratkaRegisterController {
 	
 	@FXML
 	private TextField phoneSender, phoneReceiver, sendPrice, address;
-	
+	@FXML
+	private MenuButton userName;
+	@FXML
+	public ImageView avatar;
 	
 	@FXML
 	private DatePicker receiveDate, clientReceiveDate;
+	
+	@FXML
+	private Button notificationBell;
 	
 	@FXML
     private ResourceBundle resources;
@@ -61,7 +71,9 @@ public class PratkaRegisterController {
     void initialize() throws SQLException {
     	logger.info("In pratka register form");
     	logger.info("Logged courier: " + courier);
-    	
+    	this.avatar.setImage(Property.getAvatar());
+    	courierNotification();
+    	this.userName.setText(Property.username);
     	companies = TableQuery.allCompanies();
     	if(companySender.getItems().size() == 0) {
     		for(Company c : companies) 
@@ -79,8 +91,54 @@ public class PratkaRegisterController {
     	this.category.valueProperty().addListener(categoryListener());
     	do this.category.getItems().add(rs.getString("category"));
     	while(rs.next());
-    	
     }
+    
+    @FXML
+	private void changeAvatar() {
+		this.avatar.setImage(Property.nextAvatar());
+	}
+    @FXML
+	private void logOut() throws SQLException, IOException {
+		Launch.launch.loginForm();
+	}
+    
+    @FXML
+    private void notificationBellClick() throws SQLException {
+    	if(Property.delivered) {
+    		
+    		this.notificationBell.setStyle(Property.izv);
+    		Property.delivered = false;
+    		String customers = "";
+    		for(String s : Property.alertNotificationList) customers += s + " ";
+    		
+    		Launch.alert("Отказани пратки от клиенти: " + customers);
+    		
+    		for(int i : Property.ordersIdNotification)
+    			Update.changeOrderStatus(i, Property.getStatus(4));
+    		return;
+    	}
+    	Launch.alert("Нямате известия");
+    }
+    
+    private void courierNotification() throws SQLException {
+    	String sql = "select id_order, id_customer_recipient from orders where id_courier='" + courier.getId() + "' and id_status='" + Property.getStatus(1) + "'";
+    	ResultSet rs = TableQuery.execute(sql);
+    	
+    	if(rs == null) return;
+    	Property.delivered = true;
+    	
+    	do {
+    		Property.alertNotificationList.add(TableQuery.getCustomer(rs.getInt("id_customer_recipient")));
+    		Property.ordersIdNotification.add(rs.getInt("id_order"));
+    	}while(rs.next());
+    	
+    	notification();
+    }
+    
+    private void notification() {
+    	this.notificationBell.setStyle(Property.izv2);
+    }
+    
     @FXML
     void registerOrder() throws SQLException {
     	logger.info("Clicked register order");
@@ -100,13 +158,19 @@ public class PratkaRegisterController {
     			sendToAddress = this.sendToAddress.isSelected(),
     			isPaid = this.isPaid.isSelected();
     	double price = 0;
-    	if(this.sendPrice == null) return;
+    	if(this.sendPrice == null) {
+    		Launch.alert("Полето за цена не може да е празно");
+    		return;
+    	}
     	try {
     		price = Double.parseDouble(this.sendPrice.getText());
     	}catch(Exception e) {return;}
     	if(!Valid.order(phoneSender, phoneReceiver,
     			this.receiveDate.getValue().toString(), this.clientReceiveDate.getValue().toString())) 
+    	{
+    		Launch.alert("Невалиден телефон на клиент");
     		return;
+    	}
     	
     	if(!sendToAddress && officeSender.getSelectionModel().getSelectedItem().equals(officeReceiver.getSelectionModel().getSelectedItem())) {
     		Launch.alert("Не може да се достави до същия офис");

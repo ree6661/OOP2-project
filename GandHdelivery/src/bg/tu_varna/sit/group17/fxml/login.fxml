@@ -17,13 +17,13 @@
             <Image url="@../img/GandHlogo.png" />
          </image>
       </ImageView>
-      <Label id="title" layoutX="71.0" layoutY="133.0" text="ВЛИЗАНЕ В АКАУНТ" textFill="WHITE" />
+      <Label id="title" layoutX="99.0" layoutY="129.0" text="ВЛИЗАНЕ В АКАУНТ" textFill="WHITE" />
 
-      <Button id="register" alignment="CENTER_RIGHT" contentDisplay="BOTTOM" layoutX="127.0" layoutY="278.0" mnemonicParsing="false" onAction="#registerFx" prefHeight="119.0" prefWidth="139.0" text="Регистрирай се" />
-      <Hyperlink id="forgot" fx:id="forgotPassword" layoutX="61.0" layoutY="405.0" text="забравих си паролата" />
+      <Button id="register" alignment="CENTER" contentDisplay="BOTTOM" layoutX="121.0" layoutY="279.0" mnemonicParsing="false" onAction="#registerFx" prefHeight="106.0" prefWidth="139.0" text="Регистрирай се" />
+      <Hyperlink fx:id="forgot" layoutX="82.0" layoutY="410.0" onAction="#forgotPassword" text="забравих си паролата" />
       <TextField fx:id="phone" layoutX="29.0" layoutY="182.0" prefHeight="38.0" prefWidth="235.0" promptText="телефон" />
       <PasswordField fx:id="pass" layoutX="29.0" layoutY="229.0" prefHeight="38.0" prefWidth="235.0" promptText="парола" />
-       <Button id="login" alignment="CENTER_RIGHT" contentDisplay="BOTTOM" layoutX="29.0" layoutY="279.0" mnemonicParsing="false" onAction="#loginFx" prefHeight="81.0" prefWidth="82.0" text="Влез" textOverrun="CENTER_ELLIPSIS" />
+       <Button id="login" alignment="CENTER" contentDisplay="BOTTOM" layoutX="29.0" layoutY="279.0" mnemonicParsing="false" onAction="#loginFx" prefHeight="81.0" prefWidth="82.0" text="Влез" textOverrun="CENTER_ELLIPSIS" />
       <Label id="errorMessage" layoutX="126.0" layoutY="159.0" textFill="RED">
          <font>
             <Font size="13.0" />

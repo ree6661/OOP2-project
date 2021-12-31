@@ -23,7 +23,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
 public class FirmaController {
 	
@@ -35,10 +37,15 @@ public class FirmaController {
 	
 	private final Logger logger = new Logger(FirmaController.class.getName());
 	@FXML
-	private ComboBox<String> companies, offices, city, couriers;
+	public ComboBox<String> companies, offices, city, couriers;
 	@FXML
-	private TextField firmaName, address, courierTextField, phone, password,
+	public TextField firmaName, address, courierTextField, phone, password,
 						plik, kolet, paket, tovar;
+	
+	@FXML
+	private MenuButton userName;
+	@FXML
+	public ImageView avatar;
 	
     @FXML
     private ResourceBundle resources;
@@ -50,20 +57,20 @@ public class FirmaController {
     void initialize() throws SQLException {
     	logger.info("In firma form");
     	logger.info("Logged admin: " + admin);
-    	
+    	this.userName.setText(Property.username);
     	Property.initAll();
-    	
+    	this.avatar.setImage(Property.getAvatar());
     	if(companies.getItems().size() == 0) {
     		companies.getItems().addAll(Property.companiesMap.keySet());
     		companies.valueProperty().addListener(firmaListener());    		
     	}
-    	if(city.getItems().size() == 0) {
-    		city.getItems().addAll(Property.citiesMap.keySet());
-    		city.getSelectionModel().select(0);
+    	if(this.city.getItems().size() == 0) {
+    		this.city.getItems().addAll(Property.citiesMap.keySet());
+    		this.city.getSelectionModel().select(0);
     	}
 		offices.valueProperty().addListener(officesListener());		
 		couriers.valueProperty().addListener(couriersListener());
-    }
+	}
     @FXML
     void queries() throws SQLException, IOException {
     	Launch.launch.homeFormAdmin();
@@ -71,6 +78,20 @@ public class FirmaController {
     @FXML
     void registerOrder() throws SQLException, IOException {
     	Launch.launch.pratkaForm();
+    }
+    
+    @FXML
+	private void changeAvatar() {
+		this.avatar.setImage(Property.nextAvatar());
+	}
+    @FXML
+	private void logOut() throws SQLException, IOException {
+		Launch.launch.loginForm();
+	}
+    
+    @FXML
+    private void notificationBellClick() {
+    	Launch.alert("Нямате известия");
     }
     
     @FXML
@@ -165,14 +186,22 @@ public class FirmaController {
     	companies.getItems().addAll(Property.companiesMap.keySet());
     }
     @FXML
-    private void addOffice() throws SQLException {
+    public void addOffice() throws SQLException {
+    	
     	logger.info("Clicked add office");
     	
-    	if(company == null) return;
+    	if(company == null) {
+    		Launch.alert("Фирмата е празна");
+    		return;
+    	}
     	String cityName = this.city.getPromptText(),
     			address = this.address.getText();
     	
-    	if(cityName.equals("") || address.equals("")) return;
+    	if(cityName == null || address == null || cityName.isBlank() || address.isBlank()) {
+    		Launch.alert("Не може града и/или адреса да са празни");
+    		return;
+    	}
+    	
     	
     	int cityIndex = Property.citiesMap.get(cityName);
     	String sql = "select * from office where id_company='" +
@@ -186,19 +215,31 @@ public class FirmaController {
 		Add.office(this.company.getId(), cityIndex, address);
 		Launch.alert("Успешно добавен офис");
 		logger.info("Successful added office");
+		offices.getSelectionModel().selectFirst();
 		initialize();
     }
     @FXML
     private void changeOffice() throws SQLException {
     	logger.info("Clicked change office");
     	
-    	if(company == null) return;
+    	if(this.office == null || this.offices.getPromptText().isBlank() ||
+    			this.companies.getPromptText().isBlank()) {
+    		Launch.alert("Фирмата и офиса не може да са празни");
+    		return;
+    	}
     	String cityName = this.city.getSelectionModel().getSelectedItem();
     	
+    	if(cityName.isBlank()) {
+    		Launch.alert("Града не е избран");
+    		return;
+    	}
     	int cityIndex = Property.citiesMap.get(cityName);
     	String address = this.address.getText();
     	
-    	if(cityIndex == 0 || address.equals("")) return;
+    	if(cityIndex == 0 || address.equals("")) {
+    		Launch.alert("Не може града и/или адреса да са празни");
+    		return;
+    	}
     	
     	String sql = "select * from office where id_company='" +
 				this.company.getId() + 
@@ -209,7 +250,7 @@ public class FirmaController {
     		Launch.alert("Офиса не може да се промени. Не съществува такъв");
     		return;
     	}
-    	System.out.println(this.office.getId_office()+ address + "c " + cityIndex);
+    	
     	Update.office(this.office.getId_office(), cityIndex, address);
     	Launch.alert("Успешно редактиран офис");
     	logger.info("Successful changef office");
@@ -217,8 +258,13 @@ public class FirmaController {
     }
     @FXML
     private void deleteOffice() throws SQLException {
-    	logger.info("Clicked delete office");
     	
+    	logger.info("Clicked delete office");
+    	if(this.office == null || this.offices.getPromptText().isBlank() ||
+    			this.companies.getPromptText().isBlank()) {
+    		Launch.alert("Фирмата и офиса не може да са празни");
+    		return;
+    	}
     	Delete.office(this.office);
     	this.office = null;
     	Launch.alert("Успешно изтрит офис");
@@ -233,13 +279,18 @@ public class FirmaController {
     private void addCourier() throws SQLException {
     	logger.info("Clicked add courier");
     	
-    	if(this.company == null || this.office == null) return;
+    	if(this.company == null || this.office == null || this.office.getId_office() == 0) {
+    		Launch.alert("Фирмата или офиса са празни");
+    		return;
+    	}
     	String name = this.courierTextField.getText(),
     			phone = this.phone.getText(),
     			password = this.password.getText();
     	
-    	if(name.equals("") || phone.equals("") || password.equals(""))
+    	if(name.equals("") || phone.equals("") || password.equals("")) {
+    		Launch.alert("Полетата не може да са празни");
     		return;
+    	}
     	
     	String err = Valid.user(name, phone, password, password);
     	if(!err.equals("")) {
@@ -257,8 +308,15 @@ public class FirmaController {
     		return;
     	}
 		Add.courier(name, phone, password, this.office.getId_office());
+		rs = TableQuery.execute("select * from couriers where phone='" + phone + "'");
+		this.courier = Courier.create(rs);
+		office.couriers.add(this.courier);
 		Launch.alert("Успешно добавен куриер");
 		logger.info("Successful added courier");
+		couriers.getSelectionModel().selectFirst();
+		rs = TableQuery.execute("select * from couriers where phone='" + phone + "'");
+		if(rs != null)
+			this.courier = Courier.create(rs);
 		initialize();
     }
     @FXML
@@ -267,7 +325,7 @@ public class FirmaController {
     	
     	if(this.company == null || this.office == null || 
     						this.courier == null) {
-    		System.out.println("null");
+    		Launch.alert("Фирмата офиса и куриера не може да са празни");
     		return;
     	}
     	
@@ -295,7 +353,14 @@ public class FirmaController {
     @FXML
     private void deleteCourier() throws SQLException {
     	logger.info("Clicked delete courier");
-    	
+    	if(this.company == null || this.office == null || this.courier == null ||
+    			this.offices.getPromptText().isBlank() ||
+    			this.companies.getPromptText().isBlank() || 
+    			this.couriers.getPromptText().isBlank()) {
+    		
+    		Launch.alert("Фирмата офиса и куриера не може да са празни");
+    		return;
+    	}
     	Delete.courier(this.courier);
     	this.courier = null;
     	Launch.alert("Успешно изтрит куриер");
@@ -313,7 +378,7 @@ public class FirmaController {
 				logger.info("Changed firma combobox");
 				
 				offices.getItems().clear();
-				city.setPromptText("");
+				city.setPromptText(city.getSelectionModel().getSelectedItem().toString());
 				address.setText("");
 				
 				couriers.getItems().clear();
@@ -333,7 +398,7 @@ public class FirmaController {
 					String sql = "select * from price_list where id_company='" + company.getId() + "'";
 					ResultSet rs = TableQuery.execute(sql);
 					if(rs == null) {
-						System.out.println("firmata nqma ceni");
+						Launch.alert("firmata nqma ceni");
 						return;
 					}
 					do {	
@@ -379,7 +444,7 @@ public class FirmaController {
 					
 				} catch(SQLException e) {
 					e.printStackTrace();
-					System.out.println(e + "\nerror: can't load company office");
+					Launch.alert("Не се намира офиса");
 				}
 			}
 		};
@@ -401,6 +466,7 @@ public class FirmaController {
 				office = new Office();
 				
 				try {
+					if(company != null)
 					for(int i = 0; i < company.offices.size(); ++i) {
 						String officeName = 
 								TableQuery.cityIdToName(company.offices.get(i).getId_city()) + 
@@ -442,7 +508,7 @@ public class FirmaController {
 					
 				} catch(SQLException e) {
 					e.printStackTrace();
-					System.out.println(e + "\nerror: can't load company office");
+					Launch.alert("Не са намират офисите");
 				}
 			}
 		};

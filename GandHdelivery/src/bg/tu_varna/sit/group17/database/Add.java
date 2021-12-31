@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import bg.tu_varna.sit.group17.application.Launch;
+
 public final class Add {
 	
 	public static void company(String name) throws SQLException {
@@ -33,7 +35,7 @@ public final class Add {
 		sql = "SELECT id_company FROM companies ORDER BY id_company DESC LIMIT 1";
 		ResultSet rs = TableQuery.execute(sql);
 		if(rs == null) {
-			System.out.println("Can't find company");
+			Launch.alert("Не се намира фирмата");
 			ps.close();
 			return;
 		}

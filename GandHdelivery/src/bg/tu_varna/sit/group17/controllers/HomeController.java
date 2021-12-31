@@ -30,10 +30,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 
 public final class HomeController {
 	
@@ -44,29 +46,13 @@ public final class HomeController {
 	
 	
 	public static Customer customer;
-	public static boolean user = false;
-	
 	private final Logger logger = new Logger(HomeController.class.getName());
 	
 	private LinkedList<Query2> orders = new LinkedList<>();
 	
-	private boolean delivered = false;
 	
-	private final String izv = "-fx-background-color: black;"
-			+ "-fx-background-image: url("+getClass().getResource("../img/izv.png").toExternalForm()+");"
-			+ "	-fx-background-position:  center, center;"
-			+ "	-fx-background-repeat: no-repeat;"
-			+ "	-fx-background-size: 70% 90%;"
-			+ "	-fx-border-radius: 50;";
-	private final String izv2 = "-fx-background-color: black;"
-			+ "-fx-background-image: url("+getClass().getResource("../img/izv2.png").toExternalForm()+");"
-			+ "	-fx-background-position:  center, center;"
-			+ "	-fx-background-repeat: no-repeat;"
-			+ "	-fx-background-size: 70% 90%;"
-			+ "	-fx-border-radius: 50;";
-	
-	private LinkedList<String> office_recipient_name;
-	
+	@FXML
+	private MenuButton userName;
 	@FXML
 	private ComboBox<String> functions;
 	
@@ -78,9 +64,12 @@ public final class HomeController {
 	
 	@FXML
 	private TableView<Query> table;
+
+	@FXML
+	public ImageView avatar;
 	
 	@FXML
-	private Button cancel, notificationBell;
+	private Button notificationBell, cancelOrderButton;
 	
     @FXML
     private ResourceBundle resources;
@@ -88,73 +77,122 @@ public final class HomeController {
     @FXML
     private URL location;
     
-    @FXML
-    private void notificationBellClick() {
-    	if(this.delivered) {
-    		
-    		this.notificationBell.setStyle(this.izv);
-    		this.delivered = false;
-    		String offices = "";
-    		for(String s : office_recipient_name) offices += s + " ";
-    		
-    		Launch.alert("Имате пратка в офис " + offices);
-    		return;
-    	}
-    	Launch.alert("Нямате известия");
-    }
-    
-    private void notificationCheck() throws SQLException {
-    	String sql = "select id_office_recipient from orders where id_customer_recipient='" + HomeController.customer.getId() + "' and id_status='" + Property.statusesId[2] + "'";
-    	ResultSet rs = TableQuery.execute(sql);
-    	
-    	if(rs == null) return;
-    	this.delivered = true;
-    	
-    	do this.office_recipient_name.add(TableQuery.getOffice(rs.getInt("id_office_recipient")));
-    	while(rs.next());
-    	this.notificationBell.setGraphic(null);
-    	
-    	notification();
-    }
-    
-    private void notification() {
-    	
-    	this.notificationBell.setStyle(izv2);
-    }
-    
-    @SuppressWarnings("unused")
-	private void noNotification() {
-    	
-    	this.notificationBell.setStyle(izv);
-    }
-    
 	@FXML
     void initialize() throws SQLException {
-		logger.info("In home form");
-		this.office_recipient_name = new LinkedList<>();
-		if(HomeController.user) {
-			logger.info("Logged customer: " + customer);
-			notificationCheck();
-		}
 		
-		if(HomeController.user) {
+		logger.info("In home form");
+		Property.alertNotificationList = new LinkedList<>();
+		this.avatar.setImage(Property.getAvatar());
+		
+		this.userName.setText(Property.username);
+		
+		
+		if(Property.user == 1) {
+			logger.info("Logged customer: " + customer);
+			logger.info("Checking for updating order status");
+			TableQuery.checkOrderUpdate(HomeController.customer.getId());
+			
 			this.phone.setText(HomeController.customer.getPhone());
 			this.phone.setDisable(true);
 			
 			this.quеryNames = new String[] {"Статус на пратка"};
 			this.functions.setDisable(true);
 		}
-		else {
-			IdOrder.setDisable(true);
-			//cancel.setDisable(true);
+		else if(Property.user == 2){
+			cancelOrderButton.setText("Статус: Приета пратка");
+		} else if(Property.user == 3) {
+			this.phone.setDisable(true);
+			this.IdOrder.setDisable(true);
+			this.cancelOrderButton.setDisable(true);
 		}
-		Property.initAll();
+		if(Property.user !=3 ) {
+			Property.initAll();
+			notificationCheck();			
+		}
 		
     	functions.getItems().addAll(Arrays.asList(quеryNames));
     	functions.getSelectionModel().selectFirst();;
     	
 		this.table.setEditable(true);
 		this.table.setPlaceholder(new Label("Няма данни"));
+    }
+    
+	@FXML
+	private void changeAvatar() {
+		this.avatar.setImage(Property.nextAvatar());
+	}
+	@FXML
+	private void logOut() throws SQLException, IOException {
+		Launch.launch.loginForm();
+	}	
+    
+    @FXML
+    private void notificationBellClick() throws IllegalArgumentException, SQLException {
+    	if(Property.delivered) {
+    		if(Property.user == 1) {
+	    		
+	    		this.notificationBell.setStyle(Property.izv);
+	    		Property.delivered = false;
+	    		String offices = "";
+	    		for(String s : Property.alertNotificationList) offices += s + " ";
+	    		
+	    		Launch.alert("Имате пратка в офис " + offices);
+	    		return;
+    		} if(Property.user == 2) {
+    			this.notificationBell.setStyle(Property.izv);
+        		Property.delivered = false;
+        		String customers = "";
+        		for(String s : Property.alertNotificationList) customers += s + " ";
+        		
+        		Launch.alert("Отказани пратки от клиенти: " + customers);
+        		
+        		for(int i : Property.ordersIdNotification)
+        			Update.changeOrderStatus(i, Property.getStatus(4));
+        		return;
+    		}
+    	}
+    	Launch.alert("Нямате известия");
+    }
+    
+    private void notificationCheck() throws SQLException {
+    	
+    	if(Property.user == 2) {
+    		courierNotification();
+    		return;
+    	}
+    	String sql = "select id_office_recipient from orders where id_customer_recipient='" + HomeController.customer.getId() + "' and id_status='" + Property.getStatus(2) + "'";
+    	ResultSet rs = TableQuery.execute(sql);
+    	
+    	if(rs == null) return;
+    	Property.delivered = true;
+    	
+    	do Property.alertNotificationList.add(TableQuery.getOffice(rs.getInt("id_office_recipient")));
+    	while(rs.next());
+    	
+    	notification();
+    }
+    private void courierNotification() throws SQLException {
+    	String sql = "select id_order, id_customer_recipient from orders where id_courier='" + PratkaRegisterController.courier.getId() + "' and id_status='" + Property.getStatus(1) + "'";
+    	ResultSet rs = TableQuery.execute(sql);
+    	
+    	if(rs == null) return;
+    	Property.delivered = true;
+    	
+    	do {
+    		Property.alertNotificationList.add(TableQuery.getCustomer(rs.getInt("id_customer_recipient")));
+    		Property.ordersIdNotification.add(rs.getInt("id_order"));
+    	}while(rs.next());
+    	
+    	notification();
+    }
+    
+    private void notification() {
+    	
+    	this.notificationBell.setStyle(Property.izv2);
+    }
+    @SuppressWarnings("unused")
+	private void noNotification() {
+    	this.notificationBell.setStyle(Property.izv);
     }
 	
 	@FXML
@@ -169,7 +207,62 @@ public final class HomeController {
 	
 	@FXML
     private void cancelOrder() throws SQLException {
+		
 		logger.info("Clicked cancel order");
+		
+		if(Property.user != 1) {
+			
+			int id_order = 0;
+			
+			try {
+				id_order = Integer.parseInt(this.IdOrder.getText());
+			
+			}catch(NullPointerException e) {
+				Launch.alert("Невалидно ID");
+				return;
+			}
+			if(id_order == 0) {
+				Launch.alert("Невалидно ID");
+				return;
+			}
+			
+			String phone = this.phone.getText();
+			TableQuery customerQuery = new TableQuery("customers");
+			if(!Valid.phoneNumber(phone) || !customerQuery.contains("phone", phone)) {
+				Launch.alert("Невалиден телефон на клиент");
+				return;
+			}
+			int id_customer = TableQuery.getCustomerId(phone);
+			String sql = "select * from orders where id_customer_recipient='" + id_customer + "'";
+			ResultSet rs = TableQuery.execute(sql);
+			if(rs == null) {
+				Launch.alert("Клиента няма поръчки");
+				return;
+			}
+			int id_status = rs.getInt("id_status");
+			if(id_status == Property.getStatus(1)) {
+				Launch.alert("Пратката вече е отказана");
+				return;
+			}
+			if(id_status == Property.getStatus(0)) {
+				Launch.alert("Пратката пратката още не е получена");
+				return;
+			}
+			
+			sql = "select * from orders where id_order='" + id_order + "' and id_customer_recipient='" + id_customer + "'";
+			rs = TableQuery.execute(sql);
+			if(rs == null) {
+				Launch.alert("Клиента няма такава пратка с това ID");
+				return;
+			}
+			
+			Update.changeOrderStatus(id_order, Property.getStatus(3));
+			Launch.alert("Променен статус на пратката: взета от куриер");
+			logger.info("Order accepted from courier");
+			filter();
+			return;
+		}
+		
 		if(this.orders.size() == 0) {
 			Launch.alert("Няма пратки");
 			return;
@@ -195,16 +288,16 @@ public final class HomeController {
 			return;
 		}
 		int id_status = rs.getInt("id_status");
-		if(id_status == Property.statusesId[1]) {
+		if(id_status == Property.getStatus(1)) {
 			Launch.alert("Пратката вече е отказана");
 			return;
 		}
-		if(id_status == Property.statusesId[2]) {
+		if(id_status == Property.getStatus(2)) {
 			Launch.alert("Пратката не може да бъде отказана, вече е получена");
 			return;
 		}
 		
-		Update.changeOrderStatus(id_order, Property.statusesId[1]);
+		Update.changeOrderStatus(id_order, Property.getStatus(1));
 		Launch.alert("Пратката е отказана");
 		logger.info("Order cancelled");
 		filter();
@@ -214,7 +307,7 @@ public final class HomeController {
     private void filter() throws SQLException {
     	logger.info("Clicked filter");
     	this.table.getColumns().clear();
-    	if(HomeController.user) {
+    	if(Property.user == 1) {
     		query2();
     		return;
     	}
@@ -238,7 +331,6 @@ public final class HomeController {
     		return;
     	}
     	if(Date.valueOf(from).after(Date.valueOf(to))) {
-    		System.out.println("err");
     		Launch.alert("Началната дата не може да е преди крайната дата");
     		return;
     	}
@@ -332,7 +424,6 @@ public final class HomeController {
     		return;
     	}
     	if(Date.valueOf(from).after(Date.valueOf(to))) {
-    		System.out.println("err");
     		Launch.alert("Началната дата не може да е преди крайната дата");
     		return;
     	}

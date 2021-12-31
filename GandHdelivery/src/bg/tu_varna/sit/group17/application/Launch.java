@@ -3,15 +3,17 @@ package bg.tu_varna.sit.group17.application;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Launch extends Application {
@@ -19,7 +21,9 @@ public class Launch extends Application {
 	private Scene loginScene, registerScene, homeScene, pratkaScene, firmaScene;
 	private Stage stage;
 	private Parent login, register, home, pratka, firma;
+	private HostServices hostServices = getHostServices();
 	
+
 	public static Launch launch;
 	static final Logger logger = Logger.getLogger(Launch.class.getName());
 	@Override
@@ -29,20 +33,19 @@ public class Launch extends Application {
 		logger.info("Starting application");
 		
 		this.stage = stage;
+		this.stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/logoAvatar.png")));
 		Launch.launch = this;
 		try {
 			Property.initAll();
-			//registerForm();
 			loginForm();
-			//homeFormCustomer();
-//			PratkaRegisterController.courier = new Courier();
-	//		PratkaRegisterController.courier.setId(1);
-			//pratkaForm();
-			//firmaForm();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void openLink(String link) {
+		hostServices.showDocument(link);
 	}
 	
 	public void registerForm() throws SQLException, IOException {
@@ -128,7 +131,7 @@ public class Launch extends Application {
 	
 	public static void alert(String error, String content) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Error");
+		alert.setTitle("Съобщение");
 		alert.setHeaderText(error);
 		alert.setContentText(content);
 		alert.showAndWait();
@@ -136,7 +139,8 @@ public class Launch extends Application {
 	
 	public static void alert(String error) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Error");
+		
+		alert.setTitle("Съобщение");
 		alert.setHeaderText(error);
 		alert.showAndWait();
 	}

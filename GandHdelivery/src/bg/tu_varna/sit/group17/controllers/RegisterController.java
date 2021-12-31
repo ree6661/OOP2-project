@@ -29,12 +29,11 @@ public final class RegisterController implements Initializable {
 	private PasswordField password, repeatPassword;
 	
 	public static Courier courier;
-	public static boolean registerCustomer = false;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		logger.info("In register form");
-		cBox0.getItems().addAll(Property.citiesMap.keySet());
+		cBox0.getItems().addAll(Property.citiesMap.keySet());	
 	}
 	
     @FXML
@@ -65,7 +64,6 @@ public final class RegisterController implements Initializable {
     
     @FXML
     public void login(ActionEvent e) throws SQLException, IOException {
-    	RegisterController.registerCustomer = false;
     	Launch.launch.loginForm();
     }
     

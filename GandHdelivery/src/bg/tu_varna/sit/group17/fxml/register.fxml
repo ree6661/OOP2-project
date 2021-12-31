@@ -8,7 +8,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="309.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.group17.controllers.RegisterController">
    <children>
@@ -18,11 +17,11 @@
             <Image url="@../img/GandHlogo.png" />
          </image>
       </ImageView>
-      <Label id="title" layoutX="92.0" layoutY="129.0" text="РЕГИСТРАЦИЯ" textFill="WHITE" />
+      <Label id="title" layoutX="106.0" layoutY="129.0" text="РЕГИСТРАЦИЯ" textFill="WHITE" />
 
-      <Button id="register" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="29.0" layoutY="479.0" mnemonicParsing="false" onAction="#register" prefHeight="119.0" prefWidth="142.0" text="Регистрирай се" />
+      <Button id="register" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="29.0" layoutY="479.0" mnemonicParsing="false" onAction="#register" prefHeight="106.0" prefWidth="142.0" text="Регистрирай се" />
       <TextField fx:id="phone" layoutX="25.0" layoutY="244.0" prefHeight="38.0" prefWidth="243.0" promptText="телефон" />
-       <Button id="login" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="187.0" layoutY="481.0" mnemonicParsing="false" onAction="#login" prefHeight="81.0" prefWidth="82.0" text="Влез" textOverrun="CENTER_ELLIPSIS" />
+       <Button id="login" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="184.0" layoutY="479.0" mnemonicParsing="false" onAction="#login" prefHeight="81.0" prefWidth="82.0" text="Влез" textOverrun="CENTER_ELLIPSIS" />
       <TextField fx:id="name" layoutX="25.0" layoutY="197.0" prefHeight="38.0" prefWidth="243.0" promptText=" име" />
       <PasswordField fx:id="password" layoutX="23.0" layoutY="385.0" prefHeight="38.0" prefWidth="243.0" promptText="парола" />
       <ComboBox fx:id="cBox0" layoutX="25.0" layoutY="290.0" prefHeight="38.0" prefWidth="243.0" promptText="град" />

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+import bg.tu_varna.sit.group17.application.Property;
 import bg.tu_varna.sit.group17.database.property.Company;
 import bg.tu_varna.sit.group17.database.property.Office;
 
@@ -68,6 +69,25 @@ public class TableQuery {
 		
 		sql = "select * from " + table + 
 				" where " + valueColumnName + " = '" + value + "'";
+		ps = DB.prepareStatement(sql);
+		rs = ps.executeQuery();
+		if(!rs.next()) return null;
+		
+		return rs;
+	}
+	
+	public static <T> ResultSet getRecordFromTable(
+			String valueColumnName, T value, String table, String whereColumnName, T whereValue) throws SQLException {
+		
+		
+		Connection DB = Create.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "";
+		
+		sql = "select * from " + table + 
+				" where " + valueColumnName + " = '" + value + "' and " + whereColumnName + "='" + whereValue + "'";
 		ps = DB.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if(!rs.next()) return null;
@@ -216,5 +236,17 @@ public class TableQuery {
 		
 		if(rs == null) return null;
 		return rs.getString("status_name");
+	}
+	
+	public static void checkOrderUpdate(int id_customer) throws SQLException {
+		String sql = "select id_order, customer_delivery from orders where id_customer_recipient='" + id_customer + "' and id_status='" + Property.getStatus(0) + "' and customer_delivery <= CURRENT_DATE()";
+		ResultSet rs = TableQuery.execute(sql);
+		
+		if(rs == null) return;
+		do {
+			Update.changeOrderStatus(rs.getInt("id_order"), Property.getStatus(2));
+			
+		}while(rs.next());
+		
 	}
 }

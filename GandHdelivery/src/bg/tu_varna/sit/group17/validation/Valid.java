@@ -1,6 +1,8 @@
 package bg.tu_varna.sit.group17.validation;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 import bg.tu_varna.sit.group17.application.Launch;
@@ -10,7 +12,7 @@ public final class Valid {
 	
 	public static boolean username(String username) {
 		if(username == null || username.equals("")) return false;
-		
+		if(username.length() > 45) return false;
 		final String regex = "1234567890!@№%€§*()-–=+`~_#^&[]{};:\'\"$\\/,<.>|?";
         for(char ch : regex.toCharArray()) 
         	if(username.contains(Character.toString(ch))) 
@@ -29,6 +31,7 @@ public final class Valid {
 	}
 	
 	public static boolean password(String password) {
+		if(password == null) return false;
 		return password.length() > 4 && password.length() < 31;
 	}
 	
@@ -43,7 +46,7 @@ public final class Valid {
     	if(!Valid.password(password)) 
     		return "Паролата трябва да е между 5 и 30 символа";
     		
-    	if(!repeatPassword.equals(password)) 
+    	if(!password.equals(repeatPassword)) 
     		return "Паролите не съвпадат";
     	
     	if(TableQuery.phoneExists(phone)) 
@@ -52,7 +55,20 @@ public final class Valid {
 		return "";
 	}
 	
+	public static boolean date(String date) {
+		try {
+			LocalDate.parse(date);
+		}catch(DateTimeParseException e) {return false;}
+		return true;
+	}
+	
 	public static boolean order(String phoneSender, String phoneReceiver, String date1, String date2) {
+		
+		if(phoneSender == null || phoneReceiver == null || date1 == null || date2 == null) return false;
+		if(!Valid.date(date1) || !Valid.date(date2)) {
+			Launch.alert("Невалидни дати");
+			return false;
+		}
 		
 		if(phoneSender.equals("") || phoneReceiver.equals("") || date1.equals("") || date2.equals("")) {
 			Launch.alert("Всички полета трябва да са попълнени");

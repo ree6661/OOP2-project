@@ -12,7 +12,6 @@ public class Delete {
 	
 	public static void company(Company company) throws SQLException {
 		if(company == null) {
-			System.out.println("company is null");
 			return;
 		}
 		Connection conn = Create.getConnection();
@@ -32,7 +31,6 @@ public class Delete {
 	
 	public static void companyCategory(Company company) throws SQLException {
 		if(company == null) {
-			System.out.println("company is null");
 			return;
 		}
 		Connection conn = Create.getConnection();
@@ -59,7 +57,6 @@ public class Delete {
 	
 	public static void office(Office office) throws SQLException {
 		if(office == null) {
-			System.out.println("office is null");
 			return;
 		}
 		Connection conn = Create.getConnection();
@@ -75,12 +72,10 @@ public class Delete {
 		
 		st.execute();
 		st.close();
-		System.out.println("office delete");
 	}
 	
 	public static void courier(Courier courier) throws SQLException {
 		if(courier == null) {
-			System.out.println("courier is null");
 			return;
 		}
 		Connection conn = Create.getConnection();
