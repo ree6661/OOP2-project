@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import bg.tu_varna.sit.group17.database.TableQuery;
 import bg.tu_varna.sit.group17.database.users.Courier;
 
-public class Office {
+public final class Office {
 	private int id_office, id_company, id_city;
 	private String address;
 	public LinkedList<Courier> couriers;

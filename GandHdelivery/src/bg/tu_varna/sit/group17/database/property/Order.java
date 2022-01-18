@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import bg.tu_varna.sit.group17.database.queries.Query;
 
-public class Order implements Query {
+public final class Order implements Query {
 	private int id_order;
 	private String category, office_sender, office_recipient, customer_sender, customer_recipient, courier, status,
 			address;

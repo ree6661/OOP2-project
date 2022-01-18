@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Update {
+public final class Update {
+	private Update() {
+		//utility
+	}
 	
 	public static void office(int id_office, int id_city, String address) throws SQLException {
 		Connection conn = Create.getConnection();

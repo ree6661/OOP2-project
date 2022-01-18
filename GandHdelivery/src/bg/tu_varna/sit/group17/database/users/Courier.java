@@ -3,7 +3,7 @@ package bg.tu_varna.sit.group17.database.users;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Courier extends Consumer {
+public final class Courier extends Consumer {
 	
 	private int id_office;
 	

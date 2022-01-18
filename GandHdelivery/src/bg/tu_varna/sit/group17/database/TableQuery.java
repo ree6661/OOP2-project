@@ -11,7 +11,7 @@ import bg.tu_varna.sit.group17.application.Property;
 import bg.tu_varna.sit.group17.database.property.Company;
 import bg.tu_varna.sit.group17.database.property.Office;
 
-public class TableQuery {
+public final class TableQuery {
 	
 	private Connection DB;
 	private String table;

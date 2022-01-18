@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import bg.tu_varna.sit.group17.application.Launch;
-
 public final class Add {
 	
 	public static void company(String name) throws SQLException {
@@ -35,7 +33,7 @@ public final class Add {
 		sql = "SELECT id_company FROM companies ORDER BY id_company DESC LIMIT 1";
 		ResultSet rs = TableQuery.execute(sql);
 		if(rs == null) {
-			Launch.alert("Не се намира фирмата");
+			//Launch.alert("Не се намира фирмата");
 			ps.close();
 			return;
 		}
@@ -60,7 +58,7 @@ public final class Add {
 		Connection conn = Create.getConnection();
 			
 		final String sql = 
-				"insert into customers(customer, phone, "
+				"insert into customers(name, phone, "
 				+ "id_city, address, password)"
 		        + " values (?, ?, ?, ?, ?)";
 		

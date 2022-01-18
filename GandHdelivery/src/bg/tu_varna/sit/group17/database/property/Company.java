@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-public class Company {
+public final class Company {
 	private int id;
 	private String name;
 	public LinkedList<Office> offices;

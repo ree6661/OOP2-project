@@ -9,6 +9,9 @@ import bg.tu_varna.sit.group17.database.property.Company;
 import bg.tu_varna.sit.group17.database.property.Office;
 
 public class Delete {
+	private Delete() {
+		//utility
+	}
 	
 	public static void company(Company company) throws SQLException {
 		if(company == null) {

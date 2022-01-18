@@ -6,9 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import bg.tu_varna.sit.group17.application.Launch;
-import bg.tu_varna.sit.group17.application.Logger;
+import bg.tu_varna.sit.group17.application.FormName;
+import bg.tu_varna.sit.group17.application.Load;
+import bg.tu_varna.sit.group17.application.LoggerApp;
+import bg.tu_varna.sit.group17.application.MessageBox;
 import bg.tu_varna.sit.group17.application.Property;
+import bg.tu_varna.sit.group17.application.User;
 import bg.tu_varna.sit.group17.database.TableQuery;
 import bg.tu_varna.sit.group17.database.users.Admin;
 import bg.tu_varna.sit.group17.database.users.Courier;
@@ -19,14 +22,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 
-public final class LoginController {
+public final class LoginController implements InitializeData {
 	
+	private Load load;
 	private final String err = "Невалидни телефон и/или парола";
 	private final String[] users = 
 			{"customers", "couriers", "admins"};
 	private final String ginko = "https://medpedia.framar.bg/%D0%B0%D0%BB%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B4%D0%B8%D1%86%D0%B8%D0%BD%D0%B0/%D0%BA%D0%B0%D0%BA-%D0%B4%D0%B0-%D0%BF%D0%BE%D0%B4%D1%81%D0%B8%D0%BB%D0%B8%D0%BC-%D0%BF%D0%B0%D0%BC%D0%B5%D1%82%D1%82%D0%B0-%D1%81%D0%B8";
-	private final Logger logger = new Logger(LoginController.class.getName());
-	
+	private final LoggerApp logger = new LoggerApp(getClass().getName());
+	private final MessageBox message = new MessageBox(logger);
 	@FXML
 	private TextField phone, pass;
 	
@@ -38,6 +42,12 @@ public final class LoginController {
 
 	@FXML
 	private URL location;
+	
+
+	@Override
+	public void initData(Load load) {
+		this.load = load;
+	}
 	
 	@FXML
 	void initialize() {
@@ -62,11 +72,11 @@ public final class LoginController {
         	
         	if(record != null) {
     			RegisterController.courier = Courier.create(record);
-    			Launch.launch.registerForm();
+    			load.form(FormName.register, User.Guest);
     			return;
     		}
     	}
-		Launch.alert("Поискайте от куриер да ви регистрира");
+		message.alert("Поискайте от куриер да ви регистрира");
 	}
 	
 	@FXML
@@ -76,7 +86,7 @@ public final class LoginController {
     			password = this.pass.getText();
     	
     	if(!Valid.phoneNumber(phoneNumber) || !Valid.password(password)) {
-    		Launch.alert(err);
+    		message.alert(err);
     		return;
     	}
     	
@@ -93,7 +103,7 @@ public final class LoginController {
     	}
     	
     	if(recordTable == null) {
-    		Launch.alert(err);
+    		message.alert(err);
     		return;
     	}
     	
@@ -101,25 +111,25 @@ public final class LoginController {
 		case "customers":
 			HomeController.customer = Customer.create(record);
 			Property.username = HomeController.customer.getName();
-			Property.user = 1;
-			Launch.launch.homeFormCustomer();
+			Property.user = User.Customer;
+			load.form(FormName.home, User.Customer);
 			break;
 		case "couriers":
 			PratkaRegisterController.courier = Courier.create(record);
 			Property.username = PratkaRegisterController.courier.getName();
-			Property.user = 2;
-			Launch.launch.pratkaForm();
+			Property.user = User.Courier;
+			load.form(FormName.pratkaRegister, User.Courier);
 			break;
 		case "admins":
 			FirmaController.admin = Admin.create(record);
 			Property.username = FirmaController.admin.getName();
-			Property.user = 3;
-			Launch.launch.firmaForm();
+			Property.user = User.Admin;
+			load.form(FormName.firma, User.Admin);
 			break;
 		}
     }
 	@FXML
 	private void forgotPassword() {
-		Launch.launch.openLink(this.ginko);
+		load.openLink(this.ginko);
 	}
 }

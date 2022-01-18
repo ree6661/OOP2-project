@@ -3,7 +3,7 @@ package bg.tu_varna.sit.group17.database.users;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Admin extends Consumer {
+public final class Admin extends Consumer {
 	
 	public Admin() {
 		super();

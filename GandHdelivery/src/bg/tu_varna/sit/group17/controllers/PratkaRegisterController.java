@@ -9,9 +9,12 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
-import bg.tu_varna.sit.group17.application.Launch;
-import bg.tu_varna.sit.group17.application.Logger;
+import bg.tu_varna.sit.group17.application.FormName;
+import bg.tu_varna.sit.group17.application.Load;
+import bg.tu_varna.sit.group17.application.LoggerApp;
+import bg.tu_varna.sit.group17.application.MessageBox;
 import bg.tu_varna.sit.group17.application.Property;
+import bg.tu_varna.sit.group17.application.User;
 import bg.tu_varna.sit.group17.database.Add;
 import bg.tu_varna.sit.group17.database.TableQuery;
 import bg.tu_varna.sit.group17.database.Update;
@@ -29,14 +32,16 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class PratkaRegisterController {
+public class PratkaRegisterController implements InitializeData {
 	
 	public LinkedList<Company> companies;
 	public Company company;
 
 	public static Courier courier;
-    
-	private final Logger logger = new Logger(PratkaRegisterController.class.getName());
+    private User user;
+	private Load load;
+	private final LoggerApp logger = new LoggerApp(getClass().getName());
+	private final MessageBox message = new MessageBox(logger);
 	@FXML
 	private ComboBox<String> category, officeSender,
 						officeReceiver, companySender;
@@ -64,13 +69,20 @@ public class PratkaRegisterController {
     
     @FXML
     private void queries() throws SQLException, IOException {
-    	Launch.launch.homeFormCourier();
+    	load.form(FormName.home, user);
     }
-
+    
+	@Override
+	public void initData(Load load) {
+		this.load = load;
+		
+	}
+    
     @FXML
     void initialize() throws SQLException {
     	logger.info("In pratka register form");
     	logger.info("Logged courier: " + courier);
+    	user = User.Courier;
     	this.avatar.setImage(Property.getAvatar());
     	courierNotification();
     	this.userName.setText(Property.username);
@@ -85,7 +97,7 @@ public class PratkaRegisterController {
     	String sql = "select category from categories";
     	ResultSet rs = TableQuery.execute(sql);
     	if(rs == null) {
-    		Launch.alert("Не е избрана категория");
+    		message.alert("Не е избрана категория");
     		return;
     	}
     	this.category.valueProperty().addListener(categoryListener());
@@ -99,7 +111,7 @@ public class PratkaRegisterController {
 	}
     @FXML
 	private void logOut() throws SQLException, IOException {
-		Launch.launch.loginForm();
+    	load.form(FormName.login, user);
 	}
     
     @FXML
@@ -111,13 +123,13 @@ public class PratkaRegisterController {
     		String customers = "";
     		for(String s : Property.alertNotificationList) customers += s + " ";
     		
-    		Launch.alert("Отказани пратки от клиенти: " + customers);
+    		message.alert("Отказани пратки от клиенти: " + customers);
     		
     		for(int i : Property.ordersIdNotification)
     			Update.changeOrderStatus(i, Property.getStatus(4));
     		return;
     	}
-    	Launch.alert("Нямате известия");
+    	message.alert("Нямате известия");
     }
     
     private void courierNotification() throws SQLException {
@@ -150,7 +162,7 @@ public class PratkaRegisterController {
     			clientLocalDate = this.clientReceiveDate.getValue();
     	
     	if(receiveDate == null || clientLocalDate == null) {
-    		Launch.alert("Полетата за дати не може да са празни");
+    		message.alert("Полетата за дати не може да са празни");
     		return;
     	}
     	
@@ -159,7 +171,7 @@ public class PratkaRegisterController {
     			isPaid = this.isPaid.isSelected();
     	double price = 0;
     	if(this.sendPrice == null) {
-    		Launch.alert("Полето за цена не може да е празно");
+    		message.alert("Полето за цена не може да е празно");
     		return;
     	}
     	try {
@@ -168,21 +180,21 @@ public class PratkaRegisterController {
     	if(!Valid.order(phoneSender, phoneReceiver,
     			this.receiveDate.getValue().toString(), this.clientReceiveDate.getValue().toString())) 
     	{
-    		Launch.alert("Невалиден телефон на клиент");
+    		message.alert("Невалиден телефон на клиент");
     		return;
     	}
     	
     	if(!sendToAddress && officeSender.getSelectionModel().getSelectedItem().equals(officeReceiver.getSelectionModel().getSelectedItem())) {
-    		Launch.alert("Не може да се достави до същия офис");
+    		message.alert("Не може да се достави до същия офис");
     		return;
     	}
     	if(sendToAddress && address.equals("")) {
-    		Launch.alert("Полето адрес не може да е празно");
+    		message.alert("Полето адрес не може да е празно");
     		return;
     	}
     	
     	if(Date.valueOf(receiveDate).after(Date.valueOf(clientLocalDate))) {
-    		Launch.alert("Не може да се изпрати, преди дата на получаване");
+    		message.alert("Не може да се изпрати, преди дата на получаване");
     		return;
     	}
     	
@@ -204,7 +216,7 @@ public class PratkaRegisterController {
     			id_customer_recipient, id_courier, id_status,
     			fragile, isPaid, price, sendToAddress, address,
     			Date.valueOf(receiveDate), Date.valueOf(clientLocalDate));
-    	Launch.alert("Успешно добавена поръчка");
+    	message.alert("Успешно добавена поръчка");
     	logger.info("Successful added order");
     }
     
@@ -251,7 +263,7 @@ public class PratkaRegisterController {
 					String sql = "select price from price_list where id_company='" + company.getId() + "' and id_category='" + id_category + "'";
 					ResultSet rs = TableQuery.execute(sql);
 					if(rs == null) {
-						Launch.alert("Фирмата няма цени");
+						message.alert("Фирмата няма цени");
 						return;
 					}
 					

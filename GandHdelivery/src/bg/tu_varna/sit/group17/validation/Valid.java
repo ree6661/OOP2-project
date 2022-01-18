@@ -5,10 +5,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
-import bg.tu_varna.sit.group17.application.Launch;
 import bg.tu_varna.sit.group17.database.TableQuery;
 
 public final class Valid {
+	private Valid() {
+		//utility
+	}
 	
 	public static boolean username(String username) {
 		if(username == null || username.equals("")) return false;
@@ -66,21 +68,21 @@ public final class Valid {
 		
 		if(phoneSender == null || phoneReceiver == null || date1 == null || date2 == null) return false;
 		if(!Valid.date(date1) || !Valid.date(date2)) {
-			Launch.alert("Невалидни дати");
+			//Launch.alert("Невалидни дати");
 			return false;
 		}
 		
 		if(phoneSender.equals("") || phoneReceiver.equals("") || date1.equals("") || date2.equals("")) {
-			Launch.alert("Всички полета трябва да са попълнени");
+			//Launch.alert("Всички полета трябва да са попълнени");
 			return false;
 		}
 		if(phoneSender.equals(phoneReceiver)) {
-			Launch.alert("Телефоните не може да са еднакви");
+			//Launch.alert("Телефоните не може да са еднакви");
 			return false;
 		}
 		
 		if(!Valid.phoneNumber(phoneSender) || ! Valid.phoneNumber(phoneReceiver)) {
-			Launch.alert("Невалиден телефонен номер");
+			//Launch.alert("Невалиден телефонен номер");
 			return false;
 		}
 		return true;

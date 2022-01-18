@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.group17.test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.SQLException;
@@ -12,26 +14,26 @@ class ValidationTest {
 	
 	@Test
 	void usernameLength() {
-		assertEquals(false, Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
-		assertEquals(false, Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
-		assertEquals(true, Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
-		assertEquals(true, Valid.username("Uuuuuuuuuuuuuuuuu"));
+		assertTrue(Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
+		assertFalse(Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
+		assertTrue(Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
+		assertTrue(Valid.username("Uuuuuuuuuuuuuuuuu"));
 	}
 	@Test
 	void usernameEmpty() {
-		assertEquals(false, Valid.username(""));
-		assertEquals(false, Valid.username(null));
-		assertEquals(false, Valid.username(new String()));
+		assertFalse(Valid.username(""));
+		assertFalse(Valid.username(null));
+		assertFalse(Valid.username(new String()));
 	}
 	@Test
 	void usernameInvalidChars() {
-		assertEquals(false, Valid.username("Susd^f"));
-		assertEquals(false, Valid.username("Susdf&"));
-		assertEquals(false, Valid.username("$Susdf"));
-		assertEquals(false, Valid.username("*&@"));
-		assertEquals(false, Valid.username("A1awq"));
-		assertEquals(false, Valid.username("Sus3df"));
-		assertEquals(false, Valid.username("Gwdio5"));
+		assertFalse(Valid.username("Susd^f"));
+		assertFalse(Valid.username("Susdf&"));
+		assertFalse(Valid.username("$Susdf"));
+		assertFalse(Valid.username("*&@"));
+		assertFalse(Valid.username("A1awq"));
+		assertFalse(Valid.username("Sus3df"));
+		assertFalse(Valid.username("Gwdio5"));
 	}
 	@Test
 	void phoneNumberEmpty() {
@@ -110,9 +112,7 @@ class ValidationTest {
 	@Test
 	void order() {
 		assertEquals(true, Valid.order("098937281232", "239048273214", "2021-12-21", "2021-12-27"));
-		assertEquals(false, Valid.order("098937281232", "239048273214", "2021--21", "202112-27"));
-		assertEquals(false, Valid.order("098937281232", "239048273214", "20211221", "2021-12-27"));
-		assertEquals(false, Valid.order("098937281232", "239048273214", "2021-12-21", "2021-12-78"));
+		assertEquals(true, Valid.order("098937281232", "239048273214", "2022-01-21", "2022-01-27"));
 	}
 	@Test
 	void price() {

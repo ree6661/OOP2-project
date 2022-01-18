@@ -3,7 +3,7 @@ package bg.tu_varna.sit.group17.database.users;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Customer extends Consumer {
+public final class Customer extends Consumer {
 	
 	private int id_city;
 	private String address, city_name = "";

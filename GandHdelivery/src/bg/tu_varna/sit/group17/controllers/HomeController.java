@@ -11,9 +11,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import bg.tu_varna.sit.group17.application.Launch;
-import bg.tu_varna.sit.group17.application.Logger;
+import bg.tu_varna.sit.group17.application.FormName;
+import bg.tu_varna.sit.group17.application.Load;
+import bg.tu_varna.sit.group17.application.LoggerApp;
+import bg.tu_varna.sit.group17.application.MessageBox;
 import bg.tu_varna.sit.group17.application.Property;
+import bg.tu_varna.sit.group17.application.User;
 import bg.tu_varna.sit.group17.database.TableQuery;
 import bg.tu_varna.sit.group17.database.Update;
 import bg.tu_varna.sit.group17.database.property.Order;
@@ -37,19 +40,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
-public final class HomeController {
+public final class HomeController implements InitializeData {
 	
-	private String[] quеryNames = {
-		"Пратки", "Статус на пратка", "Статистика на фирма",
-		"Куриери", "Клиенти"
-	};
-	
+	private User user;
+	private Load load;
 	
 	public static Customer customer;
-	private final Logger logger = new Logger(HomeController.class.getName());
+	
+	private final LoggerApp logger = new LoggerApp(getClass().getName());
+	private final MessageBox message = new MessageBox(logger);
 	
 	private LinkedList<Query2> orders = new LinkedList<>();
 	
+	private String[] quеryNames = {
+			"Пратки", "Статус на пратка", "Статистика на фирма",
+			"Куриери", "Клиенти"
+		};
 	
 	@FXML
 	private MenuButton userName;
@@ -77,44 +83,55 @@ public final class HomeController {
     @FXML
     private URL location;
     
+	@Override
+	public void initData(Load load) {
+		this.load = load;
+	}
+    
 	@FXML
-    void initialize() throws SQLException {
+    void initialize() {
 		
-		logger.info("In home form");
-		Property.alertNotificationList = new LinkedList<>();
-		this.avatar.setImage(Property.getAvatar());
-		
-		this.userName.setText(Property.username);
-		
-		
-		if(Property.user == 1) {
-			logger.info("Logged customer: " + customer);
-			logger.info("Checking for updating order status");
-			TableQuery.checkOrderUpdate(HomeController.customer.getId());
+		try {
+			logger.info("In home form");
+			Property.alertNotificationList = new LinkedList<>();
+			this.avatar.setImage(Property.getAvatar());
 			
-			this.phone.setText(HomeController.customer.getPhone());
-			this.phone.setDisable(true);
+			this.userName.setText(Property.username);
 			
-			this.quеryNames = new String[] {"Статус на пратка"};
-			this.functions.setDisable(true);
+			
+			if(Property.user == User.Customer) {
+				this.user = User.Customer;
+				logger.info("Logged customer: " + customer);
+				logger.info("Checking for updating order status");
+				TableQuery.checkOrderUpdate(HomeController.customer.getId());
+				
+				this.phone.setText(HomeController.customer.getPhone());
+				this.phone.setDisable(true);
+				
+				this.quеryNames = new String[] {"Статус на пратка"};
+				this.functions.setDisable(true);
+			}
+			else if(Property.user == User.Courier){
+				this.user = User.Courier;
+				cancelOrderButton.setText("Статус: Приета пратка");
+			} else if(Property.user == User.Admin) {
+				this.user = User.Admin;
+				this.phone.setDisable(true);
+				this.IdOrder.setDisable(true);
+				this.cancelOrderButton.setDisable(true);
+			} else {
+				Property.initAll();
+				notificationCheck();			
+			}
+			
+	    	functions.getItems().addAll(Arrays.asList(quеryNames));
+	    	functions.getSelectionModel().selectFirst();;
+	    	
+			this.table.setEditable(true);
+			this.table.setPlaceholder(new Label("Няма данни"));
+		} catch(SQLException e) {
+			logger.error(e.getMessage());
 		}
-		else if(Property.user == 2){
-			cancelOrderButton.setText("Статус: Приета пратка");
-		} else if(Property.user == 3) {
-			this.phone.setDisable(true);
-			this.IdOrder.setDisable(true);
-			this.cancelOrderButton.setDisable(true);
-		}
-		if(Property.user !=3 ) {
-			Property.initAll();
-			notificationCheck();			
-		}
-		
-    	functions.getItems().addAll(Arrays.asList(quеryNames));
-    	functions.getSelectionModel().selectFirst();;
-    	
-		this.table.setEditable(true);
-		this.table.setPlaceholder(new Label("Няма данни"));
     }
     
 	@FXML
@@ -123,40 +140,40 @@ public final class HomeController {
 	}
 	@FXML
 	private void logOut() throws SQLException, IOException {
-		Launch.launch.loginForm();
+		load.form(FormName.login, User.Guest);
 	}	
     
     @FXML
     private void notificationBellClick() throws IllegalArgumentException, SQLException {
     	if(Property.delivered) {
-    		if(Property.user == 1) {
+    		if(Property.user == User.Customer) {
 	    		
 	    		this.notificationBell.setStyle(Property.izv);
 	    		Property.delivered = false;
 	    		String offices = "";
 	    		for(String s : Property.alertNotificationList) offices += s + " ";
 	    		
-	    		Launch.alert("Имате пратка в офис " + offices);
+	    		message.alert("Имате пратка в офис " + offices);
 	    		return;
-    		} if(Property.user == 2) {
+    		} if(Property.user == User.Courier) {
     			this.notificationBell.setStyle(Property.izv);
         		Property.delivered = false;
         		String customers = "";
         		for(String s : Property.alertNotificationList) customers += s + " ";
         		
-        		Launch.alert("Отказани пратки от клиенти: " + customers);
+        		message.alert("Отказани пратки от клиенти: " + customers);
         		
         		for(int i : Property.ordersIdNotification)
         			Update.changeOrderStatus(i, Property.getStatus(4));
         		return;
     		}
     	}
-    	Launch.alert("Нямате известия");
+    	message.alert("Нямате известия");
     }
     
     private void notificationCheck() throws SQLException {
     	
-    	if(Property.user == 2) {
+    	if(Property.user == User.Courier) {
     		courierNotification();
     		return;
     	}
@@ -197,12 +214,12 @@ public final class HomeController {
 	
 	@FXML
 	private void registerPratka() throws SQLException, IOException {
-		Launch.launch.pratkaForm();
+		load.form(FormName.pratkaRegister, user);
 	}
 	
 	@FXML
 	private void firma() throws SQLException, IOException {
-		Launch.launch.firmaForm();
+		load.form(FormName.firma, user);
 	}
 	
 	@FXML
@@ -210,7 +227,7 @@ public final class HomeController {
 		
 		logger.info("Clicked cancel order");
 		
-		if(Property.user != 1) {
+		if(Property.user != User.Customer) {
 			
 			int id_order = 0;
 			
@@ -218,53 +235,53 @@ public final class HomeController {
 				id_order = Integer.parseInt(this.IdOrder.getText());
 			
 			}catch(NullPointerException e) {
-				Launch.alert("Невалидно ID");
+				message.alert("Невалидно ID");
 				return;
 			}
 			if(id_order == 0) {
-				Launch.alert("Невалидно ID");
+				message.alert("Невалидно ID");
 				return;
 			}
 			
 			String phone = this.phone.getText();
 			TableQuery customerQuery = new TableQuery("customers");
 			if(!Valid.phoneNumber(phone) || !customerQuery.contains("phone", phone)) {
-				Launch.alert("Невалиден телефон на клиент");
+				message.alert("Невалиден телефон на клиент");
 				return;
 			}
 			int id_customer = TableQuery.getCustomerId(phone);
 			String sql = "select * from orders where id_customer_recipient='" + id_customer + "'";
 			ResultSet rs = TableQuery.execute(sql);
 			if(rs == null) {
-				Launch.alert("Клиента няма поръчки");
+				message.alert("Клиента няма поръчки");
 				return;
 			}
 			int id_status = rs.getInt("id_status");
 			if(id_status == Property.getStatus(1)) {
-				Launch.alert("Пратката вече е отказана");
+				message.alert("Пратката вече е отказана");
 				return;
 			}
 			if(id_status == Property.getStatus(0)) {
-				Launch.alert("Пратката пратката още не е получена");
+				message.alert("Пратката пратката още не е получена");
 				return;
 			}
 			
 			sql = "select * from orders where id_order='" + id_order + "' and id_customer_recipient='" + id_customer + "'";
 			rs = TableQuery.execute(sql);
 			if(rs == null) {
-				Launch.alert("Клиента няма такава пратка с това ID");
+				message.alert("Клиента няма такава пратка с това ID");
 				return;
 			}
 			
 			Update.changeOrderStatus(id_order, Property.getStatus(3));
-			Launch.alert("Променен статус на пратката: взета от куриер");
+			message.alert("Променен статус на пратката: взета от куриер");
 			logger.info("Order accepted from courier");
 			filter();
 			return;
 		}
 		
 		if(this.orders.size() == 0) {
-			Launch.alert("Няма пратки");
+			message.alert("Няма пратки");
 			return;
 		}
 		int id_order = 0;
@@ -273,32 +290,32 @@ public final class HomeController {
 			id_order = Integer.parseInt(this.IdOrder.getText());
 		
 		}catch(NullPointerException e) {
-			Launch.alert("Невалидно ID");
+			message.alert("Невалидно ID");
 			return;
 		}
 		if(id_order == 0) {
-			Launch.alert("Невалидно ID");
+			message.alert("Невалидно ID");
 			return;
 		}
 		String sql = "select id_status from orders where id_order='" + id_order + "' and id_customer_recipient='" + customer.getId() + "'";
 		ResultSet rs = TableQuery.execute(sql);
 		
 		if(rs == null) {
-			Launch.alert("Невалидно ID");
+			message.alert("Невалидно ID");
 			return;
 		}
 		int id_status = rs.getInt("id_status");
 		if(id_status == Property.getStatus(1)) {
-			Launch.alert("Пратката вече е отказана");
+			message.alert("Пратката вече е отказана");
 			return;
 		}
 		if(id_status == Property.getStatus(2)) {
-			Launch.alert("Пратката не може да бъде отказана, вече е получена");
+			message.alert("Пратката не може да бъде отказана, вече е получена");
 			return;
 		}
 		
 		Update.changeOrderStatus(id_order, Property.getStatus(1));
-		Launch.alert("Пратката е отказана");
+		message.alert("Пратката е отказана");
 		logger.info("Order cancelled");
 		filter();
 	}
@@ -307,7 +324,7 @@ public final class HomeController {
     private void filter() throws SQLException {
     	logger.info("Clicked filter");
     	this.table.getColumns().clear();
-    	if(Property.user == 1) {
+    	if(Property.user == User.Customer) {
     		query2();
     		return;
     	}
@@ -327,11 +344,11 @@ public final class HomeController {
 		LocalDate from = this.dateFrom.getValue(),
     			to = this.dateTo.getValue();
     	if(from == null || to == null) {
-    		Launch.alert("Полетата за дати не може да са празни");
+    		message.alert("Полетата за дати не може да са празни");
     		return;
     	}
     	if(Date.valueOf(from).after(Date.valueOf(to))) {
-    		Launch.alert("Началната дата не може да е преди крайната дата");
+    		message.alert("Началната дата не може да е преди крайната дата");
     		return;
     	}
 		
@@ -413,18 +430,18 @@ public final class HomeController {
 		
 		String phone = this.phone.getText();
 		if(!Valid.phoneNumber(phone)) {
-			Launch.alert("Въведете правилен телефонен номер на клиент", "Телефона трябва да съдържа 12 цифри");
+			message.alert("Въведете правилен телефонен номер на клиент", "Телефона трябва да съдържа 12 цифри");
 			return;
 		}
 		
 		LocalDate from = this.dateFrom.getValue(),
     			to = this.dateTo.getValue();
     	if(from == null || to == null) {
-    		Launch.alert("Полетата за дати не може да са празни");
+    		message.alert("Полетата за дати не може да са празни");
     		return;
     	}
     	if(Date.valueOf(from).after(Date.valueOf(to))) {
-    		Launch.alert("Началната дата не може да е преди крайната дата");
+    		message.alert("Началната дата не може да е преди крайната дата");
     		return;
     	}
 		
@@ -442,16 +459,16 @@ public final class HomeController {
     	String sql = "select id_customer, name, phone from customers where phone='" + phone + "'";
     	ResultSet customerSet = TableQuery.execute(sql);
     	if(customerSet == null) {
-    		Launch.alert("Няма клиенти");
+    		message.alert("Няма клиенти");
     		return;
     	}
     	
     	do {
     		int customerId = TableQuery.getCustomerId(this.phone.getText());
-    		sql = "select id_order, id_status, acceptance_by_sender, customer_delivery from orders where " + /*"id_customer_sender='" + customerId + "' or " + */"id_customer_recipient='" + customerId + "'";
+    		sql = "select id_order, id_status, acceptance_by_sender, customer_delivery from orders where " + "id_customer_recipient='" + customerId + "'";
     		ResultSet orderSet = TableQuery.execute(sql);
     		if(orderSet == null) {
-    			Launch.alert("Клиента с този номер няма поръчки");
+    			message.alert("Клиента с този номер няма поръчки");
     			return;
     		}
     		do {
@@ -530,7 +547,7 @@ public final class HomeController {
 		String sql = "select id_courier, name, id_office from couriers";
 		ResultSet rs = TableQuery.execute(sql);
 		if(rs == null) {
-			Launch.alert("Няма куриери");
+			message.alert("Няма куриери");
 			return;
 		}
 		
@@ -569,7 +586,7 @@ public final class HomeController {
 		ResultSet rs = TableQuery.execute(sql);
 		
 		if(rs == null) {
-			Launch.alert("Няма клиенти");
+			message.alert("Няма клиенти");
 			return;
 		}
 		

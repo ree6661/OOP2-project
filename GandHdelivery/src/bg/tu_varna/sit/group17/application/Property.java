@@ -12,14 +12,17 @@ import bg.tu_varna.sit.group17.database.TableQuery;
 import javafx.scene.image.Image;
 
 public final class Property {
+	private Property() {
+		//utility
+	}
 	public static HashMap<String, Integer> citiesMap;
 	public static HashMap<String, Integer> companiesMap;
 	private static final int[] statusesId = {1, 2, 3, 4, 5};
 	//1 неполучен 2 отказана 3 получена 4 взета 5 отказана за постоянно
 	public static String username = "";
-	public static byte user = 0;//1 customer 2 courier 3 admin
+	public static User user = User.Guest;//1 customer 2 courier 3 admin
 	private static byte avatarIndex = 0;
-	public static Image[] avatars = {
+	public static final Image[] avatars = {
 			new Image(Property.class.getResourceAsStream("../img/defalut avatar.png")),
 			new Image(Property.class.getResourceAsStream("../img/ang.png")),
 			new Image(Property.class.getResourceAsStream("../img/avatar.png"))
