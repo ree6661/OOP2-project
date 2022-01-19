@@ -50,7 +50,7 @@ Button:hover{
 	-fx-background-color: black;
 }
 #userName, #userName .context-menu{
-	-fx-border: none;
+	/*-fx-border: none;*/
 	-fx-text-fill: white;
 	-fx-background-color: black;
 }
@@ -76,7 +76,7 @@ Button:hover{
 }
 .button,.textField,.comboBox
 {
-	-fx-spacing: 100;
+	/*-fx-spacing: 100;*/
 }
 
 
@@ -97,7 +97,7 @@ TextField,PasswordField,ComboBox,.date-picker{
 	-fx-prompt-text-fill: #B0B079;
 }
 .check-box{
-	-fx-prompt-text-fill: #B0B079;
+	/*-fx-prompt-text-fill: #B0B079;*/
 	-fx-focus-color: white;
 }
 ComboBox  .cell{-fx-text-fill: #B0B079;}

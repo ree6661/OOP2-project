@@ -9,17 +9,19 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+import bg.tu_varna.sit.group17.application.Avatar;
 import bg.tu_varna.sit.group17.application.FormName;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.application.MessageBox;
+import bg.tu_varna.sit.group17.application.Notification;
 import bg.tu_varna.sit.group17.application.Property;
-import bg.tu_varna.sit.group17.application.User;
 import bg.tu_varna.sit.group17.database.Add;
 import bg.tu_varna.sit.group17.database.TableQuery;
 import bg.tu_varna.sit.group17.database.Update;
 import bg.tu_varna.sit.group17.database.property.Company;
-import bg.tu_varna.sit.group17.database.users.Courier;
+import bg.tu_varna.sit.group17.database.users.Consumer;
+import bg.tu_varna.sit.group17.database.users.User;
 import bg.tu_varna.sit.group17.validation.Valid;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -32,13 +34,11 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class PratkaRegisterController implements InitializeData {
+public class PratkaRegisterController extends ControllerParent {
 	
 	public LinkedList<Company> companies;
 	public Company company;
 
-	public static Courier courier;
-    private User user;
 	private Load load;
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
@@ -69,23 +69,22 @@ public class PratkaRegisterController implements InitializeData {
     
     @FXML
     private void queries() throws SQLException, IOException {
-    	load.form(FormName.home, user);
+    	load.form(FormName.home, consumer);
     }
     
 	@Override
-	public void initData(Load load) {
+	public void initData(Load load, Consumer consumer) {
 		this.load = load;
-		
+		this.consumer = consumer;
 	}
     
     @FXML
     void initialize() throws SQLException {
     	logger.info("In pratka register form");
-    	logger.info("Logged courier: " + courier);
-    	user = User.Courier;
-    	this.avatar.setImage(Property.getAvatar());
+    	logger.info("Logged courier: " + consumer);
+    	this.avatar.setImage(Avatar.get());
     	courierNotification();
-    	this.userName.setText(Property.username);
+    	this.userName.setText(consumer.getName());
     	companies = TableQuery.allCompanies();
     	if(companySender.getItems().size() == 0) {
     		for(Company c : companies) 
@@ -107,48 +106,48 @@ public class PratkaRegisterController implements InitializeData {
     
     @FXML
 	private void changeAvatar() {
-		this.avatar.setImage(Property.nextAvatar());
+		this.avatar.setImage(Avatar.next());
 	}
     @FXML
 	private void logOut() throws SQLException, IOException {
-    	load.form(FormName.login, user);
+    	load.form(FormName.login, consumer);
 	}
     
     @FXML
     private void notificationBellClick() throws SQLException {
-    	if(Property.delivered) {
+    	if(Notification.delivered) {
     		
-    		this.notificationBell.setStyle(Property.izv);
-    		Property.delivered = false;
+    		this.notificationBell.setStyle(Notification.izv);
+    		Notification.delivered = false;
     		String customers = "";
-    		for(String s : Property.alertNotificationList) customers += s + " ";
+    		for(String s : Notification.alertNotificationList) customers += s + " ";
     		
     		message.alert("Отказани пратки от клиенти: " + customers);
     		
-    		for(int i : Property.ordersIdNotification)
-    			Update.changeOrderStatus(i, Property.getStatus(4));
+    		for(int i : Notification.ordersIdNotification)
+    			Update.changeOrderStatus(i, Notification.getStatus(4));
     		return;
     	}
     	message.alert("Нямате известия");
     }
     
     private void courierNotification() throws SQLException {
-    	String sql = "select id_order, id_customer_recipient from orders where id_courier='" + courier.getId() + "' and id_status='" + Property.getStatus(1) + "'";
+    	String sql = "select id_order, id_customer_recipient from orders where id_courier='" + consumer.getId() + "' and id_status='" + Notification.getStatus(1) + "'";
     	ResultSet rs = TableQuery.execute(sql);
     	
     	if(rs == null) return;
-    	Property.delivered = true;
+    	Notification.delivered = true;
     	
     	do {
-    		Property.alertNotificationList.add(TableQuery.getCustomer(rs.getInt("id_customer_recipient")));
-    		Property.ordersIdNotification.add(rs.getInt("id_order"));
+    		Notification.alertNotificationList.add(TableQuery.getCustomer(rs.getInt("id_customer_recipient")));
+    		Notification.ordersIdNotification.add(rs.getInt("id_order"));
     	}while(rs.next());
     	
     	notification();
     }
     
     private void notification() {
-    	this.notificationBell.setStyle(Property.izv2);
+    	this.notificationBell.setStyle(Notification.izv2);
     }
     
     @FXML
@@ -203,7 +202,7 @@ public class PratkaRegisterController implements InitializeData {
     		id_office_recipient = TableQuery.getOfficeId(officeReceiver.getSelectionModel().getSelectedItem()),
     		id_customer_sender = TableQuery.getCustomerId(phoneSender),
     		id_customer_recipient = TableQuery.getCustomerId(phoneReceiver),
-    		id_courier = PratkaRegisterController.courier.getId();
+    		id_courier = consumer.getId();
     	
     	final int id_status = 1;
     	

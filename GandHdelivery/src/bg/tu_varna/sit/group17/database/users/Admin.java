@@ -10,7 +10,7 @@ public final class Admin extends Consumer {
 	}
 	
 	public Admin(int id, String name, String phone, String password) {
-		super(id, name, phone, password);
+		super(id, name, phone, password, User.Admin);
 	}
 	
 	public static Admin create(ResultSet rs) throws SQLException {

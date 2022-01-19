@@ -3,6 +3,8 @@ package bg.tu_varna.sit.group17.application;
 import java.io.IOException;
 
 import bg.tu_varna.sit.group17.controllers.InitializeData;
+import bg.tu_varna.sit.group17.database.users.Consumer;
+import bg.tu_varna.sit.group17.database.users.User;
 import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,101 +13,92 @@ import javafx.stage.Stage;
 
 public final class Load {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
-	private Stage stage;
+	
 	private HostServices hostServices;
 	private FXMLLoader loader;
-
+	
+	private Stage stage;
+	private Parent parent;
+	private Scene scene;
+	
 	public Load(Stage stage, HostServices hostServices) {
 		this.stage = stage;
 		this.hostServices = hostServices;
 
 	}
+	
+	public void link(String link) {
+		hostServices.showDocument(link);
+	}
 
-	public void form(FormName form, User user) {
+	public void form(FormName form, Consumer consumer) {
 		this.stage.hide();
 		loader = new FXMLLoader(getClass().getResource("../fxml/" + form.toString() + ".fxml"));
-		Scene scene = null;
 		try {
-			scene = switch (form) {
+			this.parent = loader.load();
+			this.scene = new Scene(this.parent);
+			
+			switch (form) {
 			case login -> loginScene();
 			case register -> registerScene();
 			case firma -> firmaScene();
-			case home -> homeScene(user);
+			case home -> homeScene(consumer.getUser());
 			case pratkaRegister -> pratkaScene();
 			default -> throw new IllegalArgumentException("Unexpected value: " + form);
 			};
 		} catch(IOException | IllegalArgumentException e) {
 			logger.error("Form " + form.toString() + "not found " + e.getMessage());
+			this.stage.show();
+			return;
 		}
 		
 		InitializeData controller = loader.getController();
-		controller.initData(this);
+		controller.initData(this, consumer);
 		
 		this.stage.setScene(scene);
 		this.stage.show();
 	}
-
-	private Scene registerScene() throws IOException {
-		Parent register = loader.load();
-		Scene registerScene = new Scene(register);
-		registerScene.getStylesheets().add(getClass().getResource("../css/login-register.css").toExternalForm());
-
-		return registerScene;
+	
+	private void addStyleSheets(String styleSheets) {
+		scene.getStylesheets().add(Load.class.getResource(styleSheets).toExternalForm());
 	}
 
-	public Scene loginScene() throws IOException {
-		Parent login = loader.load();
-		Scene loginScene = new Scene(login);
-		loginScene.getStylesheets().add(getClass().getResource("../css/login-register.css").toExternalForm());
-
-		return loginScene;
+	private void registerScene() {
+		addStyleSheets("../css/login-register.css");
 	}
 
-	public Scene homeScene(User user) throws IOException, IllegalArgumentException {
+	private void loginScene() {
+		addStyleSheets("../css/login-register.css");
+	}
+	
+	
+	private void homeScene(User user) throws IllegalArgumentException {
 
-		Parent home = loader.load();
-		home.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
+		addStyleSheets("../css/home.css");
 
 		switch (user) {
 		case Admin:
-			home.getStylesheets().add(getClass().getResource("../css/hide-pratka.css").toExternalForm());
+			addStyleSheets("../css/hide-pratka.css");
 			break;
 		case Courier:
-			home.getStylesheets().add(getClass().getResource("../css/hide-firma.css").toExternalForm());
+			addStyleSheets("../css/hide-firma.css");
 			break;
 		case Customer:
-			home.getStylesheets().add(getClass().getResource("../css/hide-pratka.css").toExternalForm());
-			home.getStylesheets().add(getClass().getResource("../css/hide-firma.css").toExternalForm());
+			addStyleSheets("../css/hide-pratka.css");
+			addStyleSheets("../css/hide-firma.css");
 			break;
-		case Guest:
 		default:
 			throw new IllegalArgumentException("User not found and form home can't be opened");
 		}
-
-		Scene homeScene = new Scene(home);
-
-		return homeScene;
 	}
 
-	public Scene pratkaScene() throws IOException {
-		Parent pratka = loader.load();
-		Scene pratkaScene = new Scene(pratka);
-		pratkaScene.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
-		pratkaScene.getStylesheets().add(getClass().getResource("../css/pratkaRegister.css").toExternalForm());
-
-		return pratkaScene;
+	private void pratkaScene() {
+		addStyleSheets("../css/home.css");
+		addStyleSheets("../css/pratkaRegister.css");
 	}
 
-	public Scene firmaScene() throws IOException {
-		Parent firma = loader.load();
-		Scene firmaScene = new Scene(firma);
-		firmaScene.getStylesheets().add(getClass().getResource("../css/home.css").toExternalForm());
-		firmaScene.getStylesheets().add(getClass().getResource("../css/hide-pratka.css").toExternalForm());
-
-		return firmaScene;
-	}
-
-	public void openLink(String link) {
-		hostServices.showDocument(link);
+	private void firmaScene() {
+		addStyleSheets("../css/home.css");
+		addStyleSheets("../css/hide-pratka.css");
 	}
 }

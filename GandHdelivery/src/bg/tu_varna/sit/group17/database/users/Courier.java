@@ -13,7 +13,7 @@ public final class Courier extends Consumer {
 	}
 	
 	public Courier(int id, String name, String phone, String password, int id_office) {
-		super(id, name, phone, password);
+		super(id, name, phone, password, User.Courier);
 		this.setId_office(id_office);
 	}
 	

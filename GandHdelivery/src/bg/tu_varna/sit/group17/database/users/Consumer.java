@@ -11,19 +11,22 @@ public class Consumer implements Query {
 	protected String name;
 	protected String phone;
 	protected String password;
-	
+	protected User user;
+
 	public Consumer() {
 		this.id = 0;
 		this.name = "";
 		this.phone = "";
 		this.password = "";
+		this.user = User.Guest;
 	}
 	
-	public Consumer(int id, String name, String phone, String password) {
+	public Consumer(int id, String name, String phone, String password, User user) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.password = password;
+		this.user = user;
 	}
 	
 	public String toString() {
@@ -39,7 +42,7 @@ public class Consumer implements Query {
 		phone = rs.getString(3);
 		password = rs.getString(4);		
 		
-		return new Consumer(id, name, phone, password);
+		return new Consumer(id, name, phone, password, User.Guest);
 	}
 	
 	public int getId() {
@@ -72,5 +75,13 @@ public class Consumer implements Query {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

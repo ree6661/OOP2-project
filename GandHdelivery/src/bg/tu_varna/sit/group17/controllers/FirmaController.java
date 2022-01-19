@@ -7,20 +7,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import bg.tu_varna.sit.group17.application.Avatar;
 import bg.tu_varna.sit.group17.application.FormName;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.application.MessageBox;
 import bg.tu_varna.sit.group17.application.Property;
-import bg.tu_varna.sit.group17.application.User;
 import bg.tu_varna.sit.group17.database.Add;
+import bg.tu_varna.sit.group17.database.Delete;
 import bg.tu_varna.sit.group17.database.TableQuery;
 import bg.tu_varna.sit.group17.database.Update;
 import bg.tu_varna.sit.group17.database.property.Company;
 import bg.tu_varna.sit.group17.database.property.Office;
-import bg.tu_varna.sit.group17.database.users.Admin;
+import bg.tu_varna.sit.group17.database.users.Consumer;
 import bg.tu_varna.sit.group17.database.users.Courier;
-import bg.tu_varna.sit.group17.database.users.Delete;
+import bg.tu_varna.sit.group17.database.users.User;
 import bg.tu_varna.sit.group17.validation.Valid;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,15 +31,12 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class FirmaController implements InitializeData {
+public class FirmaController extends ControllerParent {
 	
 	public Company company;
 	public Office office;
 	public Courier courier;
 	
-	public static Admin admin;
-	
-	private User user;
 	private Load load;
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
@@ -60,18 +58,19 @@ public class FirmaController implements InitializeData {
     private URL location;
     
     @Override
-	public void initData(Load load) {
+	public void initData(Load load, Consumer admin) {
     	this.load = load;
+    	this.consumer = admin;
 	}
     
     @FXML
     void initialize() throws SQLException {
     	logger.info("In firma form");
-    	logger.info("Logged admin: " + admin);
-    	user = User.Admin;
-    	this.userName.setText(Property.username);
+    	logger.info("Logged admin: " + consumer);
+    	//user = User.Admin;
+    	this.userName.setText(consumer.getName());
     	Property.initAll();
-    	this.avatar.setImage(Property.getAvatar());
+    	this.avatar.setImage(Avatar.get());
     	if(companies.getItems().size() == 0) {
     		companies.getItems().addAll(Property.companiesMap.keySet());
     		companies.valueProperty().addListener(firmaListener());    		
@@ -85,20 +84,20 @@ public class FirmaController implements InitializeData {
 	}
     @FXML
     void queries() throws SQLException, IOException {
-    	load.form(FormName.home, user);
+    	load.form(FormName.home, consumer);
     }
     @FXML
     void registerOrder() throws SQLException, IOException {
-    	load.form(FormName.pratkaRegister, user);
+    	load.form(FormName.pratkaRegister, consumer);
     }
     
     @FXML
 	private void changeAvatar() {
-		this.avatar.setImage(Property.nextAvatar());
+		this.avatar.setImage(Avatar.next());
 	}
     @FXML
 	private void logOut() throws SQLException, IOException {
-    	load.form(FormName.login, user);
+    	load.form(FormName.login, consumer);
 	}
     
     @FXML

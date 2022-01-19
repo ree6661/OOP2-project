@@ -13,8 +13,8 @@ public final class Valid {
 	}
 	
 	public static boolean username(String username) {
-		if(username == null || username.equals("")) return false;
-		if(username.length() > 45) return false;
+		if(username == null || username.equals("") || username.length() > 45) return false;
+		
 		final String regex = "1234567890!@№%€§*()-–=+`~_#^&[]{};:\'\"$\\/,<.>|?";
         for(char ch : regex.toCharArray()) 
         	if(username.contains(Character.toString(ch))) 
@@ -22,9 +22,8 @@ public final class Valid {
         return true;
 	}
 	
-	public static boolean phoneNumber(String phone) {
-		if(phone == null || phone.isBlank() || phone.length() != 12) 
-			return false;
+	public static boolean phoneNumber(String phone) throws IllegalArgumentException {
+		if(phone == null || phone.isBlank() || phone.length() != 12) return false;
 		
 		final String regex = "[0-9]+";
 		final Pattern p = Pattern.compile(regex);

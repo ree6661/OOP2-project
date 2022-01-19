@@ -11,12 +11,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import bg.tu_varna.sit.group17.application.Avatar;
 import bg.tu_varna.sit.group17.application.FormName;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.application.MessageBox;
+import bg.tu_varna.sit.group17.application.Notification;
 import bg.tu_varna.sit.group17.application.Property;
-import bg.tu_varna.sit.group17.application.User;
 import bg.tu_varna.sit.group17.database.TableQuery;
 import bg.tu_varna.sit.group17.database.Update;
 import bg.tu_varna.sit.group17.database.property.Order;
@@ -24,7 +25,9 @@ import bg.tu_varna.sit.group17.database.queries.Query;
 import bg.tu_varna.sit.group17.database.queries.Query2;
 import bg.tu_varna.sit.group17.database.queries.Query3;
 import bg.tu_varna.sit.group17.database.queries.Query4;
+import bg.tu_varna.sit.group17.database.users.Consumer;
 import bg.tu_varna.sit.group17.database.users.Customer;
+import bg.tu_varna.sit.group17.database.users.User;
 import bg.tu_varna.sit.group17.validation.Valid;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,12 +43,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
-public final class HomeController implements InitializeData {
+public final class HomeController extends ControllerParent {
 	
-	private User user;
 	private Load load;
-	
-	public static Customer customer;
 	
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
@@ -84,38 +84,34 @@ public final class HomeController implements InitializeData {
     private URL location;
     
 	@Override
-	public void initData(Load load) {
+	public void initData(Load load, Consumer consumer) {
 		this.load = load;
+		this.consumer = consumer;
 	}
     
 	@FXML
-    void initialize() {
+    void initialize() {//comment to work for now
 		
 		try {
 			logger.info("In home form");
-			Property.alertNotificationList = new LinkedList<>();
-			this.avatar.setImage(Property.getAvatar());
+			Notification.alertNotificationList = new LinkedList<>();
+			this.avatar.setImage(Avatar.get());
+			this.userName.setText(consumer.getName());
 			
-			this.userName.setText(Property.username);
-			
-			
-			if(Property.user == User.Customer) {
-				this.user = User.Customer;
-				logger.info("Logged customer: " + customer);
+			if(consumer.getUser() == User.Customer) {
+				logger.info("Logged customer: " + consumer);
 				logger.info("Checking for updating order status");
-				TableQuery.checkOrderUpdate(HomeController.customer.getId());
+				TableQuery.checkOrderUpdate(consumer.getId());
 				
-				this.phone.setText(HomeController.customer.getPhone());
+				this.phone.setText(consumer.getPhone());
 				this.phone.setDisable(true);
 				
 				this.quеryNames = new String[] {"Статус на пратка"};
 				this.functions.setDisable(true);
 			}
-			else if(Property.user == User.Courier){
-				this.user = User.Courier;
+			else if(consumer.getUser() == User.Courier){
 				cancelOrderButton.setText("Статус: Приета пратка");
-			} else if(Property.user == User.Admin) {
-				this.user = User.Admin;
+			} else if(consumer.getUser() == User.Admin) {
 				this.phone.setDisable(true);
 				this.IdOrder.setDisable(true);
 				this.cancelOrderButton.setDisable(true);
@@ -129,42 +125,42 @@ public final class HomeController implements InitializeData {
 	    	
 			this.table.setEditable(true);
 			this.table.setPlaceholder(new Label("Няма данни"));
-		} catch(SQLException e) {
+		} catch(Exception e) {
 			logger.error(e.getMessage());
 		}
     }
     
 	@FXML
 	private void changeAvatar() {
-		this.avatar.setImage(Property.nextAvatar());
+		this.avatar.setImage(Avatar.next());
 	}
 	@FXML
 	private void logOut() throws SQLException, IOException {
-		load.form(FormName.login, User.Guest);
+		load.form(FormName.login, consumer);
 	}	
     
     @FXML
     private void notificationBellClick() throws IllegalArgumentException, SQLException {
-    	if(Property.delivered) {
-    		if(Property.user == User.Customer) {
+    	if(Notification.delivered) {
+    		if(consumer.getUser() == User.Customer) {
 	    		
-	    		this.notificationBell.setStyle(Property.izv);
-	    		Property.delivered = false;
+	    		this.notificationBell.setStyle(Notification.izv);
+	    		Notification.delivered = false;
 	    		String offices = "";
-	    		for(String s : Property.alertNotificationList) offices += s + " ";
+	    		for(String s : Notification.alertNotificationList) offices += s + " ";
 	    		
 	    		message.alert("Имате пратка в офис " + offices);
 	    		return;
-    		} if(Property.user == User.Courier) {
-    			this.notificationBell.setStyle(Property.izv);
-        		Property.delivered = false;
+    		} if(consumer.getUser() == User.Courier) {
+    			this.notificationBell.setStyle(Notification.izv);
+    			Notification.delivered = false;
         		String customers = "";
-        		for(String s : Property.alertNotificationList) customers += s + " ";
+        		for(String s : Notification.alertNotificationList) customers += s + " ";
         		
         		message.alert("Отказани пратки от клиенти: " + customers);
         		
-        		for(int i : Property.ordersIdNotification)
-        			Update.changeOrderStatus(i, Property.getStatus(4));
+        		for(int i : Notification.ordersIdNotification)
+        			Update.changeOrderStatus(i, Notification.getStatus(4));
         		return;
     		}
     	}
@@ -173,31 +169,33 @@ public final class HomeController implements InitializeData {
     
     private void notificationCheck() throws SQLException {
     	
-    	if(Property.user == User.Courier) {
+    	if(consumer.getUser() == User.Courier) {
     		courierNotification();
     		return;
     	}
-    	String sql = "select id_office_recipient from orders where id_customer_recipient='" + HomeController.customer.getId() + "' and id_status='" + Property.getStatus(2) + "'";
+    	String sql = "select id_office_recipient from orders where id_customer_recipient='" + consumer.getId() + "' and id_status='" + Notification.getStatus(2) + "'";
     	ResultSet rs = TableQuery.execute(sql);
     	
     	if(rs == null) return;
-    	Property.delivered = true;
+    	Notification.delivered = true;
     	
-    	do Property.alertNotificationList.add(TableQuery.getOffice(rs.getInt("id_office_recipient")));
+    	do {
+    		Notification.alertNotificationList.add(TableQuery.getOffice(rs.getInt("id_office_recipient")));
+    	}
     	while(rs.next());
     	
     	notification();
     }
     private void courierNotification() throws SQLException {
-    	String sql = "select id_order, id_customer_recipient from orders where id_courier='" + PratkaRegisterController.courier.getId() + "' and id_status='" + Property.getStatus(1) + "'";
+    	String sql = "select id_order, id_customer_recipient from orders where id_courier='" + consumer.getId() + "' and id_status='" + Notification.getStatus(1) + "'";
     	ResultSet rs = TableQuery.execute(sql);
     	
     	if(rs == null) return;
-    	Property.delivered = true;
+    	Notification.delivered = true;
     	
     	do {
-    		Property.alertNotificationList.add(TableQuery.getCustomer(rs.getInt("id_customer_recipient")));
-    		Property.ordersIdNotification.add(rs.getInt("id_order"));
+    		Notification.alertNotificationList.add(TableQuery.getCustomer(rs.getInt("id_customer_recipient")));
+    		Notification.ordersIdNotification.add(rs.getInt("id_order"));
     	}while(rs.next());
     	
     	notification();
@@ -205,21 +203,21 @@ public final class HomeController implements InitializeData {
     
     private void notification() {
     	
-    	this.notificationBell.setStyle(Property.izv2);
+    	this.notificationBell.setStyle(Notification.izv2);
     }
     @SuppressWarnings("unused")
 	private void noNotification() {
-    	this.notificationBell.setStyle(Property.izv);
+    	this.notificationBell.setStyle(Notification.izv);
     }
 	
 	@FXML
 	private void registerPratka() throws SQLException, IOException {
-		load.form(FormName.pratkaRegister, user);
+		load.form(FormName.pratkaRegister, consumer);
 	}
 	
 	@FXML
 	private void firma() throws SQLException, IOException {
-		load.form(FormName.firma, user);
+		load.form(FormName.firma, consumer);
 	}
 	
 	@FXML
@@ -227,7 +225,7 @@ public final class HomeController implements InitializeData {
 		
 		logger.info("Clicked cancel order");
 		
-		if(Property.user != User.Customer) {
+		if(consumer.getUser() != User.Customer) {
 			
 			int id_order = 0;
 			
@@ -257,11 +255,11 @@ public final class HomeController implements InitializeData {
 				return;
 			}
 			int id_status = rs.getInt("id_status");
-			if(id_status == Property.getStatus(1)) {
+			if(id_status == Notification.getStatus(1)) {
 				message.alert("Пратката вече е отказана");
 				return;
 			}
-			if(id_status == Property.getStatus(0)) {
+			if(id_status == Notification.getStatus(0)) {
 				message.alert("Пратката пратката още не е получена");
 				return;
 			}
@@ -273,7 +271,7 @@ public final class HomeController implements InitializeData {
 				return;
 			}
 			
-			Update.changeOrderStatus(id_order, Property.getStatus(3));
+			Update.changeOrderStatus(id_order, Notification.getStatus(3));
 			message.alert("Променен статус на пратката: взета от куриер");
 			logger.info("Order accepted from courier");
 			filter();
@@ -297,7 +295,7 @@ public final class HomeController implements InitializeData {
 			message.alert("Невалидно ID");
 			return;
 		}
-		String sql = "select id_status from orders where id_order='" + id_order + "' and id_customer_recipient='" + customer.getId() + "'";
+		String sql = "select id_status from orders where id_order='" + id_order + "' and id_customer_recipient='" + consumer.getId() + "'";
 		ResultSet rs = TableQuery.execute(sql);
 		
 		if(rs == null) {
@@ -305,16 +303,16 @@ public final class HomeController implements InitializeData {
 			return;
 		}
 		int id_status = rs.getInt("id_status");
-		if(id_status == Property.getStatus(1)) {
+		if(id_status == Notification.getStatus(1)) {
 			message.alert("Пратката вече е отказана");
 			return;
 		}
-		if(id_status == Property.getStatus(2)) {
+		if(id_status == Notification.getStatus(2)) {
 			message.alert("Пратката не може да бъде отказана, вече е получена");
 			return;
 		}
 		
-		Update.changeOrderStatus(id_order, Property.getStatus(1));
+		Update.changeOrderStatus(id_order, Notification.getStatus(1));
 		message.alert("Пратката е отказана");
 		logger.info("Order cancelled");
 		filter();
@@ -324,7 +322,7 @@ public final class HomeController implements InitializeData {
     private void filter() throws SQLException {
     	logger.info("Clicked filter");
     	this.table.getColumns().clear();
-    	if(Property.user == User.Customer) {
+    	if(consumer.getUser() == User.Customer) {
     		query2();
     		return;
     	}

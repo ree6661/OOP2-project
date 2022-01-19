@@ -15,7 +15,7 @@ public final class Customer extends Consumer {
 	}
 	
 	public Customer(int id, String name, String phone, String password, int id_city, String address) {
-		super(id, name, phone, password);
+		super(id, name, phone, password, User.Customer);
 		this.id_city = id_city;
 		this.address = address;
 	}
@@ -23,14 +23,8 @@ public final class Customer extends Consumer {
 	public static Customer create(ResultSet rs) throws SQLException {
 		Consumer c = Consumer.create(rs);
 		
-		int id_city = 0;
-		String address = null;
-		try {
-			id_city = rs.getInt(5);
-			address = rs.getString(6);
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
+		int id_city = rs.getInt("id_city");
+		String address = rs.getString("address");
 		
 		return new Customer(c.getId(), c.getName(), c.getPhone(), c.getPassword(), id_city, address);
 	}
