@@ -13,31 +13,37 @@ import javafx.stage.Stage;
 
 public final class Load {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
-	
+
 	private HostServices hostServices;
 	private FXMLLoader loader;
-	
+
 	private Stage stage;
 	private Parent parent;
 	private Scene scene;
-	
-	public Load(Stage stage, HostServices hostServices) {
+
+	public Notification notification;
+
+	public Load(Stage stage, HostServices hostServices, Consumer consumer) {
 		this.stage = stage;
 		this.hostServices = hostServices;
 
+		notification = new Notification(consumer);
+		notification.delivered = false;
 	}
-	
+
 	public void link(String link) {
 		hostServices.showDocument(link);
 	}
 
 	public void form(FormName form, Consumer consumer) {
 		this.stage.hide();
+		notification.setConsumer(consumer);
 		loader = new FXMLLoader(getClass().getResource("../fxml/" + form.toString() + ".fxml"));
+
 		try {
 			this.parent = loader.load();
 			this.scene = new Scene(this.parent);
-			
+
 			switch (form) {
 			case login -> loginScene();
 			case register -> registerScene();
@@ -46,19 +52,18 @@ public final class Load {
 			case pratkaRegister -> pratkaScene();
 			default -> throw new IllegalArgumentException("Unexpected value: " + form);
 			};
-		} catch(IOException | IllegalArgumentException e) {
+		} catch (IOException | IllegalArgumentException e) {
 			logger.error("Form " + form.toString() + "not found " + e.getMessage());
 			this.stage.show();
 			return;
 		}
-		
 		InitializeData controller = loader.getController();
 		controller.initData(this, consumer);
-		
+
 		this.stage.setScene(scene);
 		this.stage.show();
 	}
-	
+
 	private void addStyleSheets(String styleSheets) {
 		scene.getStylesheets().add(Load.class.getResource(styleSheets).toExternalForm());
 	}
@@ -70,8 +75,7 @@ public final class Load {
 	private void loginScene() {
 		addStyleSheets("../css/login-register.css");
 	}
-	
-	
+
 	private void homeScene(User user) throws IllegalArgumentException {
 
 		addStyleSheets("../css/home.css");

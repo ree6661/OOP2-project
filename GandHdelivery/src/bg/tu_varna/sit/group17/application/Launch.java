@@ -15,7 +15,7 @@ public final class Launch extends Application {
 	private void init(Stage stage) {
 		stage.setResizable(false);
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/logoAvatar.png")));
-		this.load = new Load(stage, getHostServices());
+		this.load = new Load(stage, getHostServices(), new Consumer());
 	}
 	
 	@Override

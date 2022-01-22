@@ -12,7 +12,6 @@ import bg.tu_varna.sit.group17.application.MessageBox;
 import bg.tu_varna.sit.group17.application.Property;
 import bg.tu_varna.sit.group17.database.Add;
 import bg.tu_varna.sit.group17.database.users.Consumer;
-import bg.tu_varna.sit.group17.database.users.User;
 import bg.tu_varna.sit.group17.validation.Valid;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,8 +21,6 @@ import javafx.scene.control.TextField;
 
 public final class RegisterController extends ControllerParent { 
 	
-	private Consumer consumer;
-	private Load load;
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
 	
@@ -47,11 +44,9 @@ public final class RegisterController extends ControllerParent {
 	}
 	
     @FXML
-    public void register(ActionEvent e) throws IOException, SQLException {
+    public void register(ActionEvent e) {
     	
     	try {
-	    		
-	    	
 	    	logger.info("Clicked register");
 	    	String username = this.name.getText(), 
 	    			phoneNumber = this.phone.getText(),
