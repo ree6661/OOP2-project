@@ -133,8 +133,7 @@ public final class Home {
 					throw new NullPointerException("Пратката вече е отказана");
 				}
 				if (id_status == Notification.getStatus(0)) {
-					message.alert("Пратката пратката още не е получена");
-					return;
+					throw new NullPointerException("Пратката пратката още не е получена");
 				}
 
 				sql = "select * from orders where id_order='" + id_order + "' and id_customer_recipient='" + id_customer
@@ -194,7 +193,7 @@ public final class Home {
 		} catch (NullPointerException e) {
 			message.alert(e.getMessage());
 			logger.error(e.getMessage());
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 	}
@@ -215,8 +214,10 @@ public final class Home {
 			case 3 -> prop.query4();
 			case 4 -> prop.query5();
 			}
-		} catch (SQLException | NullPointerException e) {
+		} catch(IllegalArgumentException e) {
 			message.alert(e.getMessage());
+		}
+		catch (SQLException e) {
 			logger.error(e.getMessage());
 		}
 	}

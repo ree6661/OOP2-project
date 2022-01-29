@@ -27,7 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class HomeProperties {
+public final class HomeProperties {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
 
@@ -43,7 +43,7 @@ public class HomeProperties {
 			LinkedList<Query2> orders) {
 
 		this.phone = phone;
-		IdOrder = idOrder;
+		this.IdOrder = idOrder;
 		this.functions = functions;
 		this.cancelOrderButton = cancelOrderButton;
 		this.notificationBell = notificationBell;
@@ -57,7 +57,7 @@ public class HomeProperties {
 		logger.info("In query1");
 		LocalDate from = dateFrom.getValue(), to = dateTo.getValue();
 		if (from == null || to == null) {
-			throw new IllegalArgumentException("Полетата за дати не може да са празни");
+			throw new NullPointerException("Полетата за дати не може да са празни");
 		}
 		if (Date.valueOf(from).after(Date.valueOf(to))) {
 			throw new NullPointerException("Началната дата не може да е преди крайната дата");

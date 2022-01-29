@@ -31,25 +31,18 @@ public final class HomeController extends ControllerParent {
 	private MenuButton userName;
 	@FXML
 	public ComboBox<String> functions;
-
 	@FXML
 	public DatePicker dateFrom, dateTo;
-
 	@FXML
 	public TextField phone, IdOrder;
-
 	@FXML
 	public TableView<Query> table;
-
 	@FXML
 	private ImageView avatar;
-
 	@FXML
 	public Button notificationBell, cancelOrderButton;
-
 	@FXML
 	private ResourceBundle resources;
-
 	@FXML
 	private URL location;
 
@@ -61,7 +54,7 @@ public final class HomeController extends ControllerParent {
 
 		this.avatar.setImage(Avatar.get());
 		this.userName.setText(consumer.getName());
-		home.prepareForm();
+		this.home.prepareForm();
 	}
 
 	@FXML

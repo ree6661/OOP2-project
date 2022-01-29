@@ -122,5 +122,4 @@ public final class Notification {
 			logger.error("Order not accepted. ".concat(e.getMessage()));
 		}
 	}
-
 }
