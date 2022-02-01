@@ -1,52 +1,54 @@
 Button{
-	-fx-text-fill: #B0B079;
+	-fx-text-fill: White;
 	-fx-background-color: black;
 	-fx-border-width: 2;
-	-fx-border-color: white;
+	-fx-border-color: #B0B079;
 }
 Button:hover{
-	-fx-border-color: #B0B079;
+	-fx-border-color: White;
+	-fx-text-fill: #B0B079;
 }
 #acPane{
 	-fx-text-fill: white;
 	-fx-background-color: black;
 	-fx-effect: null;
 	-fx-border-radius: 0;
-	-fx-border-width: 0 1 0 0; 
-	-fx-border-color: transparent black transparent transparent;
+	-fx-border-width: 0 5 0 0; 
+	-fx-border-color: transparent #B0B079 transparent transparent;
 }
-#spravki,#pratka,#firma
+#spravki,#pratka,#klient,#firma
 {
-	-fx-text-fill: white;
+	-fx-text-fill: White;
 	-fx-background-color: black;
 	-fx-effect: null;
 	-fx-font-size: 24px;
 	-fx-font-style: Italic;
 	 
-	-fx-border-color: white;
+	-fx-border-color: #B0B079;
 	-fx-border-width: 0 5 0 5; 
-	-fx-border-color: transparent white transparent white;
-}
-#spravki:hover,#pratka:hover,#firma:hover{
-	-fx-text-fill: #B0B079;
 	-fx-border-color: transparent #B0B079 transparent #B0B079;
+}
+#spravki:hover,#pratka:hover,#klient:hover,#firma:hover{
+	-fx-text-fill: #B0B079;
+	-fx-border-color: transparent white transparent white;
 }
 #navPane{
 	-fx-background-color: black;
 }
 #mainPane{
-	-fx-text-fill: black;
-	-fx-background-color: white;
+	-fx-background-color: White;
 }
 #filterPane {
 	-fx-background-color: black;
-	-fx-text-fill: #B0B079;
-	-fx-border-width: 0 5 0 0; 
-	-fx-border-color: transparent white transparent transparent;
+	-fx-border-width: 0 10 0 0; 
+	-fx-border-color: transparent #B0B079 transparent transparent;
 
 }
-#filterPane>*{
+#filterPane>.label{
 	-fx-text-fill: #B0B079;
+}
+#filterPane>*{
+	
 	-fx-background-color: black;
 }
 #userName, #userName .context-menu{
@@ -60,12 +62,19 @@ Button:hover{
      -fx-background-color: #B0B079;                       
 }
 #izvestia{
-	-fx-background-color: black;
+	
+	-fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 55% , #B0B079 85%, black);
 	-fx-background-image: url("../img/izv.png");
 	-fx-background-position:  center, center;
 	-fx-background-repeat: no-repeat;
-	-fx-background-size: 70% 90%;
+	-fx-background-size: cover;
+	-fx-border-size: 5;
+	-fx-border-color: #B0B079;
 	-fx-border-radius: 50;
+}
+#izvestia:hover{
+	-fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 55% , gray 85%, black);
+	-fx-border-color: White;
 }
 #vij{
 	-fx-background-color: black;
@@ -80,13 +89,50 @@ Button:hover{
 }
 
 
-#spravki:disabled,#pratka:disabled,#firma:disabled{
+#spravki:disabled,#pratka:disabled,#klient:disabled,#firma:disabled{
 	
-	-fx-opacity: 0.96;
+	-fx-opacity: 1;
 	-fx-text-fill: black;
-	-fx-background-color: white;
+	-fx-background-color: White;
 	-fx-effect: null;
 }
+#spravki{
+	-fx-graphic: url("../img/spravki0.png");
+}
+#spravki:hover{
+	-fx-graphic: url("../img/spravki1.png");
+}
+#spravki:disabled{
+	-fx-graphic: url("../img/spravki3.png");
+}
+#klient{
+	-fx-graphic: url("../img/klient0.png");
+}
+#klient:hover{
+	-fx-graphic: url("../img/klient1.png");
+}
+#klient:disabled{
+	-fx-graphic: url("../img/klient3.png");
+}
+#pratka{
+	-fx-graphic: url("../img/pratka0.png");
+}
+#pratka:hover{
+	-fx-graphic: url("../img/pratka1.png");
+}
+#pratka:disabled{
+	-fx-graphic: url("../img/pratka3.png");
+}
+#firma{
+	-fx-graphic: url("../img/firma0.png");
+}
+#firma:hover{
+	-fx-graphic: url("../img/firma1.png");
+}
+#firma:disabled{
+	-fx-graphic: url("../img/firma3.png");
+}
+
 TextField,PasswordField,ComboBox,.date-picker{
 	-fx-prompt-text-fill: #B0B079;
 	-fx-border-width: 2;
@@ -103,5 +149,8 @@ TextField,PasswordField,ComboBox,.date-picker{
 ComboBox  .cell{-fx-text-fill: #B0B079;}
 
 .check-box:selected .mark {
+	-fx-background-color: #B0B079;
+}
+#sb0,#sb1,#sb2,#sb3{
 	-fx-background-color: #B0B079;
 }

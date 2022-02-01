@@ -14,7 +14,7 @@ public final class Create {
 	private static final String database = "deliverydb";
 	private static final String url = "jdbc:mysql://localhost/" + database + "?useUnicode=true&characterEncoding=UTF-8";
 	private static final String admin = "root";
-	private static final String adminPass = "Mysql@localhost:3306";
+	private static final String adminPass = "admin";
 	
 	private static final LoggerApp logger = new LoggerApp(Create.class.getClass().getName());
    

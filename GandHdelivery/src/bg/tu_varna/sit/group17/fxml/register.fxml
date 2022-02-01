@@ -2,29 +2,56 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="309.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.group17.controllers.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="982.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.group17.controllers.RegisterController">
    <children>
-      <PasswordField fx:id="repeatPassword" layoutX="25.0" layoutY="432.0" prefHeight="38.0" prefWidth="243.0" promptText="потвърди паролата" />
-      <ImageView fitHeight="116.0" fitWidth="299.0" layoutX="15.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/GandHlogo.png" />
-         </image>
-      </ImageView>
-      <Label id="title" layoutX="106.0" layoutY="129.0" text="РЕГИСТРАЦИЯ" textFill="WHITE" />
+      <PasswordField fx:id="repeatPassword" layoutX="424.0" layoutY="358.0" prefHeight="38.0" prefWidth="243.0" promptText="потвърди паролата" />
 
-      <Button id="register" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="29.0" layoutY="479.0" mnemonicParsing="false" onAction="#register" prefHeight="106.0" prefWidth="142.0" text="Регистрирай се" />
-      <TextField fx:id="phone" layoutX="25.0" layoutY="244.0" prefHeight="38.0" prefWidth="243.0" promptText="телефон" />
-       <Button id="login" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="184.0" layoutY="479.0" mnemonicParsing="false" onAction="#login" prefHeight="81.0" prefWidth="82.0" text="Влез" textOverrun="CENTER_ELLIPSIS" />
-      <TextField fx:id="name" layoutX="25.0" layoutY="197.0" prefHeight="38.0" prefWidth="243.0" promptText=" име" />
-      <PasswordField fx:id="password" layoutX="23.0" layoutY="385.0" prefHeight="38.0" prefWidth="243.0" promptText="парола" />
-      <ComboBox fx:id="cBox0" layoutX="25.0" layoutY="290.0" prefHeight="38.0" prefWidth="243.0" promptText="град" />
-      <TextField fx:id="address" layoutX="23.0" layoutY="336.0" prefHeight="38.0" prefWidth="243.0" promptText="адрес" />
+      <Button id="register" alignment="TOP_CENTER" contentDisplay="BOTTOM" layoutX="765.0" layoutY="399.0" mnemonicParsing="false" onAction="#register" prefHeight="34.0" prefWidth="186.0" text="Регистрирай клиента" />
+      <TextField fx:id="phone" layoutX="51.0" layoutY="247.0" prefHeight="38.0" prefWidth="243.0" promptText="телефон" />
+      <TextField fx:id="name" layoutX="51.0" layoutY="143.0" prefHeight="38.0" prefWidth="243.0" promptText=" име" />
+      <PasswordField fx:id="password" layoutX="424.0" layoutY="247.0" prefHeight="38.0" prefWidth="243.0" promptText="парола" />
+      <ComboBox fx:id="cBox0" layoutX="51.0" layoutY="357.0" prefHeight="38.0" prefWidth="243.0" promptText="град" />
+      <TextField fx:id="address" layoutX="424.0" layoutY="143.0" prefHeight="38.0" prefWidth="243.0" promptText="адрес" />
+      <Pane id="navPane" prefHeight="110.0" prefWidth="982.0">
+         <children>
+            <Pane id="acPane" prefHeight="110.0" prefWidth="200.0">
+               <children>
+                  <MenuButton fx:id="userName" alignment="TOP_LEFT" layoutX="1.0" layoutY="65.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="193.0" text="user name" textFill="#333333">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#changeAvatar" text="смени аватара" />
+                        <MenuItem mnemonicParsing="false" onAction="#logOut" text="излез" />
+                     </items>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </MenuButton>
+                  <ImageView fx:id="avatar" fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/defalut%20avatar.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button id="izvestia" fx:id="notificationBell" layoutX="863.0" layoutY="6.0" minHeight="10.0" minWidth="53.0" mnemonicParsing="false" onAction="#notificationBellClick" prefHeight="99.0" prefWidth="99.0" />
+            <Button id="spravki" contentDisplay="TOP" layoutX="200.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0" text="справки" />
+            <AnchorPane id="sb0" layoutX="359.0" prefHeight="110.0" prefWidth="5.0" />
+            <AnchorPane id="sb1" layoutX="518.0" prefHeight="110.0" prefWidth="5.0" />
+            <Button id="klient" contentDisplay="TOP" disable="true" layoutX="359.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0" text="клиент" />
+            <AnchorPane id="sb2" layoutX="675.0" layoutY="1.0" prefHeight="110.0" prefWidth="5.0" />
+            <AnchorPane id="sb3" layoutX="837.0" prefHeight="110.0" prefWidth="5.0" />
+            <Button id="firma" contentDisplay="TOP" layoutX="678.0" mnemonicParsing="false" onAction="#firma" prefHeight="110.0" prefWidth="159.0" text="фирма" />
+            <Button id="pratka" contentDisplay="TOP" layoutX="518.0" mnemonicParsing="false" onAction="#registerPratka" prefHeight="110.0" prefWidth="159.0" text="пратка" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

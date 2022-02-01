@@ -14,28 +14,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.group17.controllers.HomeController">
+<Pane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="982.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.group17.controllers.HomeController">
    <children>
-      <AnchorPane id="filterPane" layoutY="109.0" prefHeight="351.0" prefWidth="206.0">
+      <TableView fx:id="table" layoutX="205.0" layoutY="110.0" prefHeight="359.0" prefWidth="779.0" />
+      <Pane id="navPane" prefHeight="110.0" prefWidth="982.0">
          <children>
-            <Button id="vij" alignment="CENTER" contentDisplay="CENTER" layoutX="66.0" layoutY="210.0" mnemonicParsing="false" onAction="#filter" prefHeight="50.0" prefWidth="60.0" textOverrun="CENTER_WORD_ELLIPSIS" />
-            <Label layoutX="9.0" layoutY="83.0" text="от" />
-            <DatePicker fx:id="dateFrom" layoutX="32.0" layoutY="79.0" prefHeight="26.0" prefWidth="159.0" />
-            <Label layoutX="8.0" layoutY="127.0" text="до" />
-            <DatePicker fx:id="dateTo" layoutX="32.0" layoutY="122.0" prefHeight="26.0" prefWidth="159.0" />
-            <Label layoutX="65.0" layoutY="4.0" prefHeight="26.0" prefWidth="70.0" text="функция " />
-            <ComboBox fx:id="functions" layoutX="9.0" layoutY="30.0" prefHeight="42.0" prefWidth="185.0" />
-            <TextField fx:id="phone" layoutX="6.0" layoutY="166.0" prefHeight="40.0" prefWidth="185.0" promptText="Телефон на клиент" />
-            <TextField fx:id="IdOrder" layoutX="7.0" layoutY="268.0" prefHeight="40.0" prefWidth="185.0" promptText="ID пратка" />
-            <Button fx:id="cancelOrderButton" layoutX="7.0" layoutY="308.0" mnemonicParsing="false" onAction="#cancelOrder" prefHeight="40.0" prefWidth="185.0" text="Откажи пратка" />
-         </children>
-      </AnchorPane>
-      <TableView fx:id="table" layoutX="206.0" layoutY="108.0" prefHeight="351.0" prefWidth="574.0" />
-      <Pane id="navPane" prefHeight="110.0" prefWidth="780.0">
-         <children>
-            <Pane id="acPane" prefHeight="99.0" prefWidth="200.0">
+            <Pane id="acPane" prefHeight="110.0" prefWidth="200.0">
                <children>
-                  <MenuButton fx:id="userName" alignment="TOP_LEFT" layoutX="1.0" layoutY="65.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="199.0" text="user name" textFill="#333333">
+                  <MenuButton fx:id="userName" alignment="TOP_LEFT" layoutX="1.0" layoutY="65.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="193.0" text="user name" textFill="#333333">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#changeAvatar" text="смени аватара" />
                         <MenuItem mnemonicParsing="false" onAction="#logOut" text="излез" />
@@ -51,11 +37,30 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button id="spravki" disable="true" layoutX="206.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0" text="справки" />
-            <Button id="pratka" layoutX="359.0" mnemonicParsing="false" onAction="#registerPratka" prefHeight="110.0" prefWidth="159.0" text="+пратка" />
-            <Button id="izvestia" fx:id="notificationBell" layoutX="696.0" layoutY="14.0" minHeight="10.0" minWidth="53.0" mnemonicParsing="false" onAction="#notificationBellClick" prefHeight="71.0" prefWidth="70.0" />
-            <Button id="firma" layoutX="518.0" mnemonicParsing="false" onAction="#firma" prefHeight="110.0" prefWidth="159.0" text="фирма" />
+            <Button id="izvestia" fx:id="notificationBell" layoutX="863.0" layoutY="6.0" minHeight="10.0" minWidth="53.0" mnemonicParsing="false" onAction="#notificationBellClick" prefHeight="99.0" prefWidth="99.0" />
+            <Button id="spravki" contentDisplay="TOP" disable="true" layoutX="200.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0" text="справки" />
+            <AnchorPane id="sb0" layoutX="359.0" prefHeight="110.0" prefWidth="5.0" />
+            <AnchorPane id="sb1" layoutX="518.0" prefHeight="110.0" prefWidth="5.0" />
+            <Button id="klient" contentDisplay="TOP" layoutX="359.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0" text="клиент" />
+            <AnchorPane id="sb2" layoutX="675.0" layoutY="1.0" prefHeight="110.0" prefWidth="5.0" />
+            <AnchorPane id="sb3" layoutX="837.0" prefHeight="110.0" prefWidth="5.0" />
+            <Button id="firma" contentDisplay="TOP" layoutX="678.0" mnemonicParsing="false" onAction="#firma" prefHeight="110.0" prefWidth="159.0" text="фирма" />
+            <Button id="pratka" contentDisplay="TOP" layoutX="518.0" mnemonicParsing="false" onAction="#registerPratka" prefHeight="110.0" prefWidth="159.0" text="пратка" />
          </children>
       </Pane>
+      <AnchorPane id="filterPane" layoutY="107.0" prefHeight="366.0" prefWidth="205.0">
+         <children>
+            <Button id="vij" alignment="CENTER" contentDisplay="CENTER" layoutX="66.0" layoutY="212.0" mnemonicParsing="false" onAction="#filter" prefHeight="50.0" prefWidth="60.0" textOverrun="CENTER_WORD_ELLIPSIS" />
+            <Label layoutX="9.0" layoutY="83.0" text="от" />
+            <DatePicker fx:id="dateFrom" layoutX="32.0" layoutY="79.0" prefHeight="26.0" prefWidth="159.0" />
+            <Label layoutX="8.0" layoutY="127.0" text="до" />
+            <DatePicker fx:id="dateTo" layoutX="32.0" layoutY="122.0" prefHeight="26.0" prefWidth="159.0" />
+            <Label layoutX="65.0" layoutY="4.0" prefHeight="26.0" prefWidth="70.0" text="функция " />
+            <ComboBox fx:id="functions" layoutX="5.0" layoutY="30.0" prefHeight="42.0" prefWidth="185.0" />
+            <TextField fx:id="phone" layoutX="6.0" layoutY="166.0" prefHeight="40.0" prefWidth="185.0" promptText="Телефон на клиент" />
+            <TextField fx:id="IdOrder" layoutX="5.0" layoutY="270.0" prefHeight="40.0" prefWidth="185.0" promptText="ID пратка" />
+            <Button fx:id="cancelOrderButton" layoutX="5.0" layoutY="317.0" mnemonicParsing="false" onAction="#cancelOrder" prefHeight="40.0" prefWidth="185.0" text="Откажи пратка" />
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

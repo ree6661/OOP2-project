@@ -17,14 +17,10 @@ public final class Notification {
 	private static final int[] statusesId = { 1, 2, 3, 4, 5 };
 	// 1 неполучен 2 отказана 3 получена 4 взета 5 отказана за постоянно
 
-	private final String izv = "-fx-background-color: black;" + "-fx-background-image: url("
-			+ Property.class.getResource("../img/izv.png").toExternalForm() + ");"
-			+ "	-fx-background-position:  center, center;" + "	-fx-background-repeat: no-repeat;"
-			+ "	-fx-background-size: 70% 90%;" + "	-fx-border-radius: 50;";
-	private final String izv2 = "-fx-background-color: black;" + "-fx-background-image: url("
-			+ Property.class.getResource("../img/izv2.png").toExternalForm() + ");"
-			+ "	-fx-background-position:  center, center;" + "	-fx-background-repeat: no-repeat;"
-			+ "	-fx-background-size: 70% 90%;" + "	-fx-border-radius: 50;";
+	private final String izv = "-fx-background-image: url("
+			+ Property.class.getResource("../img/izv.png").toExternalForm() + ");";
+	private final String izv2 = "-fx-background-image: url("
+			+ Property.class.getResource("../img/izv2.png").toExternalForm() + ");";
 	private Consumer consumer;
 
 	private Set<String> alertList;
