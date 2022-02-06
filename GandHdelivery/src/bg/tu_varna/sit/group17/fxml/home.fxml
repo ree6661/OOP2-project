@@ -41,7 +41,7 @@
             <Button id="spravki" contentDisplay="TOP" disable="true" layoutX="200.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0" text="справки" />
             <AnchorPane id="sb0" layoutX="359.0" prefHeight="110.0" prefWidth="5.0" />
             <AnchorPane id="sb1" layoutX="518.0" prefHeight="110.0" prefWidth="5.0" />
-            <Button id="klient" contentDisplay="TOP" layoutX="359.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0" text="клиент" />
+            <Button id="klient" contentDisplay="TOP" layoutX="359.0" mnemonicParsing="false" onAction="#klient" prefHeight="110.0" prefWidth="159.0" text="клиент" />
             <AnchorPane id="sb2" layoutX="675.0" layoutY="1.0" prefHeight="110.0" prefWidth="5.0" />
             <AnchorPane id="sb3" layoutX="837.0" prefHeight="110.0" prefWidth="5.0" />
             <Button id="firma" contentDisplay="TOP" layoutX="678.0" mnemonicParsing="false" onAction="#firma" prefHeight="110.0" prefWidth="159.0" text="фирма" />

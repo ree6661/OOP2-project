@@ -22,9 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 public final class HomeController extends ControllerParent {
-
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
-
 	private Home home;
 
 	@FXML
@@ -61,36 +59,30 @@ public final class HomeController extends ControllerParent {
 	void initialize() {
 		logger.info("In home form");
 	}
-
 	@FXML
 	private void changeAvatar() {
 		this.avatar.setImage(Avatar.next());
 	}
-
 	@FXML
 	private void logOut() {
 		load.form(FormName.login, consumer);
 	}
-
+	@FXML
+	private void klient() {
+		load.form(FormName.register, consumer);
+	}
 	@FXML
 	private void notificationBellClick() {
 		load.notification.apply(this.notificationBell);
 	}
-	/*
-	 * private void noNotification() {
-	 * this.notificationBell.setStyle(Notification.izv); }
-	 */
-
 	@FXML
 	private void registerPratka() throws SQLException, IOException {
 		load.form(FormName.pratkaRegister, consumer);
 	}
-
 	@FXML
 	private void firma() throws SQLException, IOException {
 		load.form(FormName.firma, consumer);
 	}
-
 	@FXML
 	private void cancelOrder() {
 		logger.info("Clicked cancel order");

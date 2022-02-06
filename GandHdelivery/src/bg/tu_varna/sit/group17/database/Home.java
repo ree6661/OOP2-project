@@ -55,8 +55,6 @@ public final class Home {
 			prop.IdOrder.setDisable(true);
 			prop.cancelOrderButton.setDisable(true);
 		}
-		// Property.initAll();
-
 		notificationCheck();
 
 		prop.functions.getItems().addAll(Arrays.asList(quеryNames));
@@ -214,10 +212,9 @@ public final class Home {
 			case 3 -> prop.query4();
 			case 4 -> prop.query5();
 			}
-		} catch(IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			message.alert(e.getMessage());
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			logger.error(e.getMessage());
 		}
 	}

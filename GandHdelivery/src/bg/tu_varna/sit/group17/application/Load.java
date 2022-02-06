@@ -69,7 +69,8 @@ public final class Load {
 	}
 
 	private void registerScene() {
-		addStyleSheets("../css/login-register.css");
+		addStyleSheets("../css/home.css");
+		addStyleSheets("../css/hide-firma.css");
 	}
 
 	private void loginScene() {
@@ -83,6 +84,7 @@ public final class Load {
 		switch (user) {
 		case Admin:
 			addStyleSheets("../css/hide-pratka.css");
+			addStyleSheets("../css/hide-klient.css");
 			break;
 		case Courier:
 			addStyleSheets("../css/hide-firma.css");
@@ -90,6 +92,7 @@ public final class Load {
 		case Customer:
 			addStyleSheets("../css/hide-pratka.css");
 			addStyleSheets("../css/hide-firma.css");
+			addStyleSheets("../css/hide-klient.css");
 			break;
 		default:
 			throw new IllegalArgumentException("User not found and form home can't be opened");
@@ -104,5 +107,6 @@ public final class Load {
 	private void firmaScene() {
 		addStyleSheets("../css/home.css");
 		addStyleSheets("../css/hide-pratka.css");
+		addStyleSheets("../css/hide-klient.css");
 	}
 }

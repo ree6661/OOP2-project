@@ -5,9 +5,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
+import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.database.TableQuery;
 
 public final class Valid {
+	private static final LoggerApp logger = new LoggerApp(Valid.class.getName());
 	private Valid() {
 		//utility
 	}
@@ -36,7 +38,7 @@ public final class Valid {
 		return password.length() > 4 && password.length() < 31;
 	}
 	
-	public static String user(String name, String phone, String password, String repeatPassword) throws SQLException {
+	public static String user(String name, String phone, String password, String repeatPassword) {
 		
 		if(!Valid.username(name)) 
     		return "Името не трябва да съдържа символи и да е твърде кратко";
@@ -50,8 +52,13 @@ public final class Valid {
     	if(!password.equals(repeatPassword)) 
     		return "Паролите не съвпадат";
     	
-    	if(TableQuery.phoneExists(phone)) 
-    		return "Вече съществува такъв телефон в базата данни";
+    	try {
+			if(TableQuery.phoneExists(phone)) 
+				return "Вече съществува такъв телефон в базата данни";
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			return "Вече съществува такъв телефон в базата данни";
+		}
     	
 		return "";
 	}

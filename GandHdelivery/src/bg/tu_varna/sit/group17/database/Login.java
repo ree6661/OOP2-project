@@ -12,7 +12,6 @@ import bg.tu_varna.sit.group17.database.users.UserCreator;
 import bg.tu_varna.sit.group17.validation.Valid;
 
 public final class Login {
-
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
 	private Load load;

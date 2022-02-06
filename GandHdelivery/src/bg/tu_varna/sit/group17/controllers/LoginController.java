@@ -32,23 +32,6 @@ public final class LoginController extends ControllerParent {
 	}
 
 	@FXML
-	void registerFx(ActionEvent event) {
-		/*
-		 * String phoneNumber = this.phone.getText(), password = this.pass.getText();
-		 * 
-		 * if(Valid.phoneNumber(phoneNumber) && Valid.password(password)) { ResultSet
-		 * record = null;
-		 * 
-		 * record = TableQuery.getRecordFromTable( "phone", phoneNumber, "couriers",
-		 * "password", password);
-		 * 
-		 * if(record != null) { RegisterController.courier = Courier.create(record);
-		 * load.form(FormName.register, User.Guest); return; } }
-		 * message.alert("Поискайте от куриер да ви регистрира");
-		 */
-	}
-
-	@FXML
 	void loginFx(ActionEvent event) {
 		logger.info("Clicked login");
 		String phoneNumber = this.phone.getText(), password = this.pass.getText();

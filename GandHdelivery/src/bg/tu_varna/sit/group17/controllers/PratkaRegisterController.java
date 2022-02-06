@@ -19,11 +19,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 public final class PratkaRegisterController extends ControllerParent {
-	
+
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
-	
+
 	private PratkaRegister pratkaRegister;
-	
+
 	@FXML
 	public ComboBox<String> category, officeSender, officeReceiver, companySender;
 	@FXML
@@ -42,18 +42,13 @@ public final class PratkaRegisterController extends ControllerParent {
 	private ResourceBundle resources;
 	@FXML
 	private URL location;
-	@FXML
-	
-	private void queries() {
-		load.form(FormName.home, consumer);
-	}
 
 	@Override
 	public void initData(Load load, Consumer consumer) {
 		this.load = load;
 		this.consumer = consumer;
 		this.pratkaRegister = new PratkaRegister(this);
-		
+
 		this.avatar.setImage(Avatar.get());
 		this.userName.setText(consumer.getName());
 		this.pratkaRegister.prepareForm();
@@ -73,6 +68,16 @@ public final class PratkaRegisterController extends ControllerParent {
 	@FXML
 	private void logOut() {
 		load.form(FormName.login, consumer);
+	}
+
+	@FXML
+	private void queries() {
+		load.form(FormName.home, consumer);
+	}
+
+	@FXML
+	private void klient() {
+		load.form(FormName.register, consumer);
 	}
 
 	@FXML

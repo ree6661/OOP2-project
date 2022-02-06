@@ -14,7 +14,6 @@ class ValidationTest {
 	
 	@Test
 	void usernameLength() {
-		assertTrue(Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
 		assertFalse(Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
 		assertTrue(Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
 		assertTrue(Valid.username("Uuuuuuuuuuuuuuuuu"));
