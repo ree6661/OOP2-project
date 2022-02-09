@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.application.MessageBox;
-import bg.tu_varna.sit.group17.application.Property;
 import bg.tu_varna.sit.group17.controllers.PratkaRegisterController;
 import bg.tu_varna.sit.group17.database.property.Company;
 import bg.tu_varna.sit.group17.database.users.Consumer;
@@ -95,7 +94,7 @@ public final class PratkaRegister {
 
 	private void courierNotification(Button notificationBell) {
 		try {
-			load.notification.courier(consumer, notificationBell);
+			load.getNotification().courier(consumer, notificationBell);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 		}
@@ -184,7 +183,7 @@ public final class PratkaRegister {
 				if (newValue == null)
 					return;
 
-				company.setId(Property.companiesMap.get(newValue));
+				company.setId(load.getProperty().getCompanies().get(newValue));
 				company.setName(newValue);
 
 				try {

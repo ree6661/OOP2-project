@@ -1,9 +1,7 @@
 package bg.tu_varna.sit.group17.controllers;
 
-import bg.tu_varna.sit.group17.application.Avatar;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
-import bg.tu_varna.sit.group17.application.Property;
 import bg.tu_varna.sit.group17.database.Login;
 import bg.tu_varna.sit.group17.database.users.Consumer;
 import javafx.event.ActionEvent;
@@ -23,12 +21,12 @@ public final class LoginController extends ControllerParent {
 		this.load = load;
 		this.consumer = consumer;
 		this.login = new Login(load);
+		load.getAvatar().reset();
 	}
 
 	@FXML
 	void initialize() {
 		logger.info("In login form");
-		Avatar.reset();
 	}
 
 	@FXML
@@ -36,10 +34,5 @@ public final class LoginController extends ControllerParent {
 		logger.info("Clicked login");
 		String phoneNumber = this.phone.getText(), password = this.pass.getText();
 		login.user(phoneNumber, password);
-	}
-
-	@FXML
-	private void forgotPassword() {
-		load.link(Property.ginko);
 	}
 }

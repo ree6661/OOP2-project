@@ -3,7 +3,6 @@ package bg.tu_varna.sit.group17.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import bg.tu_varna.sit.group17.application.Avatar;
 import bg.tu_varna.sit.group17.application.FormName;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
@@ -49,7 +48,7 @@ public final class PratkaRegisterController extends ControllerParent {
 		this.consumer = consumer;
 		this.pratkaRegister = new PratkaRegister(this);
 
-		this.avatar.setImage(Avatar.get());
+		this.avatar.setImage(load.getAvatar().get());
 		this.userName.setText(consumer.getName());
 		this.pratkaRegister.prepareForm();
 	}
@@ -62,7 +61,7 @@ public final class PratkaRegisterController extends ControllerParent {
 
 	@FXML
 	private void changeAvatar() {
-		this.avatar.setImage(Avatar.next());
+		this.avatar.setImage(load.getAvatar().next());
 	}
 
 	@FXML
@@ -82,7 +81,7 @@ public final class PratkaRegisterController extends ControllerParent {
 
 	@FXML
 	private void notificationBellClick() {
-		load.notification.apply(this.notificationBell);
+		load.getNotification().apply(this.notificationBell);
 	}
 
 	@FXML

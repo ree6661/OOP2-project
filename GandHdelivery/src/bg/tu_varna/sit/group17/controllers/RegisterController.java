@@ -5,11 +5,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import bg.tu_varna.sit.group17.application.Avatar;
 import bg.tu_varna.sit.group17.application.FormName;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
-import bg.tu_varna.sit.group17.application.Property;
 import bg.tu_varna.sit.group17.database.Register;
 import bg.tu_varna.sit.group17.database.users.Consumer;
 import javafx.event.ActionEvent;
@@ -46,20 +44,21 @@ public final class RegisterController extends ControllerParent {
 		this.load = load;
 		this.consumer = consumer;
 		this.register = new Register(this);
-		this.avatar.setImage(Avatar.get());
+		this.avatar.setImage(load.getAvatar().get());
 		this.userName.setText(consumer.getName());
 		this.register.prepareForm();
+		
+		cBox0.getItems().addAll(load.getProperty().getCities().keySet());
 	}
 
 	@FXML
 	public void initialize() {
 		logger.info("In register form");
-		cBox0.getItems().addAll(Property.citiesMap.keySet());
 	}
 
 	@FXML
 	private void changeAvatar() {
-		this.avatar.setImage(Avatar.next());
+		this.avatar.setImage(load.getAvatar().next());
 	}
 
 	@FXML
@@ -84,7 +83,7 @@ public final class RegisterController extends ControllerParent {
 
 	@FXML
 	private void notificationBellClick() {
-		load.notification.apply(this.notificationBell);
+		load.getNotification().apply(this.notificationBell);
 	}
 
 	@FXML

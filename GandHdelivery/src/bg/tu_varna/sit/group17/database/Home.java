@@ -78,20 +78,20 @@ public final class Home {
 
 			if (rs == null)
 				return;
-			load.notification.delivered = true;
+			load.getNotification().delivered = true;
 			do {
-				load.notification.addAlert(TableQuery.getOffice(rs.getInt("id_office_recipient")));
+				load.getNotification().addAlert(TableQuery.getOffice(rs.getInt("id_office_recipient")));
 			} while (rs.next());
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 		}
 
-		prop.notificationBell.setStyle(load.notification.getIconIzv2());
+		prop.notificationBell.setStyle(load.getNotification().getIconIzv2());
 	}
 
 	private void courierNotification(Button notificationBell) {
 		try {
-			load.notification.courier(consumer, notificationBell);
+			load.getNotification().courier(consumer, notificationBell);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 		}

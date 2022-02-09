@@ -1,11 +1,8 @@
 package bg.tu_varna.sit.group17.controllers;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import bg.tu_varna.sit.group17.application.Avatar;
 import bg.tu_varna.sit.group17.application.FormName;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
@@ -43,7 +40,7 @@ public class FirmaController extends ControllerParent {
 		this.firma = new Firma(this);
 		
 		this.userName.setText(consumer.getName());
-		this.avatar.setImage(Avatar.get());
+		this.avatar.setImage(load.getAvatar().get());
 		this.firma.prepareForm();
 	}
 
@@ -54,22 +51,22 @@ public class FirmaController extends ControllerParent {
 	}
 
 	@FXML
-	private void queries() throws SQLException, IOException {
+	private void queries() {
 		load.form(FormName.home, consumer);
 	}
 
 	@FXML
-	private void registerOrder() throws SQLException, IOException {
+	private void registerOrder() {
 		load.form(FormName.pratkaRegister, consumer);
 	}
 
 	@FXML
 	private void changeAvatar() {
-		this.avatar.setImage(Avatar.next());
+		this.avatar.setImage(load.getAvatar().next());
 	}
 
 	@FXML
-	private void logOut() throws SQLException, IOException {
+	private void logOut() {
 		load.form(FormName.login, consumer);
 	}
 
@@ -127,7 +124,7 @@ public class FirmaController extends ControllerParent {
 	}
 
 	@FXML
-	private void deleteCourier() throws SQLException {
+	private void deleteCourier() {
 		logger.info("Clicked delete courier");
 		firma.deleteCourier();
 	}

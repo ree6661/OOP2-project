@@ -1,11 +1,8 @@
 package bg.tu_varna.sit.group17.controllers;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import bg.tu_varna.sit.group17.application.Avatar;
 import bg.tu_varna.sit.group17.application.FormName;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
@@ -50,7 +47,7 @@ public final class HomeController extends ControllerParent {
 		this.consumer = consumer;
 		this.home = new Home(this);
 
-		this.avatar.setImage(Avatar.get());
+		this.avatar.setImage(load.getAvatar().get());
 		this.userName.setText(consumer.getName());
 		this.home.prepareForm();
 	}
@@ -61,7 +58,7 @@ public final class HomeController extends ControllerParent {
 	}
 	@FXML
 	private void changeAvatar() {
-		this.avatar.setImage(Avatar.next());
+		this.avatar.setImage(load.getAvatar().next());
 	}
 	@FXML
 	private void logOut() {
@@ -73,14 +70,14 @@ public final class HomeController extends ControllerParent {
 	}
 	@FXML
 	private void notificationBellClick() {
-		load.notification.apply(this.notificationBell);
+		load.getNotification().apply(this.notificationBell);
 	}
 	@FXML
-	private void registerPratka() throws SQLException, IOException {
+	private void registerPratka() {
 		load.form(FormName.pratkaRegister, consumer);
 	}
 	@FXML
-	private void firma() throws SQLException, IOException {
+	private void firma() {
 		load.form(FormName.firma, consumer);
 	}
 	@FXML

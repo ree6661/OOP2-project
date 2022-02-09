@@ -3,9 +3,9 @@ package bg.tu_varna.sit.group17.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.application.MessageBox;
-import bg.tu_varna.sit.group17.application.Property;
 import bg.tu_varna.sit.group17.controllers.FirmaController;
 import bg.tu_varna.sit.group17.database.property.Company;
 import bg.tu_varna.sit.group17.database.property.Office;
@@ -19,15 +19,17 @@ import javafx.scene.control.TextField;
 public final class Firma {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
-
+	
+	private Load load;
 	private Company company;
 	private Office office;
 	private Courier courier;
 
 	private ComboBox<String> companies, offices, city, couriers;
 	private TextField firmaName, address, courierTextField, phone, password, plik, kolet, paket, tovar;
-
+	
 	public Firma(FirmaController fc) {
+		this.load = fc.load;
 		this.company = new Company();
 		this.office = new Office();
 		this.courier = new Courier();
@@ -49,11 +51,11 @@ public final class Firma {
 
 	public void prepareForm() {
 		if (companies.getItems().size() == 0) {
-			companies.getItems().addAll(Property.companiesMap.keySet());
+			companies.getItems().addAll(load.getProperty().getCities().keySet());
 			companies.valueProperty().addListener(firmaListener());
 		}
 		if (this.city.getItems().size() == 0) {
-			this.city.getItems().addAll(Property.citiesMap.keySet());
+			this.city.getItems().addAll(load.getProperty().getCities().keySet());
 			this.city.getSelectionModel().select(0);
 		}
 		offices.valueProperty().addListener(officesListener());
@@ -84,8 +86,8 @@ public final class Firma {
 			message.alert("Успешно добавена фирма");
 			logger.info("Successfully added company");
 			companies.getItems().clear();
-			Property.initCompaniesMap();
-			companies.getItems().addAll(Property.companiesMap.keySet());
+			load.getProperty().initCompanies();
+			companies.getItems().addAll(load.getProperty().getCompanies().keySet());
 
 		} catch (NumberFormatException | NullPointerException | SQLException e) {
 			logger.error(e.getMessage());
@@ -121,8 +123,8 @@ public final class Firma {
 			message.alert("Фирмата е успешно редактирана");
 			logger.info("Successful changed company");
 			companies.getItems().clear();
-			Property.initCompaniesMap();
-			companies.getItems().addAll(Property.companiesMap.keySet());
+			load.getProperty().initCompanies();
+			companies.getItems().addAll(load.getProperty().getCompanies().keySet());
 			companies.getSelectionModel().selectFirst();
 
 		} catch (NumberFormatException | NullPointerException | SQLException e) {
@@ -157,8 +159,8 @@ public final class Firma {
 				return;
 			companies.getItems().clear();
 
-			Property.initCompaniesMap();
-			companies.getItems().addAll(Property.companiesMap.keySet());
+			load.getProperty().initCompanies();
+			companies.getItems().addAll(load.getProperty().getCompanies().keySet());
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 		}
@@ -175,7 +177,7 @@ public final class Firma {
 				throw new IllegalArgumentException("Не може града и/или адреса да са празни");
 			}
 
-			int cityIndex = Property.citiesMap.get(cityName);
+			int cityIndex = load.getProperty().getCities().get(cityName);
 			String sql = "select * from office where id_company='" + this.company.getId() + "' and id_city='"
 					+ cityIndex + "'and address='" + address + "'";
 			ResultSet rs = TableQuery.execute(sql);
@@ -207,7 +209,7 @@ public final class Firma {
 			if (cityName.isBlank()) {
 				throw new IllegalArgumentException("Градът не е избран");
 			}
-			int cityIndex = Property.citiesMap.get(cityName);
+			int cityIndex = load.getProperty().getCities().get(cityName);
 			String address = this.address.getText();
 
 			if (cityIndex == 0 || address.equals("")) {
@@ -375,7 +377,7 @@ public final class Firma {
 
 				company = new Company();
 				if (newValue == null) return;
-				company.setId(Property.companiesMap.get(newValue));
+				company.setId(load.getProperty().getCompanies().get(newValue));
 
 				company.setName(newValue);
 

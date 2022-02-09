@@ -1,7 +1,5 @@
 package bg.tu_varna.sit.group17.application;
 
-import java.sql.SQLException;
-
 import bg.tu_varna.sit.group17.database.users.Consumer;
 import javafx.application.Application;
 import javafx.scene.image.Image;
@@ -21,17 +19,9 @@ public final class Launch extends Application {
 	@Override
 	public void start(Stage stage) {
 		logger.info("Starting application");
-		
 		init(stage);
-
-		try {
-			Property.initAll();
-			
-			load.form(FormName.login, new Consumer());
-
-		} catch (SQLException e) {
-			logger.error(e.getMessage());
-		}
+		
+		load.form(FormName.login, new Consumer());
 	}
 
 	public static void main(String[] args) {

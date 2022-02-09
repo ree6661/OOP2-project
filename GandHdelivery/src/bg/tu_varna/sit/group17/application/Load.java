@@ -21,7 +21,9 @@ public final class Load {
 	private Parent parent;
 	private Scene scene;
 
-	public Notification notification;
+	private Notification notification;
+	private Property property;
+	private Avatar avatar;
 
 	public Load(Stage stage, HostServices hostServices, Consumer consumer) {
 		this.stage = stage;
@@ -29,6 +31,21 @@ public final class Load {
 
 		notification = new Notification(consumer);
 		notification.delivered = false;
+		this.property = new Property();
+		this.property.initAll();
+		this.avatar = new Avatar();
+	}
+
+	public Notification getNotification() {
+		return notification;
+	}
+
+	public Property getProperty() {
+		return property;
+	}
+
+	public Avatar getAvatar() {
+		return avatar;
 	}
 
 	public void link(String link) {
@@ -39,11 +56,9 @@ public final class Load {
 		this.stage.hide();
 		notification.setConsumer(consumer);
 		loader = new FXMLLoader(getClass().getResource("../fxml/" + form.toString() + ".fxml"));
-
 		try {
 			this.parent = loader.load();
 			this.scene = new Scene(this.parent);
-
 			switch (form) {
 			case login -> loginScene();
 			case register -> registerScene();

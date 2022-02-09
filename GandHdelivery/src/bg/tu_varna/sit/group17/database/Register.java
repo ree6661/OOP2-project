@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.application.MessageBox;
-import bg.tu_varna.sit.group17.application.Property;
 import bg.tu_varna.sit.group17.controllers.RegisterController;
 import bg.tu_varna.sit.group17.database.users.Consumer;
 import bg.tu_varna.sit.group17.validation.Valid;
@@ -46,7 +45,7 @@ public final class Register {
 		}
 
 		try {
-			Add.customer(username, phoneNumber, Property.citiesMap.get(city), location, password);
+			Add.customer(username, phoneNumber, load.getProperty().getCities().get(city), location, password);
 
 			message.alert("Успешна регистрация.");
 			logger.info("Successful register");
@@ -57,7 +56,7 @@ public final class Register {
 	
 	private void courierNotification() {
 		try {
-			load.notification.courier(consumer, notificationBell);
+			load.getNotification().courier(consumer, notificationBell);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 		}
