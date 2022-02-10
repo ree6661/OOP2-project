@@ -27,6 +27,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * This class is used for executing the queries form the home form.
+ */
 public final class HomeProperties {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
@@ -38,6 +41,17 @@ public final class HomeProperties {
 	public DatePicker dateFrom, dateTo;
 	private LinkedList<Query2> orders;
 
+	/**
+	 * @param phone
+	 * @param idOrder
+	 * @param functions
+	 * @param cancelOrderButton
+	 * @param notificationBell
+	 * @param table
+	 * @param dateFrom
+	 * @param dateTo
+	 * @param orders
+	 */
 	public HomeProperties(TextField phone, TextField idOrder, ComboBox<String> functions, Button cancelOrderButton,
 			Button notificationBell, TableView<Query> table, DatePicker dateFrom, DatePicker dateTo,
 			LinkedList<Query2> orders) {
@@ -53,6 +67,12 @@ public final class HomeProperties {
 		this.orders = orders;
 	}
 
+	/**
+	 * Query for displaying packages and information about them.
+	 * 
+	 * @throws SQLException if problem with the database occurs.
+	 * @throws NullPointerException if the assigned dates are invalid.
+	 */
 	public void query1() throws SQLException, NullPointerException {
 		logger.info("In query1");
 		LocalDate from = dateFrom.getValue(), to = dateTo.getValue();
@@ -63,21 +83,21 @@ public final class HomeProperties {
 			throw new NullPointerException("Началната дата не може да е преди крайната дата");
 		}
 
-		TableColumn<Query, String> idColumn = new TableColumn<Query, String>("ID Поръчка"),
-				category = new TableColumn<Query, String>("Категория"),
-				officeSender = new TableColumn<Query, String>("Изпращащ офис"),
-				officeRecipient = new TableColumn<Query, String>("Получаващ офис"),
-				customerSender = new TableColumn<Query, String>("Клиент изпращач"),
-				customerRecipient = new TableColumn<Query, String>("Клиент получател"),
-				courierC = new TableColumn<Query, String>("Обслужващ куриер"),
-				statusC = new TableColumn<Query, String>("Статус"),
-				fragileC = new TableColumn<Query, String>("Чупливо"),
-				paidC = new TableColumn<Query, String>("Наложен платеж"),
-				cashDelivery = new TableColumn<Query, String>("Цена на доставка"),
-				deliveryToAddress = new TableColumn<Query, String>("Досавяне до адрес"),
-				addressC = new TableColumn<Query, String>("Адрес на доставяне"),
-				acceptanceSender = new TableColumn<Query, String>("Дата на изпращане"),
-				customerDelivery = new TableColumn<Query, String>("Дата на получаване");
+		TableColumn<Query, String> idColumn = new TableColumn<>("ID Поръчка"),
+				category = new TableColumn<>("Категория"),
+				officeSender = new TableColumn<>("Изпращащ офис"),
+				officeRecipient = new TableColumn<>("Получаващ офис"),
+				customerSender = new TableColumn<>("Клиент изпращач"),
+				customerRecipient = new TableColumn<>("Клиент получател"),
+				courierC = new TableColumn<>("Обслужващ куриер"),
+				statusC = new TableColumn<>("Статус"),
+				fragileC = new TableColumn<>("Чупливо"),
+				paidC = new TableColumn<>("Наложен платеж"),
+				cashDelivery = new TableColumn<>("Цена на доставка"),
+				deliveryToAddress = new TableColumn<>("Досавяне до адрес"),
+				addressC = new TableColumn<>("Адрес на доставяне"),
+				acceptanceSender = new TableColumn<>("Дата на изпращане"),
+				customerDelivery = new TableColumn<>("Дата на получаване");
 
 		table.getColumns()
 				.addAll(List.of(idColumn, category, officeSender, officeRecipient, customerSender, customerRecipient,
@@ -135,6 +155,11 @@ public final class HomeProperties {
 		table.setItems(data);
 	}
 
+	/**
+	 * Query for displaying the status of a package
+	 * 
+	 * @throws SQLException if problem with the database occurs.
+	 */
 	public void query2() throws SQLException {
 		logger.info("In query2");
 
@@ -154,11 +179,11 @@ public final class HomeProperties {
 			return;
 		}
 
-		TableColumn<Query, String> numOrder = new TableColumn<Query, String>("№ пратка"),
-				nameC = new TableColumn<Query, String>("Име на клиент"),
-				phoneC = new TableColumn<Query, String>("Телефон"), statusC = new TableColumn<Query, String>("Статус"),
-				fromC = new TableColumn<Query, String>("Дата на приемане"),
-				toC = new TableColumn<Query, String>("Дата на пристигане");
+		TableColumn<Query, String> numOrder = new TableColumn<>("№ пратка"),
+				nameC = new TableColumn<>("Име на клиент"),
+				phoneC = new TableColumn<>("Телефон"), statusC = new TableColumn<>("Статус"),
+				fromC = new TableColumn<>("Дата на приемане"),
+				toC = new TableColumn<>("Дата на пристигане");
 
 		table.getColumns().addAll(List.of(numOrder, nameC, phoneC, statusC, fromC, toC));
 
@@ -201,6 +226,11 @@ public final class HomeProperties {
 		table.setItems(data);
 	}
 
+	/**
+	 * Query for displaying statistic of the current company.
+	 * 
+	 * @throws SQLException if problem with the database occurs.
+	 */
 	public void query3() throws SQLException {
 		logger.info("In query3");
 
@@ -239,6 +269,11 @@ public final class HomeProperties {
 		table.setItems(data);
 	}
 
+	/**
+	 * Query for displaying couriers work history.
+	 * 
+	 * @throws SQLException if problem with the database occurs.
+	 */
 	public void query4() throws SQLException {
 		logger.info("In query4");
 
@@ -273,6 +308,11 @@ public final class HomeProperties {
 		table.setItems(data);
 	}
 
+	/**
+	 * Query for displaying statistic of all customers.
+	 * 
+	 * @throws SQLException if problem with the database occurs.
+	 */
 	public void query5() throws SQLException {
 		logger.info("In query5");
 
@@ -308,5 +348,4 @@ public final class HomeProperties {
 
 		table.setItems(data);
 	}
-
 }

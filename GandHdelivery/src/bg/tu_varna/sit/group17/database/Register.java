@@ -10,23 +10,44 @@ import bg.tu_varna.sit.group17.database.users.Consumer;
 import bg.tu_varna.sit.group17.validation.Valid;
 import javafx.scene.control.Button;
 
+/**
+ * This class manages the functionality of the register form.
+ */
 public final class Register {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
 	private Load load;
 	private Consumer consumer;
 	private Button notificationBell;
-	
-	public Register(RegisterController reg) {
-		this.load = reg.load;
-		this.consumer = reg.consumer;
-		this.notificationBell = reg.notificationBell;
+
+	/**
+	 * @param load
+	 * @param consumer
+	 * @param notificationBell
+	 */
+	public Register(Load load, Consumer consumer, Button notificationBell) {
+		this.load = load;
+		this.consumer = consumer;
+		this.notificationBell = notificationBell;
 	}
-	
+
+	/**
+	 * Loads the object's fields and prepares them for usage.
+	 */
 	public void prepareForm() {
 		courierNotification();
 	}
-	
+
+	/**
+	 * Adds new customer from the fields of the register form.
+	 * 
+	 * @param username       the customer's username.
+	 * @param phoneNumber    the customer's phone number.
+	 * @param city           the customer's current city.
+	 * @param location       the customer's current addres.
+	 * @param password       the customer's account password.
+	 * @param repeatPassword the customer's account repeated password.
+	 */
 	public void addCustomer(String username, String phoneNumber, String city, String location, String password,
 			String repeatPassword) {
 		try {
@@ -53,7 +74,7 @@ public final class Register {
 			logger.error(e.getMessage());
 		}
 	}
-	
+
 	private void courierNotification() {
 		try {
 			load.getNotification().courier(consumer, notificationBell);

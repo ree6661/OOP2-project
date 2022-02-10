@@ -5,11 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.List;
 
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.application.MessageBox;
-import bg.tu_varna.sit.group17.controllers.PratkaRegisterController;
 import bg.tu_varna.sit.group17.database.property.Company;
 import bg.tu_varna.sit.group17.database.users.Consumer;
 import bg.tu_varna.sit.group17.validation.Valid;
@@ -21,11 +21,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+/**
+ * This class manages the functionality of the package register form.
+ */
 public final class PratkaRegister {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
 
-	private LinkedList<Company> companies;
+	private List<Company> companies;
 	private Company company;
 
 	private Consumer consumer;
@@ -37,28 +40,53 @@ public final class PratkaRegister {
 	private DatePicker receiveDate, clientReceiveDate;
 	private CheckBox fragile, sendToAddress, isPaid;
 
-	public PratkaRegister(PratkaRegisterController contr) {
+	/**
+	 * @param consumer
+	 * @param load
+	 * @param category
+	 * @param officeSender
+	 * @param officeReceiver
+	 * @param companySender
+	 * @param notificationBell
+	 * @param phoneSender
+	 * @param phoneReceiver
+	 * @param sendPrice
+	 * @param address
+	 * @param receiveDate
+	 * @param clientReceiveDate
+	 * @param fragile
+	 * @param sendToAddress
+	 * @param isPaid
+	 */
+	public PratkaRegister(Consumer consumer, Load load, ComboBox<String> category, ComboBox<String> officeSender,
+			ComboBox<String> officeReceiver, ComboBox<String> companySender, Button notificationBell,
+			TextField phoneSender, TextField phoneReceiver, TextField sendPrice, TextField address,
+			DatePicker receiveDate, DatePicker clientReceiveDate, CheckBox fragile, CheckBox sendToAddress,
+			CheckBox isPaid) {
 		this.companies = new LinkedList<>();
 		this.company = new Company();
-		this.consumer = contr.consumer;
-		this.load = contr.load;
+		this.consumer = consumer;
+		this.load = load;
 
-		this.category = contr.category;
-		this.officeSender = contr.officeSender;
-		this.officeReceiver = contr.officeReceiver;
-		this.companySender = contr.companySender;
-		this.notificationBell = contr.notificationBell;
-		this.phoneSender = contr.phoneSender;
-		this.phoneReceiver = contr.phoneReceiver;
-		this.sendPrice = contr.sendPrice;
-		this.address = contr.address;
-		this.receiveDate = contr.receiveDate;
-		this.clientReceiveDate = contr.clientReceiveDate;
-		this.fragile = contr.fragile;
-		this.sendToAddress = contr.sendToAddress;
-		this.isPaid = contr.isPaid;
+		this.category = category;
+		this.officeSender = officeSender;
+		this.officeReceiver = officeReceiver;
+		this.companySender = companySender;
+		this.notificationBell = notificationBell;
+		this.phoneSender = phoneSender;
+		this.phoneReceiver = phoneReceiver;
+		this.sendPrice = sendPrice;
+		this.address = address;
+		this.receiveDate = receiveDate;
+		this.clientReceiveDate = clientReceiveDate;
+		this.fragile = fragile;
+		this.sendToAddress = sendToAddress;
+		this.isPaid = isPaid;
 	}
 
+	/**
+	 * Loads the object's fields and prepares them for usage.
+	 */
 	public void prepareForm() {
 		try {
 			courierNotification(notificationBell);
@@ -88,6 +116,49 @@ public final class PratkaRegister {
 				this.category.getItems().add(rs.getString("category"));
 			} while (rs.next());
 		} catch (SQLException e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+	/**
+	 * Registeres an order from the fields of the package form.
+	 */
+	public void registerOrder() {
+
+		String phoneSender = this.phoneSender.getText(), phoneReceiver = this.phoneReceiver.getText(),
+				address = this.address.getText();
+		LocalDate receiveDate = this.receiveDate.getValue(), clientLocalDate = this.clientReceiveDate.getValue();
+		try {
+			if (receiveDate == null || clientLocalDate == null) {
+				throw new IllegalArgumentException("Полетата за дати не може да са празни");
+			}
+
+			boolean fragile = this.fragile.isSelected(), sendToAddress = this.sendToAddress.isSelected(),
+					isPaid = this.isPaid.isSelected();
+			double price = 0;
+
+			validFields(price, phoneSender, phoneReceiver, address, sendToAddress, receiveDate, clientLocalDate);
+
+			int id_category = TableQuery.getCategoryId(category.getSelectionModel().getSelectedItem());
+			int id_office_sender = TableQuery.getOfficeId(officeSender.getSelectionModel().getSelectedItem()),
+					id_office_recipient = TableQuery.getOfficeId(officeReceiver.getSelectionModel().getSelectedItem()),
+					id_customer_sender = TableQuery.getCustomerId(phoneSender),
+					id_customer_recipient = TableQuery.getCustomerId(phoneReceiver), id_courier = consumer.getId();
+
+			final int id_status = 1;
+
+			if (id_category == 0)
+				return;
+			Add.order(id_category, id_office_sender, id_office_recipient, id_customer_sender, id_customer_recipient,
+					id_courier, id_status, fragile, isPaid, price, sendToAddress, address, Date.valueOf(receiveDate),
+					Date.valueOf(clientLocalDate));
+
+			message.alert("Успешно добавена поръчка");
+			logger.info("Successful added order");
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+		} catch (IllegalArgumentException e) {
+			message.alert(e.getMessage());
 			logger.error(e.getMessage());
 		}
 	}
@@ -130,48 +201,8 @@ public final class PratkaRegister {
 		}
 	}
 
-	public void registerOrder() {
-
-		String phoneSender = this.phoneSender.getText(), phoneReceiver = this.phoneReceiver.getText(),
-				address = this.address.getText();
-		LocalDate receiveDate = this.receiveDate.getValue(), clientLocalDate = this.clientReceiveDate.getValue();
-		try {
-			if (receiveDate == null || clientLocalDate == null) {
-				throw new IllegalArgumentException("Полетата за дати не може да са празни");
-			}
-
-			boolean fragile = this.fragile.isSelected(), sendToAddress = this.sendToAddress.isSelected(),
-					isPaid = this.isPaid.isSelected();
-			double price = 0;
-
-			validFields(price, phoneSender, phoneReceiver, address, sendToAddress, receiveDate, clientLocalDate);
-
-			int id_category = TableQuery.getCategoryId(category.getSelectionModel().getSelectedItem());
-			int id_office_sender = TableQuery.getOfficeId(officeSender.getSelectionModel().getSelectedItem()),
-					id_office_recipient = TableQuery.getOfficeId(officeReceiver.getSelectionModel().getSelectedItem()),
-					id_customer_sender = TableQuery.getCustomerId(phoneSender),
-					id_customer_recipient = TableQuery.getCustomerId(phoneReceiver), id_courier = consumer.getId();
-
-			final int id_status = 1;
-
-			if (id_category == 0)
-				return;
-			Add.order(id_category, id_office_sender, id_office_recipient, id_customer_sender, id_customer_recipient,
-					id_courier, id_status, fragile, isPaid, price, sendToAddress, address, Date.valueOf(receiveDate),
-					Date.valueOf(clientLocalDate));
-
-			message.alert("Успешно добавена поръчка");
-			logger.info("Successful added order");
-		} catch (SQLException e) {
-			logger.error(e.getMessage());
-		} catch (IllegalArgumentException e) {
-			message.alert(e.getMessage());
-			logger.error(e.getMessage());
-		}
-	}
-
 	private ChangeListener<String> firmaListener() {
-		return new ChangeListener<String>() {
+		return new ChangeListener<>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
@@ -182,7 +213,6 @@ public final class PratkaRegister {
 
 				if (newValue == null)
 					return;
-
 				company.setId(load.getProperty().getCompanies().get(newValue));
 				company.setName(newValue);
 
@@ -200,7 +230,7 @@ public final class PratkaRegister {
 	}
 
 	private ChangeListener<String> categoryListener() {
-		return new ChangeListener<String>() {
+		return new ChangeListener<>() {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

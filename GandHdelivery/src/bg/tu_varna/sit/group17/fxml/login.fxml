@@ -9,21 +9,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="298.0" prefWidth="341.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.group17.controllers.LoginController">
-   <children>
-      <ImageView fitHeight="116.0" fitWidth="451.0" layoutX="13.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/GandHlogo.png" />
-         </image>
-      </ImageView>
-      <Label id="title" layoutX="115.0" layoutY="139.0" text="ВЛИЗАНЕ В АКАУНТ" textFill="WHITE" />
-      <TextField fx:id="phone" layoutX="6.0" layoutY="182.0" prefHeight="46.0" prefWidth="235.0" promptText="телефон" />
-      <PasswordField fx:id="pass" layoutX="6.0" layoutY="242.0" prefHeight="45.0" prefWidth="235.0" promptText="парола" />
-       <Button id="login" alignment="CENTER" contentDisplay="BOTTOM" layoutX="252.0" layoutY="182.0" mnemonicParsing="false" onAction="#loginFx" prefHeight="81.0" prefWidth="82.0" text="Влез" textOverrun="CENTER_ELLIPSIS" />
-      <Label id="errorMessage" layoutX="103.0" layoutY="176.0" textFill="RED">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="298.0"
+	prefWidth="341.0" xmlns="http://javafx.com/javafx/17"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="bg.tu_varna.sit.group17.controllers.LoginController">
+	<children>
+		<ImageView fitHeight="116.0" fitWidth="451.0" layoutX="13.0"
+			layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@../img/GandHlogo.png" />
+			</image>
+		</ImageView>
+		<Label id="title" layoutX="115.0" layoutY="139.0"
+			text="ВЛИЗАНЕ В АКАУНТ" textFill="WHITE" />
+		<TextField fx:id="phone" layoutX="6.0" layoutY="182.0"
+			prefHeight="46.0" prefWidth="235.0" promptText="телефон" />
+		<PasswordField fx:id="pass" layoutX="6.0"
+			layoutY="242.0" prefHeight="45.0" prefWidth="235.0"
+			promptText="парола" />
+		<Button id="login" alignment="CENTER" contentDisplay="BOTTOM"
+			layoutX="252.0" layoutY="182.0" mnemonicParsing="false"
+			onAction="#loginFx" prefHeight="81.0" prefWidth="82.0" text="Влез"
+			textOverrun="CENTER_ELLIPSIS" />
+		<Label id="errorMessage" layoutX="103.0" layoutY="176.0"
+			textFill="RED">
+			<font>
+				<Font size="13.0" />
+			</font>
+		</Label>
+	</children>
 </AnchorPane>

@@ -11,6 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Class used to load a specific form when it is requested.
+ */
 public final class Load {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 
@@ -25,33 +28,62 @@ public final class Load {
 	private Property property;
 	private Avatar avatar;
 
+	/**
+	 * The constructor for initializing the fields for loading every form.
+	 * 
+	 * @param stage        the stage needed to constuct the application.
+	 * @param hostServices service needed for opening a web page.
+	 * @param consumer     the consumer object which will be used across the
+	 *                     application.
+	 */
 	public Load(Stage stage, HostServices hostServices, Consumer consumer) {
 		this.stage = stage;
 		this.hostServices = hostServices;
 
 		notification = new Notification(consumer);
-		notification.delivered = false;
+		notification.setDelivered(false);
 		this.property = new Property();
-		this.property.initAll();
+		this.property.initCitiesAndCompanies();
 		this.avatar = new Avatar();
 	}
 
+	/**
+	 * @return the notification object used for accessing a notification.
+	 */
 	public Notification getNotification() {
 		return notification;
 	}
 
+	/**
+	 * @return the property object used for storing information for the application
+	 *         properties.
+	 */
 	public Property getProperty() {
 		return property;
 	}
 
+	/**
+	 * @return the avatar object of the application.
+	 */
 	public Avatar getAvatar() {
 		return avatar;
 	}
 
+	/**
+	 * Opens a link in default browser.
+	 * 
+	 * @param link link to be opened in the browser
+	 */
 	public void link(String link) {
 		hostServices.showDocument(link);
 	}
 
+	/**
+	 * Closes current form and opens a new form with specified user information.
+	 * 
+	 * @param form     the form to be launched.
+	 * @param consumer the user which will use the form.
+	 */
 	public void form(FormName form, Consumer consumer) {
 		this.stage.hide();
 		notification.setConsumer(consumer);
@@ -66,7 +98,7 @@ public final class Load {
 			case home -> homeScene(consumer.getUser());
 			case pratkaRegister -> pratkaScene();
 			default -> throw new IllegalArgumentException("Unexpected value: " + form);
-			};
+			}
 		} catch (IOException | IllegalArgumentException e) {
 			logger.error("Form " + form.toString() + "not found " + e.getMessage());
 			this.stage.show();

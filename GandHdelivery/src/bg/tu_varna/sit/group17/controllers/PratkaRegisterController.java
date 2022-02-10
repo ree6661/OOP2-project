@@ -17,6 +17,9 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+/**
+ * Controller of the package register form used for registering packages from and to customers.
+ */
 public final class PratkaRegisterController extends ControllerParent {
 
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
@@ -24,19 +27,19 @@ public final class PratkaRegisterController extends ControllerParent {
 	private PratkaRegister pratkaRegister;
 
 	@FXML
-	public ComboBox<String> category, officeSender, officeReceiver, companySender;
+	private ComboBox<String> category, officeSender, officeReceiver, companySender;
 	@FXML
-	public CheckBox fragile, sendToAddress, isPaid;
+	private CheckBox fragile, sendToAddress, isPaid;
 	@FXML
-	public TextField phoneSender, phoneReceiver, sendPrice, address;
+	private TextField phoneSender, phoneReceiver, sendPrice, address;
 	@FXML
-	public MenuButton userName;
+	private MenuButton userName;
 	@FXML
-	public ImageView avatar;
+	private ImageView avatar;
 	@FXML
-	public DatePicker receiveDate, clientReceiveDate;
+	private DatePicker receiveDate, clientReceiveDate;
 	@FXML
-	public Button notificationBell;
+	private Button notificationBell;
 	@FXML
 	private ResourceBundle resources;
 	@FXML
@@ -44,19 +47,15 @@ public final class PratkaRegisterController extends ControllerParent {
 
 	@Override
 	public void initData(Load load, Consumer consumer) {
+		logger.info("In pratka register form");
+		logger.info("Logged courier: " + consumer);
 		this.load = load;
 		this.consumer = consumer;
-		this.pratkaRegister = new PratkaRegister(this);
+		this.pratkaRegister = new PratkaRegister(consumer, load, category, officeSender, officeReceiver, companySender, notificationBell, phoneSender, phoneReceiver, sendPrice, address, receiveDate, clientReceiveDate, fragile, sendToAddress, isPaid);
 
 		this.avatar.setImage(load.getAvatar().get());
 		this.userName.setText(consumer.getName());
 		this.pratkaRegister.prepareForm();
-	}
-
-	@FXML
-	void initialize() {
-		logger.info("In pratka register form");
-		logger.info("Logged courier: " + consumer);
 	}
 
 	@FXML
@@ -85,7 +84,7 @@ public final class PratkaRegisterController extends ControllerParent {
 	}
 
 	@FXML
-	void registerOrder() {
+	private void registerOrder() {
 		logger.info("Clicked register order");
 		pratkaRegister.registerOrder();
 	}

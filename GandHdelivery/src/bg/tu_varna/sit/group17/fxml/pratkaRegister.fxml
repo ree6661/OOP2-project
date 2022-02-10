@@ -13,52 +13,99 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.group17.controllers.PratkaRegisterController">
-   <children>
-      <ComboBox fx:id="category" layoutX="384.0" layoutY="154.0" prefHeight="41.0" prefWidth="217.0" promptText="категория" />
-      <CheckBox fx:id="fragile" layoutX="384.0" layoutY="210.0" mnemonicParsing="false" text="чупливо" />
-      <ComboBox fx:id="officeSender" layoutX="99.0" layoutY="202.0" prefHeight="41.0" prefWidth="217.0" promptText="офис на подаване" />
-      <ComboBox fx:id="officeReceiver" layoutX="384.0" layoutY="255.0" prefHeight="41.0" prefWidth="217.0" promptText="офис за получаване" />
-      <CheckBox fx:id="sendToAddress" layoutX="384.0" layoutY="302.0" mnemonicParsing="false" text="доставка до  адрес" />
-      <ComboBox fx:id="companySender" layoutX="99.0" layoutY="154.0" prefHeight="41.0" prefWidth="217.0" promptText="фирма доставчик" />
-      <TextField fx:id="phoneSender" layoutX="99.0" layoutY="250.0" prefHeight="39.0" prefWidth="217.0" promptText="Телефон на Подател" />
-      <TextField fx:id="phoneReceiver" layoutX="99.0" layoutY="295.0" prefHeight="39.0" prefWidth="217.0" promptText="Телефон на Получател" />
-      <CheckBox fx:id="isPaid" layoutX="664.0" layoutY="210.0" mnemonicParsing="false" text="предплатена доставка" />
-      <DatePicker fx:id="receiveDate" layoutX="99.0" layoutY="341.0" prefHeight="41.0" prefWidth="217.0" promptText="приемане от подател" />
-      <DatePicker fx:id="clientReceiveDate" layoutX="664.0" layoutY="154.0" prefHeight="41.0" prefWidth="217.0" promptText="доставка на клиент" />
-      <Button layoutX="688.0" layoutY="382.0" mnemonicParsing="false" onAction="#registerOrder" prefHeight="39.0" prefWidth="193.0" text="регистрирай пратката" />
-      <TextField fx:id="address" layoutX="384.0" layoutY="342.0" prefHeight="39.0" prefWidth="217.0" promptText="адрес на доставка" />
-      <TextField fx:id="sendPrice" layoutX="664.0" layoutY="241.0" prefHeight="39.0" prefWidth="217.0" promptText="сума на доставка" />
-      <Pane id="navPane" layoutX="-1.0" prefHeight="110.0" prefWidth="982.0">
-         <children>
-            <Pane id="acPane" prefHeight="110.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="avatar" fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/defalut%20avatar.png" />
-                     </image>
-                  </ImageView>
-                  <MenuButton fx:id="userName" alignment="TOP_LEFT" layoutY="65.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="193.0" text="user name" textFill="#333333">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#changeAvatar" text="смени аватара" />
-                        <MenuItem mnemonicParsing="false" onAction="#logOut" text="излез" />
-                     </items>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </MenuButton>
-               </children>
-            </Pane>
-            <Button id="izvestia" fx:id="notificationBell" layoutX="863.0" layoutY="6.0" minHeight="10.0" minWidth="53.0" mnemonicParsing="false" onAction="#notificationBellClick" prefHeight="99.0" prefWidth="99.0" />
-            <AnchorPane id="sb0" layoutX="359.0" prefHeight="110.0" prefWidth="5.0" />
-            <AnchorPane id="sb1" layoutX="518.0" prefHeight="110.0" prefWidth="5.0" />
-            <Button id="klient" contentDisplay="TOP" layoutX="359.0" mnemonicParsing="false" onAction="#klient" prefHeight="110.0" prefWidth="159.0" text="клиент" />
-            <AnchorPane id="sb2" layoutX="675.0" layoutY="-7.0" prefHeight="118.0" prefWidth="5.0" />
-            <AnchorPane id="sb3" layoutX="830.0" prefHeight="110.0" prefWidth="12.0" />
-            <Button id="spravki" contentDisplay="TOP" layoutX="200.0" mnemonicParsing="false" onAction="#queries" prefHeight="110.0" prefWidth="159.0" text="справки" />
-            <Button id="pratka" contentDisplay="TOP" disable="true" layoutX="518.0" mnemonicParsing="false" onAction="#registerOrder" prefHeight="110.0" prefWidth="159.0" text="+пратка" />
-            <Button id="firma" contentDisplay="TOP" layoutX="678.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0" text="фирма" />
-         </children>
-      </Pane>
-   </children>
+<Pane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0"
+	prefWidth="980.0" xmlns="http://javafx.com/javafx/17"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="bg.tu_varna.sit.group17.controllers.PratkaRegisterController">
+	<children>
+		<ComboBox fx:id="category" layoutX="384.0" layoutY="154.0"
+			prefHeight="41.0" prefWidth="217.0" promptText="категория" />
+		<CheckBox fx:id="fragile" layoutX="384.0" layoutY="210.0"
+			mnemonicParsing="false" text="чупливо" />
+		<ComboBox fx:id="officeSender" layoutX="99.0" layoutY="202.0"
+			prefHeight="41.0" prefWidth="217.0" promptText="офис на подаване" />
+		<ComboBox fx:id="officeReceiver" layoutX="384.0"
+			layoutY="255.0" prefHeight="41.0" prefWidth="217.0"
+			promptText="офис за получаване" />
+		<CheckBox fx:id="sendToAddress" layoutX="384.0"
+			layoutY="302.0" mnemonicParsing="false" text="доставка до  адрес" />
+		<ComboBox fx:id="companySender" layoutX="99.0"
+			layoutY="154.0" prefHeight="41.0" prefWidth="217.0"
+			promptText="фирма доставчик" />
+		<TextField fx:id="phoneSender" layoutX="99.0"
+			layoutY="250.0" prefHeight="39.0" prefWidth="217.0"
+			promptText="Телефон на Подател" />
+		<TextField fx:id="phoneReceiver" layoutX="99.0"
+			layoutY="295.0" prefHeight="39.0" prefWidth="217.0"
+			promptText="Телефон на Получател" />
+		<CheckBox fx:id="isPaid" layoutX="664.0" layoutY="210.0"
+			mnemonicParsing="false" text="предплатена доставка" />
+		<DatePicker fx:id="receiveDate" layoutX="99.0"
+			layoutY="341.0" prefHeight="41.0" prefWidth="217.0"
+			promptText="приемане от подател" />
+		<DatePicker fx:id="clientReceiveDate" layoutX="664.0"
+			layoutY="154.0" prefHeight="41.0" prefWidth="217.0"
+			promptText="доставка на клиент" />
+		<Button layoutX="688.0" layoutY="382.0" mnemonicParsing="false"
+			onAction="#registerOrder" prefHeight="39.0" prefWidth="193.0"
+			text="регистрирай пратката" />
+		<TextField fx:id="address" layoutX="384.0" layoutY="342.0"
+			prefHeight="39.0" prefWidth="217.0" promptText="адрес на доставка" />
+		<TextField fx:id="sendPrice" layoutX="664.0" layoutY="241.0"
+			prefHeight="39.0" prefWidth="217.0" promptText="сума на доставка" />
+		<Pane id="navPane" layoutX="-1.0" prefHeight="110.0"
+			prefWidth="982.0">
+			<children>
+				<Pane id="acPane" prefHeight="110.0" prefWidth="200.0">
+					<children>
+						<ImageView fx:id="avatar" fitHeight="60.0"
+							fitWidth="60.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../img/defalut%20avatar.png" />
+							</image>
+						</ImageView>
+						<MenuButton fx:id="userName" alignment="TOP_LEFT"
+							layoutY="65.0" mnemonicParsing="false" prefHeight="40.0"
+							prefWidth="193.0" text="user name" textFill="#333333">
+							<items>
+								<MenuItem mnemonicParsing="false"
+									onAction="#changeAvatar" text="смени аватара" />
+								<MenuItem mnemonicParsing="false" onAction="#logOut"
+									text="излез" />
+							</items>
+							<font>
+								<Font size="18.0" />
+							</font>
+						</MenuButton>
+					</children>
+				</Pane>
+				<Button id="izvestia" fx:id="notificationBell"
+					layoutX="863.0" layoutY="6.0" minHeight="10.0" minWidth="53.0"
+					mnemonicParsing="false" onAction="#notificationBellClick"
+					prefHeight="99.0" prefWidth="99.0" />
+				<AnchorPane id="sb0" layoutX="359.0" prefHeight="110.0"
+					prefWidth="5.0" />
+				<AnchorPane id="sb1" layoutX="518.0" prefHeight="110.0"
+					prefWidth="5.0" />
+				<Button id="klient" contentDisplay="TOP" layoutX="359.0"
+					mnemonicParsing="false" onAction="#klient" prefHeight="110.0"
+					prefWidth="159.0" text="клиент" />
+				<AnchorPane id="sb2" layoutX="675.0" layoutY="-7.0"
+					prefHeight="118.0" prefWidth="5.0" />
+				<AnchorPane id="sb3" layoutX="830.0" prefHeight="110.0"
+					prefWidth="12.0" />
+				<Button id="spravki" contentDisplay="TOP" layoutX="200.0"
+					mnemonicParsing="false" onAction="#queries" prefHeight="110.0"
+					prefWidth="159.0" text="справки" />
+				<Button id="pratka" contentDisplay="TOP" disable="true"
+					layoutX="518.0" mnemonicParsing="false" onAction="#registerOrder"
+					prefHeight="110.0" prefWidth="159.0" text="+пратка" />
+				<Button id="firma" contentDisplay="TOP" layoutX="678.0"
+					mnemonicParsing="false" prefHeight="110.0" prefWidth="159.0"
+					text="фирма" />
+			</children>
+		</Pane>
+	</children>
 </Pane>

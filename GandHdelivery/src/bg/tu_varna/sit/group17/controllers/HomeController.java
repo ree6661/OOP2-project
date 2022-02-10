@@ -18,6 +18,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+/**
+ * Controller of the home form used for looking at queries.
+ */
 public final class HomeController extends ControllerParent {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private Home home;
@@ -25,17 +28,17 @@ public final class HomeController extends ControllerParent {
 	@FXML
 	private MenuButton userName;
 	@FXML
-	public ComboBox<String> functions;
+	private ComboBox<String> functions;
 	@FXML
-	public DatePicker dateFrom, dateTo;
+	private DatePicker dateFrom, dateTo;
 	@FXML
-	public TextField phone, IdOrder;
+	private TextField phone, IdOrder;
 	@FXML
-	public TableView<Query> table;
+	private TableView<Query> table;
 	@FXML
 	private ImageView avatar;
 	@FXML
-	public Button notificationBell, cancelOrderButton;
+	private Button notificationBell, cancelOrderButton;
 	@FXML
 	private ResourceBundle resources;
 	@FXML
@@ -43,43 +46,48 @@ public final class HomeController extends ControllerParent {
 
 	@Override
 	public void initData(Load load, Consumer consumer) {
+		logger.info("In home form");
 		this.load = load;
 		this.consumer = consumer;
-		this.home = new Home(this);
+		this.home = new Home(load, consumer, phone, IdOrder, functions, cancelOrderButton, notificationBell, table,
+				dateFrom, dateTo);
 
 		this.avatar.setImage(load.getAvatar().get());
 		this.userName.setText(consumer.getName());
 		this.home.prepareForm();
 	}
 
-	@FXML
-	void initialize() {
-		logger.info("In home form");
-	}
+
 	@FXML
 	private void changeAvatar() {
 		this.avatar.setImage(load.getAvatar().next());
 	}
+
 	@FXML
 	private void logOut() {
 		load.form(FormName.login, consumer);
 	}
+
 	@FXML
 	private void klient() {
 		load.form(FormName.register, consumer);
 	}
+
 	@FXML
 	private void notificationBellClick() {
 		load.getNotification().apply(this.notificationBell);
 	}
+
 	@FXML
 	private void registerPratka() {
 		load.form(FormName.pratkaRegister, consumer);
 	}
+
 	@FXML
 	private void firma() {
 		load.form(FormName.firma, consumer);
 	}
+
 	@FXML
 	private void cancelOrder() {
 		logger.info("Clicked cancel order");

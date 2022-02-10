@@ -19,6 +19,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+/**
+ * Controller of the registration form used for registering customers from courier.
+ */
 public final class RegisterController extends ControllerParent {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private Register register;
@@ -29,7 +32,7 @@ public final class RegisterController extends ControllerParent {
 	@FXML
 	private ImageView avatar;
 	@FXML
-	public Button notificationBell;
+	private Button notificationBell;
 	@FXML
 	private ComboBox<String> cBox0;
 	@FXML
@@ -41,19 +44,15 @@ public final class RegisterController extends ControllerParent {
 
 	@Override
 	public void initData(Load load, Consumer consumer) {
+		logger.info("In register form");
 		this.load = load;
 		this.consumer = consumer;
-		this.register = new Register(this);
+		this.register = new Register(load, consumer, notificationBell);
 		this.avatar.setImage(load.getAvatar().get());
 		this.userName.setText(consumer.getName());
 		this.register.prepareForm();
 		
 		cBox0.getItems().addAll(load.getProperty().getCities().keySet());
-	}
-
-	@FXML
-	public void initialize() {
-		logger.info("In register form");
 	}
 
 	@FXML
@@ -87,7 +86,7 @@ public final class RegisterController extends ControllerParent {
 	}
 
 	@FXML
-	public void register(ActionEvent e) {
+	private void register(ActionEvent e) {
 		register.addCustomer(name.getText(), phone.getText(), cBox0.getValue(), address.getText(), password.getText(),
 				repeatPassword.getText());
 	}

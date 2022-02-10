@@ -9,66 +9,90 @@ import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.application.MessageBox;
 import bg.tu_varna.sit.group17.application.Notification;
-import bg.tu_varna.sit.group17.controllers.HomeController;
 import bg.tu_varna.sit.group17.controllers.HomeProperties;
+import bg.tu_varna.sit.group17.database.queries.Query;
 import bg.tu_varna.sit.group17.database.queries.Query2;
 import bg.tu_varna.sit.group17.database.users.Consumer;
 import bg.tu_varna.sit.group17.database.users.User;
 import bg.tu_varna.sit.group17.validation.Valid;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
+/**
+ * This class manages the functionality of the home form.
+ */
 public final class Home {
 
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
 
 	private LinkedList<Query2> orders;
-	public String[] quеryNames = { "Пратки", "Статус на пратка", "Статистика на фирма", "Куриери", "Клиенти" };
+	private String[] quеryNames = { "Пратки", "Статус на пратка", "Статистика на фирма", "Куриери", "Клиенти" };
 	private Load load;
 	private Consumer consumer;
+	private HomeProperties properties;
 
-	private HomeProperties prop;
-
-	public Home(HomeController contr) {
-		orders = new LinkedList<>();
-		this.load = contr.load;
-		this.consumer = contr.consumer;
-		this.prop = new HomeProperties(contr.phone, contr.IdOrder, contr.functions, contr.cancelOrderButton,
-				contr.notificationBell, contr.table, contr.dateFrom, contr.dateTo, orders);
+	/**
+	 * @param load
+	 * @param consumer
+	 * @param phone
+	 * @param idOrder
+	 * @param functions
+	 * @param cancelOrderButton
+	 * @param notificationBell
+	 * @param table
+	 * @param dateFrom
+	 * @param dateTo
+	 * @param orders
+	 */
+	public Home(Load load, Consumer consumer, TextField phone, TextField idOrder, ComboBox<String> functions,
+			Button cancelOrderButton, Button notificationBell, TableView<Query> table, DatePicker dateFrom,
+			DatePicker dateTo) {
+		this.orders = new LinkedList<>();
+		this.load = load;
+		this.consumer = consumer;
+		this.properties = new HomeProperties(phone, idOrder, functions, cancelOrderButton, notificationBell, table,
+				dateFrom, dateTo, orders);
 	}
 
+	/**
+	 * Loads the object's fields and prepares them for usage.
+	 */
 	public void prepareForm() {
 		if (consumer.getUser() == User.Customer) {
 			logger.info("Logged customer: " + consumer);
 			logger.info("Checking for updating order status");
 
 			updateOrderStatus();
-			prop.phone.setText(consumer.getPhone());
-			prop.phone.setDisable(true);
+			properties.phone.setText(consumer.getPhone());
+			properties.phone.setDisable(true);
 
 			quеryNames = new String[] { "Статус на пратка" };
-			prop.functions.setDisable(true);
+			properties.functions.setDisable(true);
 		} else if (consumer.getUser() == User.Courier) {
-			prop.cancelOrderButton.setText("Статус: Приета пратка");
+			properties.cancelOrderButton.setText("Статус: Приета пратка");
 		} else if (consumer.getUser() == User.Admin) {
-			prop.IdOrder.setDisable(true);
-			prop.cancelOrderButton.setDisable(true);
+			properties.IdOrder.setDisable(true);
+			properties.cancelOrderButton.setDisable(true);
 		}
 		notificationCheck();
 
-		prop.functions.getItems().addAll(Arrays.asList(quеryNames));
-		prop.functions.getSelectionModel().selectFirst();
+		properties.functions.getItems().addAll(Arrays.asList(quеryNames));
+		properties.functions.getSelectionModel().selectFirst();
 
-		prop.table.setEditable(true);
-		prop.table.setPlaceholder(new Label("Няма данни"));
+		properties.table.setEditable(true);
+		properties.table.setPlaceholder(new Label("Няма данни"));
 	}
 
 	private void notificationCheck() {
 		if (consumer.getUser() == User.Admin)
 			return;
 		if (consumer.getUser() == User.Courier) {
-			courierNotification(prop.notificationBell);
+			courierNotification(properties.notificationBell);
 			return;
 		}
 		String sql = "select id_office_recipient from orders where id_customer_recipient='" + consumer.getId()
@@ -78,7 +102,7 @@ public final class Home {
 
 			if (rs == null)
 				return;
-			load.getNotification().delivered = true;
+			load.getNotification().setDelivered(true);
 			do {
 				load.getNotification().addAlert(TableQuery.getOffice(rs.getInt("id_office_recipient")));
 			} while (rs.next());
@@ -86,7 +110,7 @@ public final class Home {
 			logger.error(e.getMessage());
 		}
 
-		prop.notificationBell.setStyle(load.getNotification().getIconIzv2());
+		properties.notificationBell.setStyle(load.getNotification().getNotificationIcon());
 	}
 
 	private void courierNotification(Button notificationBell) {
@@ -97,7 +121,7 @@ public final class Home {
 		}
 	}
 
-	public void updateOrderStatus() {
+	private void updateOrderStatus() {
 		try {
 			TableQuery.checkOrderUpdate(consumer.getId());
 		} catch (SQLException e) {
@@ -105,8 +129,13 @@ public final class Home {
 		}
 	}
 
+	/**
+	 * Cancells the selected order.
+	 * 
+	 * @param queryIndex current selected query index.
+	 */
 	public void cancelOrder(int queryIndex) {
-		String idOrder = prop.IdOrder.getText(), phone = prop.phone.getText();
+		String idOrder = properties.IdOrder.getText(), phone = properties.phone.getText();
 		if (consumer.getUser() != User.Customer) {
 
 			int id_order = 0;
@@ -196,21 +225,26 @@ public final class Home {
 		}
 	}
 
+	/**
+	 * Filters the information for the selected query.
+	 * 
+	 * @param queryIndex current selected query index.
+	 */
 	public void filter(int queryIndex) {
 		try {
 			if (consumer.getUser() == User.Customer) {
 				orders.clear();
-				prop.query2();
+				properties.query2();
 				return;
 			}
 
 			logger.info("Query index: " + queryIndex);
 			switch (queryIndex) {
-			case 0 -> prop.query1();
-			case 1 -> prop.query2();
-			case 2 -> prop.query3();
-			case 3 -> prop.query4();
-			case 4 -> prop.query5();
+			case 0 -> properties.query1();
+			case 1 -> properties.query2();
+			case 2 -> properties.query3();
+			case 3 -> properties.query4();
+			case 4 -> properties.query5();
 			}
 		} catch (IllegalArgumentException e) {
 			message.alert(e.getMessage());

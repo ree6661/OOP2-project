@@ -15,15 +15,18 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+/**
+ * Controller of the company form used only by the administrator.
+ */
 public class FirmaController extends ControllerParent {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
-	
+
 	private Firma firma;
 	@FXML
-	public ComboBox<String> companies, offices, city, couriers;
+	private ComboBox<String> companies, offices, city, couriers;
 	@FXML
-	public TextField firmaName, address, courierTextField, phone, password, plik, kolet, paket, tovar;
+	private TextField firmaName, address, courierTextField, phone, password, plik, kolet, paket, tovar;
 	@FXML
 	private MenuButton userName;
 	@FXML
@@ -37,8 +40,9 @@ public class FirmaController extends ControllerParent {
 	public void initData(Load load, Consumer consumer) {
 		this.load = load;
 		this.consumer = consumer;
-		this.firma = new Firma(this);
-		
+		this.firma = new Firma(load, companies, offices, city, couriers, firmaName, address, courierTextField, phone,
+				password, plik, kolet, paket, tovar);
+
 		this.userName.setText(consumer.getName());
 		this.avatar.setImage(load.getAvatar().get());
 		this.firma.prepareForm();
@@ -78,19 +82,19 @@ public class FirmaController extends ControllerParent {
 	@FXML
 	private void addFirma() {
 		logger.info("Clicked add firma");
-		firma.addFirma();
+		firma.addCompany();
 	}
 
 	@FXML
 	private void changeFirma() {
 		logger.info("Clicked change firma");
-		firma.changeFirma();
+		firma.changeCompany();
 	}
 
 	@FXML
 	private void deleteFirma() {
 		logger.info("Clicked delete firma");
-		firma.deleteFirma();
+		firma.deleteCompany();
 	}
 
 	@FXML
@@ -108,7 +112,7 @@ public class FirmaController extends ControllerParent {
 	@FXML
 	private void deleteOffice() {
 		logger.info("Clicked delete office");
-		firma.deleteFirma();
+		firma.deleteCompany();
 	}
 
 	@FXML

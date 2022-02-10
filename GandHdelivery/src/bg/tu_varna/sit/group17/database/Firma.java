@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import bg.tu_varna.sit.group17.application.Load;
 import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.application.MessageBox;
-import bg.tu_varna.sit.group17.controllers.FirmaController;
 import bg.tu_varna.sit.group17.database.property.Company;
 import bg.tu_varna.sit.group17.database.property.Office;
 import bg.tu_varna.sit.group17.database.users.Courier;
@@ -16,10 +15,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+/**
+ * This class manages the functionality of the company form.
+ */
 public final class Firma {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
 	private final MessageBox message = new MessageBox(logger);
-	
+
 	private Load load;
 	private Company company;
 	private Office office;
@@ -27,31 +29,52 @@ public final class Firma {
 
 	private ComboBox<String> companies, offices, city, couriers;
 	private TextField firmaName, address, courierTextField, phone, password, plik, kolet, paket, tovar;
-	
-	public Firma(FirmaController fc) {
-		this.load = fc.load;
+
+	/**
+	 * @param load
+	 * @param companies
+	 * @param offices
+	 * @param city
+	 * @param couriers
+	 * @param firmaName
+	 * @param address
+	 * @param courierTextField
+	 * @param phone
+	 * @param password
+	 * @param plik
+	 * @param kolet
+	 * @param paket
+	 * @param tovar
+	 */
+	public Firma(Load load, ComboBox<String> companies, ComboBox<String> offices, ComboBox<String> city,
+			ComboBox<String> couriers, TextField firmaName, TextField address, TextField courierTextField,
+			TextField phone, TextField password, TextField plik, TextField kolet, TextField paket, TextField tovar) {
+		this.load = load;
 		this.company = new Company();
 		this.office = new Office();
 		this.courier = new Courier();
 
-		this.companies = fc.companies;
-		this.offices = fc.offices;
-		this.city = fc.city;
-		this.couriers = fc.couriers;
-		this.firmaName = fc.firmaName;
-		this.address = fc.address;
-		this.courierTextField = fc.courierTextField;
-		this.phone = fc.phone;
-		this.password = fc.password;
-		this.plik = fc.plik;
-		this.kolet = fc.kolet;
-		this.paket = fc.paket;
-		this.tovar = fc.tovar;
+		this.companies = companies;
+		this.offices = offices;
+		this.city = city;
+		this.couriers = couriers;
+		this.firmaName = firmaName;
+		this.address = address;
+		this.courierTextField = courierTextField;
+		this.phone = phone;
+		this.password = password;
+		this.plik = plik;
+		this.kolet = kolet;
+		this.paket = paket;
+		this.tovar = tovar;
 	}
 
+	/**
+	 * Loads the object's fields and prepares them for usage.
+	 */
 	public void prepareForm() {
 		if (companies.getItems().size() == 0) {
-			companies.getItems().addAll(load.getProperty().getCities().keySet());
+			companies.getItems().addAll(load.getProperty().getCompanies().keySet());
 			companies.valueProperty().addListener(firmaListener());
 		}
 		if (this.city.getItems().size() == 0) {
@@ -62,7 +85,10 @@ public final class Firma {
 		couriers.valueProperty().addListener(couriersListener());
 	}
 
-	public void addFirma() {
+	/**
+	 * Creates new company.
+	 */
+	public void addCompany() {
 		try {
 			String name = firmaName.getText();
 			if (name.equals("")) {
@@ -97,7 +123,10 @@ public final class Firma {
 		}
 	}
 
-	public void changeFirma() {
+	/**
+	 * Changes an existing company's fields.
+	 */
+	public void changeCompany() {
 		try {
 			String name = firmaName.getText();// companies.getSelectionModel().getSelectedItem();
 			if (name.equals("") || name.length() < 3) {
@@ -135,7 +164,10 @@ public final class Firma {
 		}
 	}
 
-	public void deleteFirma() {
+	/**
+	 * Deletes an existing company.
+	 */
+	public void deleteCompany() {
 		try {
 			if (this.company == null) {
 				message.alert("Не е избрана фирма");
@@ -166,6 +198,9 @@ public final class Firma {
 		}
 	}
 
+	/**
+	 * Adds new office to the currently selected company.
+	 */
 	public void addOffice() {
 		try {
 			if (company == null) {
@@ -198,6 +233,9 @@ public final class Firma {
 		}
 	}
 
+	/**
+	 * Changes an existing office's fields.
+	 */
 	public void changeOffice() {
 		try {
 			if (this.office == null || this.offices.getPromptText().isBlank()
@@ -236,6 +274,10 @@ public final class Firma {
 
 	}
 
+	/**
+	 * Deletes an existing office and it's couriers from the currently selected
+	 * company.
+	 */
 	public void deleteOffice() {
 		try {
 			if (this.office == null || this.offices.getPromptText().isBlank()
@@ -263,6 +305,9 @@ public final class Firma {
 		}
 	}
 
+	/**
+	 * Adds new courier to an office.
+	 */
 	public void addCourier() {
 		try {
 			if (this.company == null || this.office == null || this.office.getId_office() == 0) {
@@ -306,6 +351,9 @@ public final class Firma {
 		}
 	}
 
+	/**
+	 * Changes an existing courier.
+	 */
 	public void changeCourier() {
 		try {
 			if (this.company == null || this.office == null || this.courier == null) {
@@ -335,6 +383,9 @@ public final class Firma {
 		}
 	}
 
+	/**
+	 * Detetes an existing courier form an office.
+	 */
 	public void deleteCourier() {
 		try {
 			if (this.company == null || this.office == null || this.courier == null
@@ -360,7 +411,7 @@ public final class Firma {
 	}
 
 	private ChangeListener<String> firmaListener() {
-		return new ChangeListener<String>() {
+		return new ChangeListener<>() {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -376,7 +427,8 @@ public final class Firma {
 				password.setText("");
 
 				company = new Company();
-				if (newValue == null) return;
+				if (newValue == null)
+					return;
 				company.setId(load.getProperty().getCompanies().get(newValue));
 
 				company.setName(newValue);
@@ -434,7 +486,7 @@ public final class Firma {
 				} catch (SQLException e) {
 					logger.error("Офиса не е намерен " + office);
 					message.alert("Офиса не е намерен");
-				}  catch(IllegalArgumentException e) {
+				} catch (IllegalArgumentException e) {
 					message.alert(e.getMessage());
 					logger.error(e.getMessage());
 				}
@@ -443,7 +495,7 @@ public final class Firma {
 	}
 
 	private ChangeListener<String> officesListener() {
-		return new ChangeListener<String>() {
+		return new ChangeListener<>() {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -505,7 +557,7 @@ public final class Firma {
 	}
 
 	private ChangeListener<String> couriersListener() {
-		return new ChangeListener<String>() {
+		return new ChangeListener<>() {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

@@ -8,30 +8,20 @@ import bg.tu_varna.sit.group17.database.property.Company;
 import bg.tu_varna.sit.group17.database.property.Office;
 import bg.tu_varna.sit.group17.database.users.Courier;
 
-public class Delete {
+/**
+ * This class is used for deleting records from the database.
+ */
+public final class Delete {
 	private Delete() {
 		//utility
 	}
 	
-	public static void company(Company company) throws SQLException {
-		if(company == null) {
-			return;
-		}
-		Connection conn = Create.getConnection();
-		
-		if(company.offices.size() != 0) 
-			for(int i = 0; i < company.offices.size(); ++i) 
-				Delete.office(company.offices.get(i));
-		
-		final String sql = "DELETE FROM companies WHERE id_company=?";
-		
-		PreparedStatement st = conn.prepareStatement(sql);
-		st.setInt(1, company.getId());
-		
-		st.execute();
-		st.close();
-	}
-	
+	/**
+	 * Deletes a company's packages price list.
+	 * 
+	 * @param company the company whoose price list to be deleted.
+	 * @throws SQLException if a problem with the database occurs.
+	 */
 	public static void companyCategory(Company company) throws SQLException {
 		if(company == null) {
 			return;
@@ -58,6 +48,12 @@ public class Delete {
 		ps.close();
 	}
 	
+	/**
+	 * Deletes an office from the database.
+	 * 
+	 * @param office office to be deleted.
+	 * @throws SQLException if a problem with the database occurs.
+	 */
 	public static void office(Office office) throws SQLException {
 		if(office == null) {
 			return;
@@ -77,6 +73,12 @@ public class Delete {
 		st.close();
 	}
 	
+	/**
+	 * Deletes courier from the database.
+	 * 
+	 * @param courier the courier to be deleted.
+	 * @throws SQLException if a problem with the database occurs.
+	 */
 	public static void courier(Courier courier) throws SQLException {
 		if(courier == null) {
 			return;

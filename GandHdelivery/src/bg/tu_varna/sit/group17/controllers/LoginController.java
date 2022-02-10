@@ -8,6 +8,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+/**
+ * Controller of the login form used for logging a used.
+ */
 public final class LoginController extends ControllerParent {
 
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
@@ -18,6 +21,7 @@ public final class LoginController extends ControllerParent {
 
 	@Override
 	public void initData(Load load, Consumer consumer) {
+		logger.info("In login form");
 		this.load = load;
 		this.consumer = consumer;
 		this.login = new Login(load);
@@ -25,12 +29,7 @@ public final class LoginController extends ControllerParent {
 	}
 
 	@FXML
-	void initialize() {
-		logger.info("In login form");
-	}
-
-	@FXML
-	void loginFx(ActionEvent event) {
+	private void loginFx(ActionEvent event) {
 		logger.info("Clicked login");
 		String phoneNumber = this.phone.getText(), password = this.pass.getText();
 		login.user(phoneNumber, password);
