@@ -1,10 +1,12 @@
 package bg.tu_varna.sit.group17.database.queries;
 
+/**
+ * This class represents the home form query for company's statistic.
+ */
 public class Query3 implements Query {
 	private int company, orders, offices, couriers, admins;
-	
+
 	public Query3(int company, int orders, int offices, int couriers, int admins) {
-		super();
 		this.company = company;
 		this.orders = orders;
 		this.offices = offices;

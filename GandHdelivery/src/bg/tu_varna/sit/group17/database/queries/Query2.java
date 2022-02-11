@@ -2,13 +2,15 @@ package bg.tu_varna.sit.group17.database.queries;
 
 import java.sql.Date;
 
+/**
+ * This class represents the home form query for checking a package status.
+ */
 public class Query2 implements Query {
 	private int number;
 	private String name, phone, status;
 	private Date from, to;
 	
 	public Query2(int number, String name, String phone, String status, Date from, Date to) {
-		super();
 		this.number = number;
 		this.name = name;
 		this.phone = phone;

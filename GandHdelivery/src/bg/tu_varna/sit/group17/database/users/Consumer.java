@@ -5,8 +5,11 @@ import java.sql.SQLException;
 
 import bg.tu_varna.sit.group17.database.queries.Query;
 
+/**
+ * This class is parent class of the all users.
+ */
 public class Consumer implements Query {
-	
+
 	protected int id;
 	protected String name;
 	protected String phone;
@@ -20,7 +23,7 @@ public class Consumer implements Query {
 		this.password = "";
 		this.user = User.Guest;
 	}
-	
+
 	public Consumer(int id, String name, String phone, String password, User user) {
 		this.id = id;
 		this.name = name;
@@ -28,23 +31,23 @@ public class Consumer implements Query {
 		this.password = password;
 		this.user = user;
 	}
-	
+
 	public String toString() {
 		return "id: " + id + " name: " + name + " phone: " + phone;
 	}
-	
+
 	public static Consumer create(ResultSet rs) throws SQLException {
 		int id = 0;
 		String name = null, phone = null, password = null;
-		
+
 		id = rs.getInt(1);
-		name = rs.getString(2); 
+		name = rs.getString(2);
 		phone = rs.getString(3);
-		password = rs.getString(4);		
-		
+		password = rs.getString(4);
+
 		return new Consumer(id, name, phone, password, User.Guest);
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -52,7 +55,7 @@ public class Consumer implements Query {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -76,7 +79,7 @@ public class Consumer implements Query {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}

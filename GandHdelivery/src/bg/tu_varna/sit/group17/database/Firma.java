@@ -30,22 +30,6 @@ public final class Firma {
 	private ComboBox<String> companies, offices, city, couriers;
 	private TextField firmaName, address, courierTextField, phone, password, plik, kolet, paket, tovar;
 
-	/**
-	 * @param load
-	 * @param companies
-	 * @param offices
-	 * @param city
-	 * @param couriers
-	 * @param firmaName
-	 * @param address
-	 * @param courierTextField
-	 * @param phone
-	 * @param password
-	 * @param plik
-	 * @param kolet
-	 * @param paket
-	 * @param tovar
-	 */
 	public Firma(Load load, ComboBox<String> companies, ComboBox<String> offices, ComboBox<String> city,
 			ComboBox<String> couriers, TextField firmaName, TextField address, TextField courierTextField,
 			TextField phone, TextField password, TextField plik, TextField kolet, TextField paket, TextField tovar) {
@@ -291,11 +275,11 @@ public final class Firma {
 
 			if (couriers.getItems() == null)
 				return;
-			couriers.getItems().clear();
+			//couriers.getItems().clear();
 
 			if (offices.getItems() == null)
 				return;
-			offices.getItems().clear();
+			//offices.getItems().clear();
 
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
@@ -334,7 +318,7 @@ public final class Firma {
 			Add.courier(name, phone, password, this.office.getId_office());
 			rs = TableQuery.execute("select * from couriers where phone='" + phone + "'");
 			this.courier = Courier.create(rs);
-			office.couriers.add(this.courier);
+			office.getCouriers().add(this.courier);
 			message.alert("Успешно добавен куриер");
 			logger.info("Successful added courier");
 			couriers.getSelectionModel().selectFirst();
@@ -465,19 +449,19 @@ public final class Firma {
 					}
 					company.setOffices(rs);
 
-					if (company.offices.size() == 0) {
+					if (company.getOffices().size() == 0) {
 						offices.setPromptText("Няма офис");
 						couriers.setPromptText("Няма куриер");
 						return;
 					}
 
-					for (int i = 0; i < company.offices.size(); ++i) {
-						Office office = company.offices.get(i);
+					for (int i = 0; i < company.getOffices().size(); ++i) {
+						Office office = company.getOffices().get(i);
 
 						offices.getItems()
 								.add(TableQuery.cityIdToName(office.getId_city()) + " " + office.getAddress());
 					}
-					office = company.offices.get(0);
+					office = company.getOffices().get(0);
 
 					offices.getSelectionModel().selectFirst();
 					city.setPromptText(office.getCity());
@@ -511,11 +495,11 @@ public final class Firma {
 
 				try {
 					if (company != null)
-						for (int i = 0; i < company.offices.size(); ++i) {
-							String officeName = TableQuery.cityIdToName(company.offices.get(i).getId_city()) + " "
-									+ company.offices.get(i).getAddress();
+						for (int i = 0; i < company.getOffices().size(); ++i) {
+							String officeName = TableQuery.cityIdToName(company.getOffices().get(i).getId_city()) + " "
+									+ company.getOffices().get(i).getAddress();
 							if (officeName.equals(newValue)) {
-								office = company.offices.get(i);
+								office = company.getOffices().get(i);
 								break;
 							}
 						}
@@ -535,17 +519,17 @@ public final class Firma {
 					}
 
 					office.setCouriers(rs);
-					if (office.couriers.size() == 0) {
+					if (office.getCouriers().size() == 0) {
 						couriers.setPromptText("Няма куриери");
 						return;
 					}
 
-					for (int i = 0; i < office.couriers.size(); ++i) {
-						Courier courier = office.couriers.get(i);
+					for (int i = 0; i < office.getCouriers().size(); ++i) {
+						Courier courier = office.getCouriers().get(i);
 						couriers.getItems().add(courier.getName());
 					}
 
-					courier = office.couriers.get(0);
+					courier = office.getCouriers().get(0);
 					couriers.getSelectionModel().selectFirst();
 
 				} catch (SQLException e) {
@@ -568,10 +552,10 @@ public final class Firma {
 				password.setText("");
 
 				int selectedIndex = couriers.getSelectionModel().getSelectedIndex();
-				if (selectedIndex < 0 || selectedIndex > office.couriers.size() - 1)
+				if (selectedIndex < 0 || selectedIndex > office.getCouriers().size() - 1)
 					return;
 
-				courier = office.couriers.get(selectedIndex);
+				courier = office.getCouriers().get(selectedIndex);
 
 				courierTextField.setText(courier.getName());
 				phone.setText(courier.getPhone());

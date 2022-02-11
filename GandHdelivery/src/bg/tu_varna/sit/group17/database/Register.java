@@ -20,11 +20,6 @@ public final class Register {
 	private Consumer consumer;
 	private Button notificationBell;
 
-	/**
-	 * @param load
-	 * @param consumer
-	 * @param notificationBell
-	 */
 	public Register(Load load, Consumer consumer, Button notificationBell) {
 		this.load = load;
 		this.consumer = consumer;
@@ -58,7 +53,6 @@ public final class Register {
 				throw new IllegalArgumentException(err);
 			}
 		} catch (IllegalArgumentException e) {
-			message.alert("Невалидни телефон и/или парола");
 			logger.error(e.getMessage());
 		}
 		if (city.equals("град")) {

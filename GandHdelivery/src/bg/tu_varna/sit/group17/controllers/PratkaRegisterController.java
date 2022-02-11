@@ -18,7 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 /**
- * Controller of the package register form used for registering packages from and to customers.
+ * Controller of the package register form used for registering packages from
+ * and to customers.
  */
 public final class PratkaRegisterController extends ControllerParent {
 
@@ -51,7 +52,9 @@ public final class PratkaRegisterController extends ControllerParent {
 		logger.info("Logged courier: " + consumer);
 		this.load = load;
 		this.consumer = consumer;
-		this.pratkaRegister = new PratkaRegister(consumer, load, category, officeSender, officeReceiver, companySender, notificationBell, phoneSender, phoneReceiver, sendPrice, address, receiveDate, clientReceiveDate, fragile, sendToAddress, isPaid);
+		this.pratkaRegister = new PratkaRegister(consumer, load, category, officeSender, officeReceiver, companySender,
+				notificationBell, phoneSender, phoneReceiver, sendPrice, address, receiveDate, clientReceiveDate,
+				fragile, sendToAddress, isPaid);
 
 		this.avatar.setImage(load.getAvatar().get());
 		this.userName.setText(consumer.getName());

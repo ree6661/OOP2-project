@@ -17,7 +17,8 @@ public enum FormName {
 	 */
 	home,
 	/**
-	 * represents the package sending form for registering new package to be send to a customer.
+	 * represents the package sending form for registering new package to be send to
+	 * a customer.
 	 */
 	pratkaRegister,
 	/**

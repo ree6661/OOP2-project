@@ -36,19 +36,6 @@ public final class Home {
 	private Consumer consumer;
 	private HomeProperties properties;
 
-	/**
-	 * @param load
-	 * @param consumer
-	 * @param phone
-	 * @param idOrder
-	 * @param functions
-	 * @param cancelOrderButton
-	 * @param notificationBell
-	 * @param table
-	 * @param dateFrom
-	 * @param dateTo
-	 * @param orders
-	 */
 	public Home(Load load, Consumer consumer, TextField phone, TextField idOrder, ComboBox<String> functions,
 			Button cancelOrderButton, Button notificationBell, TableView<Query> table, DatePicker dateFrom,
 			DatePicker dateTo) {

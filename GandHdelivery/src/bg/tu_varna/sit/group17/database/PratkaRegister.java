@@ -40,24 +40,6 @@ public final class PratkaRegister {
 	private DatePicker receiveDate, clientReceiveDate;
 	private CheckBox fragile, sendToAddress, isPaid;
 
-	/**
-	 * @param consumer
-	 * @param load
-	 * @param category
-	 * @param officeSender
-	 * @param officeReceiver
-	 * @param companySender
-	 * @param notificationBell
-	 * @param phoneSender
-	 * @param phoneReceiver
-	 * @param sendPrice
-	 * @param address
-	 * @param receiveDate
-	 * @param clientReceiveDate
-	 * @param fragile
-	 * @param sendToAddress
-	 * @param isPaid
-	 */
 	public PratkaRegister(Consumer consumer, Load load, ComboBox<String> category, ComboBox<String> officeSender,
 			ComboBox<String> officeReceiver, ComboBox<String> companySender, Button notificationBell,
 			TextField phoneSender, TextField phoneReceiver, TextField sendPrice, TextField address,
@@ -95,7 +77,7 @@ public final class PratkaRegister {
 
 			if (companySender.getItems().size() == 0) {
 				for (Company c : companies)
-					if (c.offices.size() != 0)
+					if (c.getOffices().size() != 0)
 						companySender.getItems().add(c.getName());
 
 				logger.info("Changed firma combobox");
@@ -218,8 +200,8 @@ public final class PratkaRegister {
 
 				try {
 					for (int i = 0; i < companies.size(); ++i) {
-						for (int j = 0; j < companies.get(i).offices.size(); ++j)
-							officeSender.getItems().add(companies.get(i).offices.get(j).getFullAddress());
+						for (int j = 0; j < companies.get(i).getOffices().size(); ++j)
+							officeSender.getItems().add(companies.get(i).getOffices().get(j).getFullAddress());
 					}
 				} catch (SQLException e) {
 					logger.error(e.getMessage());

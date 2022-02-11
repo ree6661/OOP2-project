@@ -15,13 +15,14 @@ public abstract class ControllerParent implements InitializeData {
 	 * Loader of forms passed by the controllers.
 	 */
 	protected Load load;
-	
+
 	/**
 	 * @return the current user object.
 	 */
 	public Consumer getConsumer() {
 		return consumer;
 	}
+
 	/**
 	 * @return the loader of the forms.
 	 */

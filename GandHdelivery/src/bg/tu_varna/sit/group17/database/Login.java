@@ -8,7 +8,6 @@ import bg.tu_varna.sit.group17.application.LoggerApp;
 import bg.tu_varna.sit.group17.application.MessageBox;
 import bg.tu_varna.sit.group17.database.users.Consumer;
 import bg.tu_varna.sit.group17.database.users.User;
-import bg.tu_varna.sit.group17.database.users.UserCreator;
 import bg.tu_varna.sit.group17.validation.Valid;
 
 /**
@@ -20,7 +19,8 @@ public final class Login {
 	private Load load;
 
 	/**
-	 * @param load the load object with information of the current application lifecycle.
+	 * @param load the load object with information of the current application
+	 *             lifecycle.
 	 */
 	public Login(Load load) {
 		this.load = load;
@@ -30,7 +30,7 @@ public final class Login {
 	 * Logs a user into the application.
 	 * 
 	 * @param phoneNumber user's phone number.
-	 * @param password user's password.
+	 * @param password    user's password.
 	 */
 	public void user(String phoneNumber, String password) {
 		ResultSet record = null;
@@ -61,7 +61,8 @@ public final class Login {
 	}
 
 	private void loadForm(User user, ResultSet userResult) throws SQLException {
-		final Consumer consumer = UserCreator.create(user, userResult);
+		UserCreator creator = new UserCreator();
+		final Consumer consumer = creator.create(user, userResult);
 		load.form(user.getFormName(), consumer);
 	}
 }

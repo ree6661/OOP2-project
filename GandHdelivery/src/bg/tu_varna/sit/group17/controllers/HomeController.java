@@ -57,7 +57,6 @@ public final class HomeController extends ControllerParent {
 		this.home.prepareForm();
 	}
 
-
 	@FXML
 	private void changeAvatar() {
 		this.avatar.setImage(load.getAvatar().next());

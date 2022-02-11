@@ -175,7 +175,7 @@ public final class TableQuery {
 			if (rs == null)
 				continue;
 			do {
-				companies.get(i).offices.add(new Office(rs.getInt("id_office"), rs.getInt("id_company"),
+				companies.get(i).getOffices().add(new Office(rs.getInt("id_office"), rs.getInt("id_company"),
 						rs.getInt("id_city"), rs.getString("address")));
 			} while (rs.next());
 		}
@@ -217,8 +217,8 @@ public final class TableQuery {
 			return 0;
 		Company c = new Company();
 		c.setOffices(rs);
-		for (int i = 0; i < c.offices.size(); ++i) {
-			Office o = c.offices.get(i);
+		for (int i = 0; i < c.getOffices().size(); ++i) {
+			Office o = c.getOffices().get(i);
 			if (o.getFullAddress().equals(fullAddress))
 				return o.getId_office();
 		}

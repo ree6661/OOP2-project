@@ -4,6 +4,9 @@ import java.sql.Date;
 
 import bg.tu_varna.sit.group17.database.queries.Query;
 
+/**
+ * This class represents the order from the database.
+ */
 public final class Order implements Query {
 	private int id_order;
 	private String category, office_sender, office_recipient, customer_sender, customer_recipient, courier, status,
@@ -11,7 +14,7 @@ public final class Order implements Query {
 	private boolean fragile, paid, delivery_to_address;
 	private double cash_on_delivery;
 	private Date acceptance_by_sender, customer_delivery;
-	
+
 	public Order(int id_order, String category, String office_sender, String office_recipient, String customer_sender,
 			String customer_recipient, String courier, String status, String address, boolean fragile, boolean paid,
 			boolean delivery_to_address, double cash_on_delivery, Date acceptance_by_sender, Date customer_delivery) {

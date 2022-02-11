@@ -10,20 +10,33 @@ import org.junit.jupiter.api.Test;
 
 import bg.tu_varna.sit.group17.validation.Valid;
 
-class ValidationTest {
-	
+/**
+ * Tests for validation class.
+ */
+final class ValidationTest {
+	/**
+	 * Test for length of a username.
+	 */
 	@Test
 	void usernameLength() {
 		assertFalse(Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
 		assertTrue(Valid.username("Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"));
 		assertTrue(Valid.username("Uuuuuuuuuuuuuuuuu"));
 	}
+
+	/**
+	 * Test for empty username.
+	 */
 	@Test
 	void usernameEmpty() {
 		assertFalse(Valid.username(""));
 		assertFalse(Valid.username(null));
 		assertFalse(Valid.username(new String()));
 	}
+
+	/**
+	 * Test for invalid characters in username.
+	 */
 	@Test
 	void usernameInvalidChars() {
 		assertFalse(Valid.username("Susd^f"));
@@ -34,12 +47,20 @@ class ValidationTest {
 		assertFalse(Valid.username("Sus3df"));
 		assertFalse(Valid.username("Gwdio5"));
 	}
+
+	/**
+	 * Test for empty phone number.
+	 */
 	@Test
 	void phoneNumberEmpty() {
 		assertEquals(false, Valid.phoneNumber(""));
 		assertEquals(false, Valid.phoneNumber(null));
 		assertEquals(false, Valid.phoneNumber(new String()));
 	}
+
+	/**
+	 * Test for any phone length.
+	 */
 	@Test
 	void phoneNumberLength() {
 		assertEquals(true, Valid.phoneNumber("123452234532"));
@@ -47,6 +68,10 @@ class ValidationTest {
 		assertEquals(false, Valid.phoneNumber("12345"));
 		assertEquals(false, Valid.phoneNumber("12345232132342424"));
 	}
+
+	/**
+	 * Test for invalid characters in phone number.
+	 */
 	@Test
 	void phoneNumberInvalidChars() {
 		assertEquals(false, Valid.phoneNumber("*12345234532"));
@@ -55,13 +80,19 @@ class ValidationTest {
 		assertEquals(false, Valid.phoneNumber("123452^34532"));
 	}
 
+	/**
+	 * Test for empty password.
+	 */
 	@Test
 	void passwordEmpty() {
 		assertEquals(false, Valid.password(""));
 		assertEquals(false, Valid.password(null));
 		assertEquals(false, Valid.password(new String()));
 	}
-	
+
+	/**
+	 * Test for length of a password.
+	 */
 	@Test
 	void passwordLength() {
 		assertEquals(false, Valid.password("*1234523453sdfsw453223452345322345234532"));
@@ -69,13 +100,16 @@ class ValidationTest {
 		assertEquals(true, Valid.password("a12345234532"));
 		assertEquals(true, Valid.password("qwert"));
 	}
+
+	/**
+	 * Test for valid user data.
+	 */
 	@Test
-	void user() throws SQLException {
+	void user() {
 		String s = "", username = "Името не трябва да съдържа символи и да е твърде кратко",
-				phone = "Телефона трябва да съдържа 12 цифри",
-				passBig = "Паролата трябва да е между 5 и 30 символа",
+				phone = "Телефона трябва да съдържа 12 цифри", passBig = "Паролата трябва да е между 5 и 30 символа",
 				repeatPass = "Паролите не съвпадат";
-		
+
 		s = Valid.user("Ivan Ivanov", "098378291234", "12342", "12342");
 		assertEquals("", s);
 		s = Valid.user("Iv%an Ivanov", "098378291234", "1234", "1234");
@@ -99,6 +133,10 @@ class ValidationTest {
 		s = Valid.user("Ivan Ivanov", "098378291234", "12344", null);
 		assertEquals(repeatPass, s);
 	}
+
+	/**
+	 * Test for valid date
+	 */
 	@Test
 	void date() {
 		assertEquals(true, Valid.date("2021-12-27"));
@@ -108,17 +146,25 @@ class ValidationTest {
 		assertEquals(false, Valid.date("2021-13-18"));
 		assertEquals(false, Valid.date("021-12-78"));
 	}
+
+	/**
+	 * Test for valid order data.
+	 */
 	@Test
 	void order() {
 		assertEquals(true, Valid.order("098937281232", "239048273214", "2021-12-21", "2021-12-27"));
 		assertEquals(true, Valid.order("098937281232", "239048273214", "2022-01-21", "2022-01-27"));
 	}
+
+	/**
+	 * Test for valid price.
+	 */
 	@Test
 	void price() {
-		assertEquals(true , Valid.price(1234));
-		assertEquals(true , Valid.price(345.2));
-		assertEquals(true , Valid.price(0));
-		assertEquals(false , Valid.price(-1));
-		assertEquals(false , Valid.price(-144));
+		assertEquals(true, Valid.price(1234));
+		assertEquals(true, Valid.price(345.2));
+		assertEquals(true, Valid.price(0));
+		assertEquals(false, Valid.price(-1));
+		assertEquals(false, Valid.price(-144));
 	}
 }

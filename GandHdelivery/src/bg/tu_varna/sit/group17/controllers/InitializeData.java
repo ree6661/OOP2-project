@@ -10,7 +10,7 @@ public interface InitializeData {
 	/**
 	 * Used for initializing data before the usage of a controller.
 	 * 
-	 * @param load the form loader which will be initialized.
+	 * @param load     the form loader which will be initialized.
 	 * @param consumer the consumer of the current login session.
 	 */
 	void initData(Load load, Consumer consumer);

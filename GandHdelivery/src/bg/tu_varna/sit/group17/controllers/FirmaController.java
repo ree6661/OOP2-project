@@ -112,7 +112,7 @@ public class FirmaController extends ControllerParent {
 	@FXML
 	private void deleteOffice() {
 		logger.info("Clicked delete office");
-		firma.deleteCompany();
+		firma.deleteOffice();
 	}
 
 	@FXML

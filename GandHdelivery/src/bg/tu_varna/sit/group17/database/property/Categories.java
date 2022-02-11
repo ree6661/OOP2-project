@@ -1,5 +1,8 @@
 package bg.tu_varna.sit.group17.database.property;
 
+/**
+ * This class repersents the categories from the database.
+ */
 public final class Categories {
 	private int id;
 	private String name;

@@ -39,7 +39,6 @@ public final class Notification {
 		ordersIdSet = new TreeSet<>();
 	}
 
-	
 	/**
 	 * @return the icon for no notifications.
 	 */
@@ -54,7 +53,6 @@ public final class Notification {
 		return izv2;
 	}
 
-	
 	/**
 	 * @param consumer changes the customer for notifications.
 	 */
@@ -114,7 +112,7 @@ public final class Notification {
 	}
 
 	/**
-	 * @param courier courier which receives the notification.
+	 * @param courier            courier which receives the notification.
 	 * @param notificationButton button which icon will change to notification.
 	 * @throws SQLException if a problem with the database occurs.
 	 */
@@ -135,7 +133,7 @@ public final class Notification {
 	}
 
 	/**
-	 * @param notificationBell button which icon will be changed to no notification. 
+	 * @param notificationBell button which icon will be changed to no notification.
 	 */
 	public void apply(Button notificationBell) {
 		if (!delivered)

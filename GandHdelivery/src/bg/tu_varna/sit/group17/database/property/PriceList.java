@@ -1,5 +1,8 @@
 package bg.tu_varna.sit.group17.database.property;
 
+/**
+ * This class represents the company's price list from the database.
+ */
 public final class PriceList {
 	private int id_company;
 	private int id_category;
@@ -10,7 +13,7 @@ public final class PriceList {
 		id_category = 0;
 		price = 0;
 	}
-	
+
 	public PriceList(int id_company, int id_category, double price) {
 		this.id_company = id_company;
 		this.id_category = id_category;

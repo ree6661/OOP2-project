@@ -20,7 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 /**
- * Controller of the registration form used for registering customers from courier.
+ * Controller of the registration form used for registering customers from
+ * courier.
  */
 public final class RegisterController extends ControllerParent {
 	private final LoggerApp logger = new LoggerApp(getClass().getName());
@@ -51,7 +52,7 @@ public final class RegisterController extends ControllerParent {
 		this.avatar.setImage(load.getAvatar().get());
 		this.userName.setText(consumer.getName());
 		this.register.prepareForm();
-		
+
 		cBox0.getItems().addAll(load.getProperty().getCities().keySet());
 	}
 
